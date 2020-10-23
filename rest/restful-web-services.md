@@ -30,8 +30,8 @@ Use a singular noun:
 
 ```
 https://example.com/universities/urjc
-https://example.com/univerisities/urjc/masters/cloud-computing
-https://example.com/univerisities/urjc/masters/cloud-computing/subjects/api-design
+https://example.com/universities/urjc/masters/cloud-computing
+https://example.com/universities/urjc/masters/cloud-computing/subjects/api-design
 ```
 
 **Collection and store**
@@ -39,8 +39,8 @@ Use a singular noun:
 
 ```
 https://example.com/universities
-https://example.com/univerisities/urjc/masters
-https://example.com/univerisities/urjc/masters/cloud-computing/subjects
+https://example.com/universities/urjc/masters
+https://example.com/universities/urjc/masters/cloud-computing/subjects
 ```
 
 **Controller**
