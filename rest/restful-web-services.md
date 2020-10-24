@@ -1,5 +1,22 @@
 # RESTful Web Service
-As we've seen, resources have identifiers (URIs), and we can leverage the underlying transfer protocol (namely, HTTP) to modify (for example, using `PUT`) a resource (i.e. change its state) using its representation (for example, a JSON object).
+A service which fully adheres to the REST specification is said to be a _RESTful Service_. Also note that, according to Roy's dissertation, _"REST does not restrict communication to a particular protocol"_. However, most of the time REST is Web-based. In such case, we would call it a _RESTful Web Service_.
+
+## REST Uniform Interface
+When it comes to the REST constraint about _Uniform Interface_, this is how each sub-constraint is enforced in a RESTful Web Service:
+* **Identification of resources** - each resource is identified by a [URIs (RFC 3986)][].
+* **Manipulation of resources through representations** - the manipulation of resources state is done through the standard [HTTP (RFC 7231)][]. There are no verbs in REST, but not because HTTP already has verbs, but because we transfering a _state_, rather than calling instructions.
+* **self-descriptive messages** - the [Media Type Specification (RFC 6838)][] (formerly known as MIME types) is used to make messages self-descriptive, for example, using [`application/schema+json`][JSON Schema] (used by [OpenAPI][]) or [`application/vnd.api+json`][JSON API].
+* **Hypermedia as the engine of application state (HATEOAS)** - hyperlinks in the resource returned by the browser can be used to allow clients to transition from one state to another.
+
+To sum up: resources have identifiers (URIs), and we can leverage the underlying transfer protocol (namely, HTTP) to modify (for example, using `PUT`) a resource (i.e. change its state) using its representation (for example, a JSON object).
+
+## Richardson Maturity Model
+The so called [Richardson Maturity Model][] describes different levels on how RESFull a Web Service is:
+
+* **Level Zero** - One URI and one HTTP method. Example: XML-RPC or SOAP.
+* **Level One** - Many URIs and one HTTP method.
+* **Level Two** - Many URIs and multiple HTTP methods.
+* **Level Four** - Hypermedia: leverage links and forms.
 
 ## Identification of resources
 In RESTful Web Services, [URIs](https://tools.ietf.org/html/rfc3986) are used to identify resources. However, the REST specification does not state anything about how identifiers should look like: they are just **opaque identifiers**. And code need not rely on any URI convention. According to [Roy Fielding words](https://roy.gbiv.com/untangled/2008/rest-apis-must-be-hypertext-driven),

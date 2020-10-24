@@ -8,8 +8,6 @@ In REST, we define _resources_ (for example, books), that can be _represented_ i
 
 > Note: we've covered _resource states_. We also have the _application state_, which resides on the client side. It can transition to other states just following the links in the _representations_.
 
-A service which fully adheres to the REST specification is said to be a _RESTful Service_. Also note that, according to Roy's dissertation, _"REST does not restrict communication to a particular protocol"_. Most of the time it is Web-based. In such case, we would call it a _RESTful Web Service_.
-
 ## Constraints
 REST encompasses six constraints:
 
@@ -20,19 +18,11 @@ REST encompasses six constraints:
 * **Cache** - this reduces the number of interactions, which improves the efficiency and thus the user experience.
 * **Layered System** - or Microservices. Clients can only see the immediate layer they are interacting with. This layer may be composed of a hiearchy of layers.
 * **Code-On-Demand** (optional) - servers can provide clients with executable code (scripts).
-* **Uniform Interface** - consists in a common interface to let each side (client and server) to evolve independently. Here is a list of each constraint and how they are enforced in a RESTful Web Service:
-  * **Identification of resources** - each single resource has an identifier. For this, we use URIs.
-  * **Manipulation of resources through representations** - resources state can be manipulated by a client using a representation. In RESTful Web Services, the HTTP standard is used. There are no verbs in REST, but not because HTTP already has verbs, but because we transfering a _state_, rather than calling instructions.
-  * **self-descriptive messages** - each message gives precise information about how to describe itself. The [Media Type (formerly known as MIME types)](https://www.iana.org/assignments/media-types/media-types.xhtml) is used to make messages self-descriptive, for example, using [`application/vnd.api+json`](https://jsonapi.org/).
+* **Uniform Interface** - consists in a common interface to let each side (client and server) to evolve independently. Here is a list of each constraint:
+  * **Identification of resources** - each single resource has an identifier.
+  * **Manipulation of resources through representations** - resources state can be manipulated by a client using a representation.
+  * **self-descriptive messages** - each message gives precise information about how to describe itself.
   * **Hypermedia as the engine of application state (HATEOAS)** - Application state transition are carried out through hypermedia in the resource returned by the server.
-
-## Richardson Maturity Model
-The so called [Richardson Maturity Model](https://www.crummy.com/writing/speaking/2008-QCon/act3.html) describes different levels on how RESFull a Web Service is:
-
-* **Level Zero** - One URI and one HTTP method. Example: XML-RPC or SOAP.
-* **Level One** - Many URIs and one HTTP method.
-* **Level Two** - Many URIs and multiple HTTP methods.
-* **Level Four** - Hypermedia: leverage links and forms.
 
 ## Resources
 Resources can be any information that can be named: a document, a collection of documents, a temporal service ("today's weather in Madrid"), etc. There is no consensus about how to model resources, but very often the following patterns are suggested (please note, this is not part of the REST specification):
