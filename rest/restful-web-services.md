@@ -128,6 +128,52 @@ Error descriptions should be expressed in the body using a certain resource type
 }
 ```
 
+## Message description
+This constraint states that we need each message to be self-descriptive; this comprehends the payload as well as the metadata.
+
+### Metadata
+In RESTful Web Services, we rely on HTTP to specify the metadata:
+
+* [`Content-Type`][]: the Media Type plus a charset. This is also used to let clients specify the desired representation.
+* [`Last-Modified`][]: last modification date and time of a resource.
+* [`Content-Encoding`][]: compression method: `gzip`, `compress`, `deflate`, `identity`, `br`...
+* [`Content-Length`][]: size in bytes of the body.
+* [`Content-Language`][]: describes the language intended for the audience.
+
+### Resource representation
+To choose the apropriate representation, the `Content-Type` entity header will be used. See the [IANA document on Media-Types][] to check a comprehensive list of media types approved by the IANA. For example, `text/plain` or `image/png`. An extensible format, like `application/xml` or `application/json` can be used as well. [GitHub defines its own media types][GitHub custom Media Types], as in:
+
+```
+application/vnd.github+json
+application/vnd.github.v3+json
+application/vnd.github.v3.raw+json
+application/vnd.github.v3.text+json
+application/vnd.github.v3.html+json
+application/vnd.github.v3.full+json
+application/vnd.github.v3.diff
+application/vnd.github.v3.patch
+```
+
+When using the OpenAPI Specification (formerly known as Swagger Specification), [JSON Schema][] is used to describe each resource.
+
+### Content Negotiation
+Content negotiation is the process to selected the apropriate representation for a resource. It can be [Server-Driven Negotiation][] or [Agent-Driven Negotiation][]
+
+#### Server-Driven Negotiation
+Clients can use HTTP to tell the server about their preferences. Then the server uses their choices to select a representation. Please note, there is no standard algorithm for this.
+
+* [`Accept`][]: to specify a weighted list of the accepted media types, as in `Accept: text/html, application/xhtml+xml, application/xml;q=0.9, */*;q=0.8`.
+* [`Accept-Charset`][]: characters encodings accepted, as in `Accept-Charset: utf-8, iso-8859-1;q=0.5`.
+* [`Accept-Language`][]: specifies the accepted languages. `Accept-Language: fr-CH, fr;q=0.9, en;q=0.8, de;q=0.7, *;q=0.5`.
+* [`Accept-Encoding`][]: compression algorithms accepted. `Accept-Encoding: deflate, gzip;q=1.0, *;q=0.5`.
+
+Servers will return the selected values, as well as a [`Vary`][] header to tell a cache whether a new request is needed or not.
+
+#### Agent-Driven Negotiation
+Sometimes, it is useful to let the user agent (manually or through a script) selected the desired representation. And even though HTTP includes some important selection features (type, charset, language, encoding...), it still lacks of many other useful representations, for example, currency unit or distance unit.
+
+For all of the above, the _Agent-Driven Negociation_ was defined. In this case, the server will return a `300 - Multiple Choices` with a list of URIs for each representation. Note there is no standarized way to return the list of possible choices. Sometimes, subdomains, query parameters or URI extensions are used as a workaround.
+
 ## HATEOAS
 We want to leverage hypermedia turn our service into a states machine. The state is the resource itself. To change the state we will use hyperlinks. There is no unique medium to express them:
 
