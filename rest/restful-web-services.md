@@ -19,7 +19,7 @@ The so called [Richardson Maturity Model][] describes different levels on how RE
 * **Level Four** - Hypermedia: leverage links and forms.
 
 ## Identification of resources
-In RESTful Web Services, [URIs](https://tools.ietf.org/html/rfc3986) are used to identify resources. However, the REST specification does not state anything about how identifiers should look like: they are just **opaque identifiers**. And code need not rely on any URI convention. According to [Roy Fielding words](https://roy.gbiv.com/untangled/2008/rest-apis-must-be-hypertext-driven),
+In RESTful Web Services, [URIs (RFC 3986)][] are used to identify resources. However, the REST specification does not state anything about how identifiers should look like: they are just **opaque identifiers**. And code need not rely on any URI convention. According to [Roy Fielding words][Roy Fielding about the opacity of resource identifiers],
 
 > A REST API should be entered with no prior knowledge beyond the initial URI (bookmark) and set of standardized media types that are appropriate for the intended audience (i.e., expected to be understood by any client that might use the API).
 
@@ -30,9 +30,9 @@ So, technically, all these URI might be completely RESTful:
 * https://example.com/89110c64-0c83-11eb-adc1-0242ac120002
 
 ### URI Templates and URI design
-Even thoguh according to the REST contraints neither the client nor the documentation should rely on a specific URI convention, that does not mean that we cannot follow a convention to (1) make the URIs human-readable, (2) to save design time or (3) to distribute the processing based on our URIs path. It is completely right to use, for example, [URI Templates RFC 6570](https://tools.ietf.org/html/rfc6570).
+Even thoguh according to the REST contraints neither the client nor the documentation should rely on a specific URI convention, that does not mean that we cannot follow a convention to (1) make the URIs human-readable, (2) to save design time or (3) to distribute the processing based on our URIs path. It is completely right to use, for example, [URI Templates (RFC 6570)][].
 
-Many of the rules on how to design URIs are opinionated. Still, some have major approval in the community, like the ones presented in [REST API Design Rulebook, by Mark Masse](https://learning.oreilly.com/library/view/rest-api-design/9781449317904/):
+Many of the rules on how to design URIs are opinionated. Still, some have major approval in the community, like the ones presented in [REST API Design Rulebook, by Mark Masse][]:
 
 * Forward slash (/): won't be used as the last character of a URI. It is used to specify a hierarchical relationship. This allows for mapping compositions of elements.
 * Use hyphens (-), and not underscore (_), to improve readability.
@@ -71,7 +71,7 @@ POST https://example.com/products/51240/discountoffer
 ## Manipulation of resources
 When implementing a RESTful Web Service, we will be using HTTP as the underlying transfer protocol to manipulate resources. One of the constraints is that the system should be visible. Here this means we should leverage the available methods of HTTP rather than encapsulating our own methods within our request representations (i.e. we should not do _tunnelling_).
 
-HTTP defines a number of methods along with their description ([RFC 7231](https://tools.ietf.org/html/rfc7231#section-4.1) and [RFC 5789](https://tools.ietf.org/html/rfc5789)):
+HTTP defines a number of methods along with their description ([HTTP/1.1 Request Methods (RFC 7231)][] and [PATCH Method for HTTP (RFC 5789)][]):
 
 | Method  | Meaning                                                                             | Is safe | Is idempotent |
 |---------|-------------------------------------------------------------------------------------|---------|---------------|
@@ -108,7 +108,7 @@ Used to:
 It is used to remove a resource. This operation is not _safe_ (i.e. it has side effects), but it is _idempotent_. This is controversial: what should we return when asked to remove a resource that never existed? A `404 Not Found`? What should we return when deleting a resource that was previously removed? `204 No Content`? Is this secure enough? Should we maintain a list of removed identifiers?
 
 ### Other methods
-It is encouraged not to use other HTTP methods, like those proposed by [WebDAV RFC 4918](https://tools.ietf.org/html/rfc4918), and instead use `POST`. However, some people does not discourage using `PATCH`.
+It is encouraged not to use other HTTP methods, like those proposed by [WebDAV (RFC 4918)][], and instead use `POST`. However, some people does not discourage using `PATCH`.
 
 ### Beyond CRUD
 It's fundamental to notice several things. Neither REST nor HTTP are CRUD. Some HTTP methods clearly map CRUD action (i.e. `GET` maps _Read_ and `DELETE` maps _Delete_). However:
@@ -119,7 +119,7 @@ It's fundamental to notice several things. Neither REST nor HTTP are CRUD. Some 
 To map an operation that does not clearly match a CRUD action, we can:
 
 * Map a state to a field. For example, a field called `status` for a music player which accepts a number of possible options, or a field called `activated` of type boolean.
-* Create a new resource. This resource will map an action into it. For example, GitHub defined an embedded resource to gists (a form of shareable snippets of code) to _star_ or _unstar_ them, as in [`PUT|DELETE /gists/:gist_id/start`](https://developer.github.com/v3/gists/#star-a-gist).
+* Create a new resource. This resource will map an action into it. For example, GitHub defined an [embedded resource in gists][GitHub embedded resources to star gists] (a form of shareable snippets of code) to _star_ or _unstar_ them, as in `PUT|DELETE /gists/:gist_id/start`.
 * Create a resource of type _controller_. For example, to merge two resources.
 
 ### Error messages and error responses
@@ -194,9 +194,9 @@ For all of the above, the _Agent-Driven Negociation_ was defined. In this case, 
 ## HATEOAS
 We want to leverage hypermedia turn our service into a states machine. The state is the resource itself. To change the state we will use hyperlinks. There is no unique medium to express them:
 
-* HTTP: [Web Links (RFC 8288)](https://tools.ietf.org/html/rfc8288) - Send links through the HTTP headers. Apropriate when the representation does not allow links (i.e. an image or a plain text) or when it's required to read links without parsing the body.
-* JSON: [JSON-LD](https://json-ld.org/), [HAL (Hypertext Application Language)](https://tools.ietf.org/html/draft-kelly-json-hal-08) or [Hydra](http://www.hydra-cg.com/spec/latest/core/).
-* XML: [Atom (RFC 5023)](https://tools.ietf.org/html/rfc5023#section-11).
+* HTTP: [Web Links (RFC 8288)][] - Send links through the HTTP headers. Apropriate when the representation does not allow links (i.e. an image or a plain text) or when it's required to read links without parsing the body.
+* JSON: [JSON-LD][], [HAL (Hypertext Application Language)][] or [Hydra][].
+* XML: [Atom (RFC 5023)][].
 
 To generate a state machine we can think in a microwave oven. When we first get it, it might returns to turn it on:
 
@@ -231,17 +231,17 @@ Queries are used to filter, sort and paginate both collections and stores. Brack
 * Basic filtering. Select those whose `country` is `spain`: `GET /universities?country=spain`.
 * Filtering with operand: Select those whose `country` is not equal to `spain`: `GET /universities?country[neq]=spain`.
 * Sorting: `GET /universities?sort_by=-date,id`.
-* Select specific fields: `GET /universities?fields=id,name,departments(name)`. Example: [Google Tasks API](https://developers.google.com/tasks/performance#partial-response).
+* Select specific fields: `GET /universities?fields=id,name,departments(name)`. Example: [Google Tasks API][Partial response in Google Tasks API].
 * Include sub-resources: our resource might contain a collection of other type. We can use something like `GET /posts/12?embed=comments,author.name` to fetch a blog post along with all its comments and its author name.
 
 ### Pagination
 We tyipically identify two different pagination mechanisms:
 * Offset-based pagination: `GET /universities?limit=10&offset=30`.
-* [Cursor-based pagination](https://developers.facebook.com/docs/graph-api/using-graph-api/#paging): `GET /universities?limit=10&next=uc3m`.
+* [Cursor-based pagination][Cursor-based pagination in Facebook API]: `GET /universities?limit=10&next=uc3m`.
 
 _Cursor-based_ pagination is more popular nowadays.
 
-It can also contain `Web Links` headers to help traversing a collection of resources. See for example the [GitHub API](https://developer.github.com/v3/#pagination).
+It can also contain `Web Links` headers to help traversing a collection of resources. See for example the [GitHub API][Pagination with Web Links in GitHub API].
 
 ## Security
 We use
@@ -271,7 +271,7 @@ We can also use _one-time URIs_ to implement conditional `POST` requests. These 
 
 
 ## Versioning
-When it comes to versioning, according to [Roy Fielding keynote on Evolve'13](https://www.slideshare.net/evolve_conference/201308-fielding-evolve), the best practice for versioning a REST API is not to version it. REST is already defined as a state machine (HATEOAS) where each state can be dynamic and each transition can be redirected (linked). So instead of agreeing on an interface, to change the state, client software should only need to _follow_ the apropriate links (as we humans do when we use a web).
+When it comes to versioning, according to [Roy Fielding keynote on Evolve'13][], the best practice for versioning a REST API is not to version it. REST is already defined as a state machine (HATEOAS) where each state can be dynamic and each transition can be redirected (linked). So instead of agreeing on an interface, to change the state, client software should only need to _follow_ the apropriate links (as we humans do when we use a web).
 
 To read: https://nordicapis.com/api-change-strategy/
 
@@ -280,3 +280,41 @@ To read: https://nordicapis.com/api-change-strategy/
 Queries paginated, filtering, asynchronous tasks, N+1 with embedded.
 
 ### Rage limiting
+
+[URIs (RFC 3986)]: https://tools.ietf.org/html/rfc3986
+[URI Templates (RFC 6570)]: https://tools.ietf.org/html/rfc6570
+[Media Type Specification (RFC 6838)]: https://tools.ietf.org/html/rfc6838
+[HTTP (RFC 7231)]: https://tools.ietf.org/html/rfc7231
+[HTTP/1.1 Request Methods (RFC 7231)]: https://tools.ietf.org/html/rfc7231#section-4.1
+[PATCH Method for HTTP (RFC 5789)]: https://tools.ietf.org/html/rfc5789
+[WebDAV (RFC 4918)]: https://tools.ietf.org/html/rfc4918
+[Web Links (RFC 8288)]: https://tools.ietf.org/html/rfc8288
+[Atom (RFC 5023)]: https://tools.ietf.org/html/rfc5023#section-11
+[HAL (Hypertext Application Language)]: https://tools.ietf.org/html/draft-kelly-json-hal-08
+[Richardson Maturity Model]: https://www.crummy.com/writing/speaking/2008-QCon/act3.html
+[JSON Schema]: https://json-schema.org/
+[OpenAPI]: https://swagger.io/specification/
+[JSON API]: https://jsonapi.org/
+[Roy Fielding about the opacity of resource identifiers]: https://roy.gbiv.com/untangled/2008/rest-apis-must-be-hypertext-driven
+[REST API Design Rulebook, by Mark Masse]: https://learning.oreilly.com/library/view/rest-api-design/9781449317904/
+[GitHub embedded resources to star gists]: https://developer.github.com/v3/gists/#star-a-gist
+[`Content-Type`]: https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Type
+[`Last-Modified`]: https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Last-Modified
+[`Content-Encoding`]: https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Encoding
+[`Content-Length`]: https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Length
+[`Content-Language`]: https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Language
+[IANA document on Media-Types]: https://www.iana.org/assignments/media-types/media-types.xhtml
+[GitHub custom Media Types]: https://docs.github.com/en/free-pro-team@latest/rest/overview/media-types
+[Server-Driven Negotiation]: https://developer.mozilla.org/en-US/docs/Web/HTTP/Content_negotiation#Server-driven_content_negotiation
+[Agent-Driven Negotiation]: https://developer.mozilla.org/en-US/docs/Web/HTTP/Content_negotiation#Agent-driven_negotiation
+[`Accept`]: https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Accept
+[`Accept-Charset`]: https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Accept-Charset
+[`Accept-Language`]: https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Accept-Language
+[`Accept-Encoding`]: https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Accept-Encoding
+[`Vary`]: https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Vary
+[JSON-LD]: https://json-ld.org/
+[Hydra]: http://www.hydra-cg.com/spec/latest/core/
+[Partial response in Google Tasks API]: https://developers.google.com/tasks/performance#partial-response
+[Cursor-based pagination in Facebook API]: https://developers.facebook.com/docs/graph-api/using-graph-api/#paging
+[Pagination with Web Links in GitHub API]: https://developer.github.com/v3/#pagination
+[Roy Fielding keynote on Evolve'13]: https://www.slideshare.net/evolve_conference/201308-fielding-evolve

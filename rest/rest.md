@@ -1,5 +1,5 @@
 # REST
-REST (Representational state transfer) was first introduced in [Roy Fielding's doctoral dissertation Architectural Styles and the Design of Network-based Software Architectures](https://www.ics.uci.edu/~fielding/pubs/dissertation/top.htm), and it is described as an _architectural style for distributed hypermedia systems_. It is important to notice two key points here:
+REST (Representational state transfer) was first introduced in [Roy Fielding's doctoral dissertation Architectural Styles and the Design of Network-based Software Architectures][], and it is described as an _architectural style for distributed hypermedia systems_. It is important to notice two key points here:
 
 1. It is an _architectural style_, not a _protocol_. For example, SOAP is a protocol. REST, on the other side, is an architectural style which make use of standards, but there is no official standard for REST. Because of this, we often find different solutions to a given problem.
 2. It is for _distributed hypermedia systems_. Clients have access to hypermedia information from a repository which might be in a distributed network.
@@ -40,3 +40,5 @@ As _collections_, _store resources_ works as repositories of resources. But unli
 _Controller resources_ can be thought as remote methods: they represent an action, accept input parameters and return a value. These can be used to map procedures that do not match any CRUD action, for example to run a number of operations (merge two contacts), or to carry out an operation whose matching CRUD action is not obvious. Each of these resources will have their own identifier to avoid _tunnelling_.
 
 > By tunnelling we mean using the same operation on the same identifier to perform different actions. SOAP over HTTP or XML-RPC are examples of tunnelling, because they use POST calls to a single URI to perform different operations: they both would delete a resource performing a POST call.
+
+[Roy Fielding's doctoral dissertation Architectural Styles and the Design of Network-based Software Architectures]: https://www.ics.uci.edu/~fielding/pubs/dissertation/top.htm
