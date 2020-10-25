@@ -279,7 +279,7 @@ To read: https://nordicapis.com/api-change-strategy/
 
 Queries paginated, filtering, asynchronous tasks, N+1 with embedded.
 
-### Rage limiting
+### Rate limiting
 
 [URIs (RFC 3986)]: https://tools.ietf.org/html/rfc3986
 [URI Templates (RFC 6570)]: https://tools.ietf.org/html/rfc6570
