@@ -52,7 +52,7 @@ https://example.com/universities/urjc/masters/cloud-computing/subjects/api-desig
 ```
 
 **Collection and store**
-Use a singular noun:
+Use a plural noun:
 
 ```
 https://example.com/universities
