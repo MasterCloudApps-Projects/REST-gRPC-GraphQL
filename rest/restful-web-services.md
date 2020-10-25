@@ -264,7 +264,7 @@ We use
 * `OAuth 2`
 
 ## Conditional requests
-Since REST promotes visibility, a RESTful Web Services takes advantage of the HTTP built-in caching. Every response might contain:
+Since REST promotes visibility, a RESTful Web Services takes advantage of the HTTP built-in caching and [Conditional Requests (RFC 7232)][]. Every response might contain:
 
 * `ETag` - or `entity tag`. Part of the HTTP specification, this is a header to represent a specific version of a resource from. Tipically, hash functions are used for this. Clients may save a copy of the resource so that, once they are expired (which is controlled by the `Expired` and/or `Cache-Control` headers), they can make a new request sending its `ETag` in the `If-None-Match` header field. If the server detects the `ETag` has not change, then it will return a `304 - Not Modified` response.
 * `Last-Modified` - This works like `ETag` but, unlike this, it is timestamp-based. This timestamp is set into `If-Modified-Since` header when sending a new request.
@@ -303,6 +303,7 @@ Queries paginated, filtering, asynchronous tasks, N+1 with embedded.
 [WebDAV (RFC 4918)]: https://tools.ietf.org/html/rfc4918
 [Web Links (RFC 8288)]: https://tools.ietf.org/html/rfc8288
 [Atom (RFC 5023)]: https://tools.ietf.org/html/rfc5023#section-11
+[Conditional Requests (RFC 7232)]: https://tools.ietf.org/html/rfc7232
 [HAL (Hypertext Application Language)]: https://tools.ietf.org/html/draft-kelly-json-hal-08
 [JSON Schema]: https://tools.ietf.org/html/draft-handrews-json-schema-02
 [JSON Hyper-Schema]: https://tools.ietf.org/html/draft-handrews-json-schema-hyperschema-02
