@@ -5,7 +5,7 @@ A service which fully adheres to the REST specification is said to be a _RESTful
 When it comes to the REST constraint about _Uniform Interface_, this is how each sub-constraint is enforced in a RESTful Web Service:
 * **Identification of resources** - each resource is identified by a [URIs (RFC 3986)][].
 * **Manipulation of resources through representations** - the manipulation of resources state is done through the standard [HTTP (RFC 7231)][]. There are no verbs in REST, but not because HTTP already has verbs, but because we transfering a _state_, rather than calling instructions.
-* **self-descriptive messages** - the [Media Type Specification (RFC 6838)][] (formerly known as MIME types) is used to make messages self-descriptive, for example, using [`application/schema+json`][JSON Schema] (used by [OpenAPI][]) or [`application/vnd.api+json`][JSON API].
+* **self-descriptive messages** - the [Media Type Specification (RFC 6838)][] (formerly known as MIME types) is used to make messages self-descriptive.
 * **Hypermedia as the engine of application state (HATEOAS)** - hyperlinks in the resource returned by the browser can be used to allow clients to transition from one state to another.
 
 To sum up: resources have identifiers (URIs), and we can leverage the underlying transfer protocol (namely, HTTP) to modify (for example, using `PUT`) a resource (i.e. change its state) using its representation (for example, a JSON object).
@@ -171,7 +171,7 @@ application/vnd.github.v3.diff
 application/vnd.github.v3.patch
 ```
 
-When using the OpenAPI Specification (formerly known as Swagger Specification), [JSON Schema][] is used to describe each resource.
+However, some people argue that [minting new Media Types should be avoided][].
 
 ### Content Negotiation
 Content negotiation is the process to selected the apropriate representation for a resource. It can be [Server-Driven Negotiation][] or [Agent-Driven Negotiation][]
@@ -291,9 +291,8 @@ Queries paginated, filtering, asynchronous tasks, N+1 with embedded.
 [Web Links (RFC 8288)]: https://tools.ietf.org/html/rfc8288
 [Atom (RFC 5023)]: https://tools.ietf.org/html/rfc5023#section-11
 [HAL (Hypertext Application Language)]: https://tools.ietf.org/html/draft-kelly-json-hal-08
+[JSON Schema]: https://tools.ietf.org/html/draft-handrews-json-schema-02
 [Richardson Maturity Model]: https://www.crummy.com/writing/speaking/2008-QCon/act3.html
-[JSON Schema]: https://json-schema.org/
-[OpenAPI]: https://swagger.io/specification/
 [JSON API]: https://jsonapi.org/
 [Roy Fielding about the opacity of resource identifiers]: https://roy.gbiv.com/untangled/2008/rest-apis-must-be-hypertext-driven
 [REST API Design Rulebook, by Mark Masse]: https://learning.oreilly.com/library/view/rest-api-design/9781449317904/
@@ -318,3 +317,4 @@ Queries paginated, filtering, asynchronous tasks, N+1 with embedded.
 [Cursor-based pagination in Facebook API]: https://developers.facebook.com/docs/graph-api/using-graph-api/#paging
 [Pagination with Web Links in GitHub API]: https://developer.github.com/v3/#pagination
 [Roy Fielding keynote on Evolve'13]: https://www.slideshare.net/evolve_conference/201308-fielding-evolve
+[Minting new Media Types should be avoided]: http://duncan-cragg.org/blog/post/minting-media-types-usually-less-restful-using-raw/
