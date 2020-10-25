@@ -17,7 +17,7 @@ const app = require('express')();
 const bodyParser = require('body-parser')
 const { v4: uuidv4 } = require('uuid');
 
-var newsMap = new Map();
+var newsCollection = new Map();
 
 app.use(bodyParser.json()) // for parsing application/json
 app
@@ -27,20 +27,20 @@ app
 
         // The slug is optional. A random UUDI is generated when empty:
         const slug = req.get('slug') || uuidv4();
-        newsMap.set(slug, news);
+        newsCollection.set(slug, news);
         const identifier = '/news/' + slug;
         res.location(identifier);
         res.status(201)
         res.set('Content-Location', identifier);
         res.format({
-            'application/json': () => res.json(newsMap.get(slug))
+            'application/json': () => res.json(newsCollection.get(slug))
         });
     })
 
     // Return 200 when found or 404 when not found:
-    .get('/news/:id', (req, res) => newsMap.has(req.params.id) ?
+    .get('/news/:id', (req, res) => newsCollection.has(req.params.id) ?
         res.format({
-            'application/json': () => res.json(newsMap.get(req.params.id))
+            'application/json': () => res.json(newsCollection.get(req.params.id))
         }) :
         res.sendStatus(404)
     );
