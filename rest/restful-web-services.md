@@ -88,7 +88,12 @@ A method is considered _safe_ as long as it does not have side-effects. And it i
 REST specification does not mention much about which HTTP methods should be used for a certain operation. This is because REST is all about the architectural style, while HTTP methods are part of the Web's architecture. When maping an API operation to an HTTP method we should consider: the semantic of the method; whether the operation is safe or idempotent; how affect caching; etc. But from the client point of view, it is not important which HTTP method maps an operation. There are some consensus though:
 
 ### GET
-It is used for _safe_ and _idempotent_ data retrieval, either on documents or in collections/stores.
+`GET` is used for _safe_ and _idempotent_ data retrieval, either on documents or in collections/stores.
+
+### HEAD and OPTIONS
+These two methods are used for data inspection, so they both are _safe_ and _idempotent_. When only the metadata (header) of a resource is required, `HEAD` can be used instead of `GET`.
+
+To discover how can we interact with a resource, `OPTIONS` will be used. This will return an `Allow` header listing all available methods. Note that, even though a client application can fetch this information at runtime, it increases the network traffic.
 
 ### POST
 `POST` is the most controversial HTTP method. It can be used for a number of things:
