@@ -163,7 +163,13 @@ In RESTful Web Services, we rely on HTTP to specify the metadata:
 * [`Content-Language`][]: describes the language intended for the audience.
 
 ### Resource representation
-To choose the apropriate representation, the `Content-Type` entity header will be used. See the [IANA document on Media-Types][] to check a comprehensive list of media types approved by the IANA. For example, `text/plain` or `image/png`. An extensible format, like `application/xml` or `application/json` can be used as well. [GitHub defines its own media types][GitHub custom Media Types], as in:
+To choose the apropriate representation, the `Content-Type` entity header will be used. See the [IANA document on Media-Types][] to check a comprehensive list of media types approved by the IANA. For example, `text/plain` or `image/png`. An extensible format, like `application/xml` or `application/json` can be used as well.
+
+To describe JSON resources, several specifications can be used:
+* [JSON Schema][], using `application/schema+json`.
+* [JSON API][], using `application/vnd.api+json`.
+
+[GitHub defines its own media types][GitHub custom Media Types], as in:
 
 ```
 application/vnd.github+json
@@ -200,10 +206,12 @@ For all of the above, the _Agent-Driven Negociation_ was defined. In this case, 
 We want to leverage hypermedia turn our service into a states machine. The state is the resource itself. To change the state we will use hyperlinks. There is no unique medium to express them:
 
 * HTTP: [Web Links (RFC 8288)][] - Send links through the HTTP headers. Apropriate when the representation does not allow links (i.e. an image or a plain text) or when it's required to read links without parsing the body.
-* JSON: [JSON-LD][], [HAL (Hypertext Application Language)][] or [Hydra][].
+* JSON: [JSON API][] (it can descrive links as well), [JSON-LD][], [JSON Hyper-Schema][] (the hypermedia solution of JSON Schema), [HAL (Hypertext Application Language)][] or [Hydra][].
 * XML: [Atom (RFC 5023)][].
 
-To generate a state machine we can think in a microwave oven. When we first get it, it might returns to turn it on:
+Typically, the type of relation in a link is specified in a `rel` field. IANA maintains a [list of standard link relations][IANA list of link relations].
+
+To generate a [state machine in REST][] we can think in a microwave oven. When we first get it, it might returns to turn it on:
 
 ```
 GET /microwaves/12
@@ -297,6 +305,7 @@ Queries paginated, filtering, asynchronous tasks, N+1 with embedded.
 [Atom (RFC 5023)]: https://tools.ietf.org/html/rfc5023#section-11
 [HAL (Hypertext Application Language)]: https://tools.ietf.org/html/draft-kelly-json-hal-08
 [JSON Schema]: https://tools.ietf.org/html/draft-handrews-json-schema-02
+[JSON Hyper-Schema]: https://tools.ietf.org/html/draft-handrews-json-schema-hyperschema-02
 [Richardson Maturity Model]: https://www.crummy.com/writing/speaking/2008-QCon/act3.html
 [JSON API]: https://jsonapi.org/
 [Roy Fielding about the opacity of resource identifiers]: https://roy.gbiv.com/untangled/2008/rest-apis-must-be-hypertext-driven
@@ -323,3 +332,5 @@ Queries paginated, filtering, asynchronous tasks, N+1 with embedded.
 [Pagination with Web Links in GitHub API]: https://developer.github.com/v3/#pagination
 [Roy Fielding keynote on Evolve'13]: https://www.slideshare.net/evolve_conference/201308-fielding-evolve
 [Minting new Media Types should be avoided]: http://duncan-cragg.org/blog/post/minting-media-types-usually-less-restful-using-raw/
+[state machine in REST]: https://nordicapis.com/designing-a-true-rest-state-machine/
+[IANA list of link relations]: https://www.iana.org/assignments/link-relations/link-relations.xhtml
