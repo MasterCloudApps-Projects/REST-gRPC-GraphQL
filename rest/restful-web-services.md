@@ -29,6 +29,8 @@ So, technically, all these URI might be completely RESTful:
 * https://example.com/books?getBook=12
 * https://example.com/89110c64-0c83-11eb-adc1-0242ac120002
 
+This contrasts with [common interpretation of REST](./openapi.md).
+
 ### URI Templates and URI design
 Even thoguh according to the REST contraints neither the client nor the documentation should rely on a specific URI convention, that does not mean that we cannot follow a convention to (1) make the URIs human-readable, (2) to save design time or (3) to distribute the processing based on our URIs path. It is completely right to use, for example, [URI Templates (RFC 6570)][].
 
