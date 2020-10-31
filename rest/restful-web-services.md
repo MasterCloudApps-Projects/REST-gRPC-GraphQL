@@ -126,7 +126,7 @@ It's fundamental to notice several things. Neither REST nor HTTP are CRUD. Some 
 To map an operation that does not clearly match a CRUD action, we can:
 
 * Map a state to a field. For example, a field called `status` for a music player which accepts a number of possible options, or a field called `activated` of type boolean.
-* Create a new resource. This resource will map an action into it. For example, GitHub defined an [embedded resource in gists][GitHub embedded resources to star gists] (a form of shareable snippets of code) to _star_ or _unstar_ them, as in `PUT|DELETE /gists/:gist_id/start`.
+* Create a new resource. This resource will map an action into it. For example, GitHub defined an [embedded resource in gists][GitHub embedded resources to star gists] (a form of shareable snippets of code) to _star_ or _unstar_ them, as in `PUT|DELETE /gists/:gist_id/start`. [Paypal allows to authorize a payment][Paypal embedded resources to authorize payments] creating a resource of type `authorize` in an order: `PUT /v2/checkout/orders/5O190127TN364715T/authorize`.
 * Create a resource of type _controller_. For example, to merge two resources.
 
 ### Error messages and error responses
