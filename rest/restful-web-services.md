@@ -244,7 +244,7 @@ Queries are used to filter, sort and paginate both collections and stores. Brack
 * Basic filtering. Select those whose `country` is `spain`: `GET /universities?country=spain`.
 * Filtering with operand: Select those whose `country` is not equal to `spain`: `GET /universities?country[neq]=spain`.
 * Sorting: `GET /universities?sort_by=-date,id`.
-* Select specific fields: `GET /universities?fields=id,name,departments(name)`. Example: [Google Tasks API][Partial response in Google Tasks API].
+* Select specific fields: `GET /universities?fields=id,name,departments(name)`. Examples: [Google Tasks API][Partial response in Google Tasks API] or [Sparse Fieldsets in JSON API][JSON API].
 * Include sub-resources: our resource might contain a collection of other type. We can use something like `GET /posts/12?embed=comments,author.name` to fetch a blog post along with all its comments and its author name.
 
 ### Pagination
