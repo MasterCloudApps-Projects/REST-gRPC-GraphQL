@@ -18,7 +18,7 @@ REST encompasses six constraints:
 * **Cache** - this reduces the number of interactions, which improves the efficiency and thus the user experience.
 * **Layered System** - or Microservices. Clients can only see the immediate layer they are interacting with. This layer may be composed of a hiearchy of layers.
 * **Code-On-Demand** (optional) - servers can provide clients with executable code (scripts).
-* **Uniform Interface** - consists in a common interface to let each side (client and server) evolve independently. Here is a list of each constraint:
+* **Uniform Interface** - consists in a common, consistent interface to let each side (client and server) evolve independently. Here is a list of each constraint:
   * **Identification of resources** - each single resource has an identifier.
   * **Manipulation of resources through representations** - resources state can be manipulated by a client using a representation.
   * **self-descriptive messages** - each message gives precise information about how to describe itself.
@@ -41,4 +41,19 @@ _Controller resources_ can be thought as remote methods: they represent an actio
 
 > By tunnelling we mean using the same operation on the same identifier to perform different actions. SOAP over HTTP or XML-RPC are examples of tunnelling, because they use POST calls to a single URI to perform different operations: they both would delete a resource performing a POST call.
 
+## Implementation
+The above [constraints](#constraints) are not tight to any specific transfer protocol. They fit perfectly on HTTP, where we work with data (_resources_), and the behaviour results from the operations on that data. When HTTP is used to create a RESTful Service, we call it [_RESTful Web Service_][RESTful Web Service].
+
+However, most _REST APIs_ are not HATEOAS compliant. So, instead of take advantage of hypermedia, very often APIs rely on contracts and rules on how identifiers are built (they are not _opaque_, but _predictable_). These APIs, which are not that different from RPC, are often called [_REST-Like Web Services_][REST-LikeWeb Service].
+
+### Characteristics of a HATEOAS API
+
+* ✔️ Evolvability. Client and server don't rely on a bespoke contract, but in open standards.
+* ✔️ Discoverability. A client can easily discover new functionalities provided by the server.
+* ✔️ Simplicity. Reduces the client-side logic.
+* ✘ Lack of adoption and tooling.
+* ✘ Cost. Developing a RESTful Service is expensive.
+
 [Roy Fielding's doctoral dissertation Architectural Styles and the Design of Network-based Software Architectures]: https://www.ics.uci.edu/~fielding/pubs/dissertation/top.htm
+[RESTful Web Service]: ./restful-web-services.md
+[REST-LikeWeb Service]: ./restlike-web-services.md
