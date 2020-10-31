@@ -133,22 +133,22 @@ To map an operation that does not clearly match a CRUD action, we can:
 A _RESTful Web Service_ is expected to return error responses both in the HTTP header and in the payload:
 
 **Header**
-Set a meaningful error code. For example, when requesting a nonexisting resource, return a `404`. Please note, sometimes it is not so obvious. Consider this identifier: `/departments/:deptID/employees?id=Smith`. If for the given department there is no employee whose identifier is `smith`, a `404` looks fine. What if there is no department for `:deptID`? What should we return?
+Set a meaningful error code. For example, when requesting a nonexisting resource, return a `404`. However, sometimes this can be confusing:
+
+* Consider this identifier: `/departments/:deptID/employees?id=Smith`. If for the given department there is no employee whose identifier is `smith`, a `404` looks fine. What if there is no department for `:deptID`? What should we return?
+* If we get a `404`, can assume a resource does not exist? Can we safely delete our local copy? What if we are getting that just because of a missconfiguration on NGINX?
 
 **Body**
-Error descriptions should be expressed in the body using a certain resource type. For example:
+HTTP responses are limited, as we have just seen. Sometimes, we need room to add more details. We can express error descriptions in the body. For this, several solutions have been proposed: [JSend][], [Problem Details For HTTP APIs (RFC 7807)][]. For example, in RFC 7807 we can express an _out of credit_ error like this:
 
 ```
-{
-  'code': 3334,
-  'message': 'Invalid input',
-  'errors': [
-    {
-      'code': 555,
-      'field': 'field1',
-      'message': 'Password should be at least 8-characters long'
-    }
-  ]
+ {
+    "type": "https://example.com/probs/out-of-credit",
+    "title": "You do not have enough credit.",
+    "detail": "Your current balance is 30, but that costs 50.",
+    "instance": "/account/12345/msgs/abc",
+    "balance": 30,
+    "accounts": ["/account/12345", "/account/67890"]
 }
 ```
 
@@ -309,6 +309,8 @@ Queries paginated, filtering, asynchronous tasks, N+1 with embedded.
 [HAL (Hypertext Application Language)]: https://tools.ietf.org/html/draft-kelly-json-hal-08
 [JSON Schema]: https://tools.ietf.org/html/draft-handrews-json-schema-02
 [JSON Hyper-Schema]: https://tools.ietf.org/html/draft-handrews-json-schema-hyperschema-02
+[Problem Details For HTTP APIs (RFC 7807)]: https://tools.ietf.org/html/rfc7807
+[JSend]: https://github.com/omniti-labs/jsend
 [Richardson Maturity Model]: https://www.crummy.com/writing/speaking/2008-QCon/act3.html
 [JSON API]: https://jsonapi.org/
 [Roy Fielding about the opacity of resource identifiers]: https://roy.gbiv.com/untangled/2008/rest-apis-must-be-hypertext-driven
