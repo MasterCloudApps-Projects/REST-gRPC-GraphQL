@@ -136,7 +136,7 @@ A _RESTful Web Service_ is expected to return error responses both in the HTTP h
 Set a meaningful error code. For example, when requesting a nonexisting resource, return a `404`. However, sometimes this can be confusing:
 
 * Consider this identifier: `/departments/:deptID/employees?id=Smith`. If for the given department there is no employee whose identifier is `smith`, a `404` looks fine. What if there is no department for `:deptID`? What should we return?
-* If we get a `404`, can assume a resource does not exist? Can we safely delete our local copy? What if we are getting that just because of a missconfiguration on NGINX?
+* If we get a `404`, can assume a resource does not exist? Can we safely delete our local copy? What if we are getting that just because of a missconfiguration on NGINX? HTTP server errors might be conflated with application logic errors.
 
 **Body**
 HTTP responses are limited, as we have just seen. Sometimes, we need room to add more details. We can express error descriptions in the body. For this, several solutions have been proposed: [JSend][], [Problem Details For HTTP APIs (RFC 7807)][]. For example, in RFC 7807 we can express an _out of credit_ error like this:
@@ -156,7 +156,7 @@ HTTP responses are limited, as we have just seen. Sometimes, we need room to add
 This constraint states that we need each message to be self-descriptive; this comprehends the payload as well as the metadata.
 
 ### Metadata
-In RESTful Web Services, we rely on HTTP to specify the metadata:
+In _RESTful Web Services_, we rely on HTTP to specify the metadata:
 
 * [`Content-Type`][]: the Media Type plus a charset. This is also used to let clients specify the desired representation.
 * [`Last-Modified`][]: last modification date and time of a resource.
