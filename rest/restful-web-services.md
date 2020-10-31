@@ -205,10 +205,17 @@ Sometimes, it is useful to let the user agent (manually or through a script) sel
 For all of the above, the _Agent-Driven Negociation_ was defined. In this case, the server will return a `300 - Multiple Choices` with a list of URIs for each representation. Note there is no standarized way to return the list of possible choices. Sometimes, subdomains, query parameters or URI extensions are used as a workaround.
 
 ## HATEOAS
-We want to leverage hypermedia turn our service into a states machine. The state is the resource itself. To change the state we will use hyperlinks. There is no unique medium to express them:
+We want to leverage hypermedia turn our service into a states machine. The state is the resource itself. To change the state we will use hyperlinks.
+
+### Note on Versioning
+When it comes to versioning, according to [Roy Fielding keynote on Evolve'13][], the best practice for versioning a REST API is not to version it. REST is already defined as a state machine (HATEOAS) where each state can be dynamic and each transition can be redirected (linked). So instead of agreeing on an interface, to change the state, client software should only need to _follow_ the apropriate links (as we humans do when we use a web). But still, [an API might need updates which break backwards compatibility][API Change Strategy] (like fixing a typo in a schema).
+
+### Links specifications
+
+There is no unique medium to express them:
 
 * HTTP: [Web Links (RFC 8288)][] - Send links through the HTTP headers. Apropriate when the representation does not allow links (i.e. an image or a plain text) or when it's required to read links without parsing the body.
-* JSON: [JSON API][] (it can descrive links as well), [JSON-LD][], [JSON Hyper-Schema][] (the hypermedia solution of JSON Schema), [HAL (Hypertext Application Language)][] or [Hydra][].
+* JSON: [JSON API][] (it can descrive links as well), [JSON-LD][], [JSON Hyper-Schema][] (the hypermedia solution of JSON Schema), [HAL (Hypertext Application Language)][] or [Hydra][] (based on JSON-LD).
 * XML: [Atom (RFC 5023)][].
 
 Typically, the type of relation in a link is specified in a `rel` field. IANA maintains a [list of standard link relations][IANA list of link relations].
@@ -238,6 +245,27 @@ Some people (See _RESTful Web Services Cookbook_) suggest we express the action 
 
 * Use the existing names, like `self`, `alternate`, `related`, `previous`, `next`, `first` and `last`.
 * If there is no existing name, create a new one. Express that relation as a URI. Also, provide an HTML documentation for that relation at that URI.
+
+### Real World Examples
+Criticisms of HATEOAS often argue that there are no real-world examples of it, which is unfair. One of the most widely-used REST APIs in the world makes use of it: [PayPal][PayPal and HATEOAS]. Here is an example extract from a response:
+
+```
+{
+  "links": [{
+    "href": "https://api.paypal.com/v1/payments/sale/36C38912MN9658832",
+    "rel": "self",
+    "method": "GET"
+  }, {
+    "href": "https://api.paypal.com/v1/payments/sale/36C38912MN9658832/refund",
+    "rel": "refund",
+    "method": "POST"
+  }, {
+    "href": "https://api.paypal.com/v1/payments/payment/PAY-5YK922393D847794YKER7MUI",
+    "rel": "parent_payment",
+    "method": "GET"
+  }]
+}
+```
 
 ## Querying URI
 Queries are used to filter, sort and paginate both collections and stores. Brackets or colon might be handy to use operators:
@@ -284,12 +312,6 @@ We can also use _one-time URIs_ to implement conditional `POST` requests. These 
 
 `Link: <http://www.example.com/comments/gtlrx8et2l>;rel="remove"`
 
-
-## Versioning
-When it comes to versioning, according to [Roy Fielding keynote on Evolve'13][], the best practice for versioning a REST API is not to version it. REST is already defined as a state machine (HATEOAS) where each state can be dynamic and each transition can be redirected (linked). So instead of agreeing on an interface, to change the state, client software should only need to _follow_ the apropriate links (as we humans do when we use a web).
-
-To read: https://nordicapis.com/api-change-strategy/
-
 ## Performance
 
 Queries paginated, filtering, asynchronous tasks, N+1 with embedded.
@@ -316,6 +338,7 @@ Queries paginated, filtering, asynchronous tasks, N+1 with embedded.
 [Roy Fielding about the opacity of resource identifiers]: https://roy.gbiv.com/untangled/2008/rest-apis-must-be-hypertext-driven
 [REST API Design Rulebook, by Mark Masse]: https://learning.oreilly.com/library/view/rest-api-design/9781449317904/
 [GitHub embedded resources to star gists]: https://developer.github.com/v3/gists/#star-a-gist
+[Paypal embedded resources to authorize payments]: https://developer.paypal.com/docs/api/orders/v2/#orders_authorize
 [`Content-Type`]: https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Type
 [`Last-Modified`]: https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Last-Modified
 [`Content-Encoding`]: https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Encoding
@@ -339,3 +362,5 @@ Queries paginated, filtering, asynchronous tasks, N+1 with embedded.
 [Minting new Media Types should be avoided]: http://duncan-cragg.org/blog/post/minting-media-types-usually-less-restful-using-raw/
 [state machine in REST]: https://nordicapis.com/designing-a-true-rest-state-machine/
 [IANA list of link relations]: https://www.iana.org/assignments/link-relations/link-relations.xhtml
+[PayPal and HATEOAS]: https://developer.paypal.com/docs/api/reference/api-responses/#hateoas-links
+[API Change Strategy]: https://nordicapis.com/api-change-strategy/
