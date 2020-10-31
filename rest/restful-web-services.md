@@ -19,7 +19,7 @@ The so called [Richardson Maturity Model][] describes different levels on how RE
 * **Level Four** - Hypermedia: leverage links and forms.
 
 ## Identification of resources
-In RESTful Web Services, [URIs (RFC 3986)][] are used to identify resources. However, the REST specification does not state anything about how identifiers should look like: they are just **opaque identifiers**. And code need not rely on any URI convention. According to [Roy Fielding words][Roy Fielding about the opacity of resource identifiers],
+In _RESTful Web Services_, [URIs (RFC 3986)][] are used to identify resources. However, the REST specification does not state anything about how identifiers should look like: they are just **opaque identifiers**. And code need not rely on any URI convention. According to [Roy Fielding words][Roy Fielding about the opacity of resource identifiers],
 
 > A REST API should be entered with no prior knowledge beyond the initial URI (bookmark) and set of standardized media types that are appropriate for the intended audience (i.e., expected to be understood by any client that might use the API).
 
