@@ -18,7 +18,7 @@ REST encompasses six constraints:
 * **Cache** - this reduces the number of interactions, which improves the efficiency and thus the user experience.
 * **Layered System** - or Microservices. Clients can only see the immediate layer they are interacting with. This layer may be composed of a hiearchy of layers.
 * **Code-On-Demand** (optional) - servers can provide clients with executable code (scripts).
-* **Uniform Interface** - consists in a common interface to let each side (client and server) to evolve independently. Here is a list of each constraint:
+* **Uniform Interface** - consists in a common interface to let each side (client and server) evolve independently. Here is a list of each constraint:
   * **Identification of resources** - each single resource has an identifier.
   * **Manipulation of resources through representations** - resources state can be manipulated by a client using a representation.
   * **self-descriptive messages** - each message gives precise information about how to describe itself.

@@ -2,16 +2,16 @@
 A service which fully adheres to the REST specification is said to be a _RESTful Service_. Also note that, according to Roy's dissertation, _"REST does not restrict communication to a particular protocol"_. However, most of the time REST is Web-based. In such case, we would call it a _RESTful Web Service_.
 
 ## REST Uniform Interface
-When it comes to the REST constraint about _Uniform Interface_, this is how each sub-constraint is enforced in a RESTful Web Service:
+When it comes to the REST constraint about _Uniform Interface_, this is how each sub-constraint is enforced in a _RESTful Web Service_:
 * **Identification of resources** - each resource is identified by a [URIs (RFC 3986)][].
-* **Manipulation of resources through representations** - the manipulation of resources state is done through the standard [HTTP (RFC 7231)][]. There are no verbs in REST, but not because HTTP already has verbs, but because we transfering a _state_, rather than calling instructions.
+* **Manipulation of resources through representations** - the manipulation of resources state is done through the standard [HTTP (RFC 7231)][]. There are no verbs in REST, but not because HTTP already has verbs, but because we are transfering a _state_, rather than calling instructions.
 * **self-descriptive messages** - the [Media Type Specification (RFC 6838)][] (formerly known as MIME types) is used to make messages self-descriptive.
 * **Hypermedia as the engine of application state (HATEOAS)** - hyperlinks in the resource returned by the browser can be used to allow clients to transition from one state to another.
 
 To sum up: resources have identifiers (URIs), and we can leverage the underlying transfer protocol (namely, HTTP) to modify (for example, using `PUT`) a resource (i.e. change its state) using its representation (for example, a JSON object).
 
 ## Richardson Maturity Model
-The so called [Richardson Maturity Model][] describes different levels on how RESFull a Web Service is:
+The so called [Richardson Maturity Model][] describes different levels on how RESTFul a Web Service is:
 
 * **Level Zero** - One URI and one HTTP method. Example: XML-RPC or SOAP.
 * **Level One** - Many URIs and one HTTP method.
@@ -69,7 +69,7 @@ POST https://example.com/products/51240/discountoffer
 ```
 
 ## Manipulation of resources
-When implementing a RESTful Web Service, we will be using HTTP as the underlying transfer protocol to manipulate resources. One of the constraints is that the system should be visible. Here this means we should leverage the available methods of HTTP rather than encapsulating our own methods within our request representations (i.e. we should not do _tunnelling_).
+When implementing a _RESTful Web Service_, we will be using HTTP as the underlying transfer protocol to manipulate resources. According to REST constraints, the system should be visible. Here this means we should leverage the available methods of HTTP rather than encapsulating our own methods within our request representations (i.e. we should not do _tunnelling_).
 
 HTTP defines a number of methods along with their description ([HTTP/1.1 Request Methods (RFC 7231)][] and [PATCH Method for HTTP (RFC 5789)][]):
 
@@ -85,7 +85,7 @@ HTTP defines a number of methods along with their description ([HTTP/1.1 Request
 
 A method is considered _safe_ as long as it does not have side-effects. And it is _idempotent_ when the side-effects of applying several identical requests is the same as for a single request.
 
-REST specification does not mention much about which HTTP methods should be used for a certain operation. This is because REST is all about the architectural style, while HTTP methods are part of the Web's architecture. When maping an API operation to an HTTP method we should consider: the semantic of the method; whether the operation is safe or idempotent; how affect caching; etc. But from the client point of view, it is not important which HTTP method maps an operation. There are some consensus though:
+REST specification does not mention much about which HTTP methods should be used for a certain operation. This is because REST is all about the architectural style, while HTTP methods are part of the Web's architecture. When mapping an API operation to an HTTP method we should consider: the semantic of the method; whether the operation is safe or idempotent; how affect caching; etc. But from the client point of view, it is not important which HTTP method maps an operation. There are some consensus, though:
 
 ### GET
 `GET` is used for _safe_ and _idempotent_ data retrieval, either on documents or in collections/stores.
@@ -93,7 +93,7 @@ REST specification does not mention much about which HTTP methods should be used
 ### HEAD and OPTIONS
 These two methods are used for data inspection, so they both are _safe_ and _idempotent_. When only the metadata (header) of a resource is required, `HEAD` can be used instead of `GET`.
 
-To discover how can we interact with a resource, `OPTIONS` will be used. This will return an `Allow` header listing all available methods. Note that, even though a client application can fetch this information at runtime, it increases the network traffic.
+To discover how we can interact with a resource, `OPTIONS` will be used. This will return an `Allow` header listing all available methods. Note that, even though a client application can fetch this information at runtime, it increases the network traffic.
 
 ### POST
 `POST` is the most controversial HTTP method. It can be used for a number of things:
@@ -128,7 +128,7 @@ To map an operation that does not clearly match a CRUD action, we can:
 * Create a resource of type _controller_. For example, to merge two resources.
 
 ### Error messages and error responses
-A RESTful Web Service is expected to return error responses both in the HTTP header and in the payload:
+A _RESTful Web Service_ is expected to return error responses both in the HTTP header and in the payload:
 
 **Header**
 Set a meaningful error code. For example, when requesting a nonexisting resource, return a `404`. Please note, sometimes it is not so obvious. Consider this identifier: `/departments/:deptID/employees?id=Smith`. If for the given department there is no employee whose identifier is `smith`, a `404` looks fine. What if there is no department for `:deptID`? What should we return?
