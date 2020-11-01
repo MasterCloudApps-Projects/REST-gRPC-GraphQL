@@ -21,8 +21,9 @@ Create a resource of type _controller_. For example:
 * To move a resource.
 * To run bulk operations.
 
-Chapter 11 of [RESTful Web Services Cookbook] gives lot of details on how these controllers can be articulated.
+Chapter 11 of [RESTful Web Services Cookbook] gives lot of details on how these controllers can be articulated. [Google Cloud API Design guide][] also provides good examples on when and how to create custom methods.
 
 [GitHub embedded resources to star gists]: https://developer.github.com/v3/gists/#star-a-gist
 [Paypal embedded resources to authorize payments]: https://developer.paypal.com/docs/api/orders/v2/#orders_authorize
 [RESTful Web Services Cookbook]: https://learning.oreilly.com/library/view/restful-web-services/9780596809140/
+[Google Cloud API Design guide]: https://cloud.google.com/apis/design/custom_methods
