@@ -1,5 +1,5 @@
 # Add a document to a collection (Async)
-We've covered how we can add a document to a [collection](../03_create_document_collection/README.md) or to a [store](../04_put_document_store/README.md). Sometimes, things get more complicated, and the resource creation on the server end takes too long to give a synchronous answer. In this cases, we can create a new resource of type `task`, which will contain a `status` to let us know when the task has ended.
+We've covered how we can add a document to a [collection](../create_document_collection/README.md) or to a [store](../04_put_document_store/README.md). Sometimes, things get more complicated, and the resource creation on the server end takes too long to give a synchronous answer. In this cases, we can create a new resource of type `task`, which will contain a `status` to let us know when the task has ended.
 
 ## Request
 
