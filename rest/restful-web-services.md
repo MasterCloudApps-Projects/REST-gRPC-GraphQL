@@ -117,17 +117,11 @@ It is used to remove a resource. This operation is not _safe_ (i.e. it has side 
 ### Other methods
 It is encouraged not to use other HTTP methods, like those proposed by [WebDAV (RFC 4918)][], and instead use `POST`. However, some people does not discourage using `PATCH`.
 
-### Beyond CRUD
+### HTTP is not CRUD
 It's fundamental to notice several things. Neither REST nor HTTP are CRUD. Some HTTP methods clearly map CRUD action (i.e. `GET` maps _Read_ and `DELETE` maps _Delete_). However:
 
 * `POST` can run a number of _non-idempotent_ and _unsafe_ operations. One of those operations might be _Create_. Performing other actions it is also correct. Remember, the entire SOAP protocol is _tunnelled_ through `POST`.
 * `PUT` does not only _Update_ a resource. It can also _Create_ a specific resource.
-
-To map an operation that does not clearly match a CRUD action, we can:
-
-* Map a state to a field. For example, a field called `status` for a music player which accepts a number of possible options, or a field called `activated` of type boolean.
-* Create a new resource. This resource will map an action into it. For example, GitHub defined an [embedded resource in gists][GitHub embedded resources to star gists] (a form of shareable snippets of code) to _star_ or _unstar_ them, as in `PUT|DELETE /gists/:gist_id/start`. [Paypal allows to authorize a payment][Paypal embedded resources to authorize payments] creating a resource of type `authorize` in an order: `PUT /v2/checkout/orders/5O190127TN364715T/authorize`.
-* Create a resource of type _controller_. For example, to merge two resources.
 
 ### Error messages and error responses
 A _RESTful Web Service_ is expected to return error responses both in the HTTP header and in the payload:
@@ -241,7 +235,7 @@ GET /microwaves/12
 Then, following the `on` link, the microwave would be turned on.
 
 ### About `rel`
-Some people (See _RESTful Web Services Cookbook_) suggest we express the action type in the `rel` following these rules:
+Some people (See [RESTful Web Services Cookbook][]) suggest we express the action type in the `rel` following these rules:
 
 * Use the existing names, like `self`, `alternate`, `related`, `previous`, `next`, `first` and `last`.
 * If there is no existing name, create a new one. Express that relation as a URI. Also, provide an HTML documentation for that relation at that URI.
@@ -337,8 +331,6 @@ Queries paginated, filtering, asynchronous tasks, N+1 with embedded.
 [JSON API]: https://jsonapi.org/
 [Roy Fielding about the opacity of resource identifiers]: https://roy.gbiv.com/untangled/2008/rest-apis-must-be-hypertext-driven
 [REST API Design Rulebook, by Mark Masse]: https://learning.oreilly.com/library/view/rest-api-design/9781449317904/
-[GitHub embedded resources to star gists]: https://developer.github.com/v3/gists/#star-a-gist
-[Paypal embedded resources to authorize payments]: https://developer.paypal.com/docs/api/orders/v2/#orders_authorize
 [`Content-Type`]: https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Type
 [`Last-Modified`]: https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Last-Modified
 [`Content-Encoding`]: https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Encoding
@@ -364,3 +356,4 @@ Queries paginated, filtering, asynchronous tasks, N+1 with embedded.
 [IANA list of link relations]: https://www.iana.org/assignments/link-relations/link-relations.xhtml
 [PayPal and HATEOAS]: https://developer.paypal.com/docs/api/reference/api-responses/#hateoas-links
 [API Change Strategy]: https://nordicapis.com/api-change-strategy/
+[RESTful Web Services Cookbook]: https://learning.oreilly.com/library/view/restful-web-services/9780596809140/
