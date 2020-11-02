@@ -159,7 +159,7 @@ In _RESTful Web Services_, we rely on HTTP to specify the metadata:
 * [`Content-Language`][]: describes the language intended for the audience.
 
 ### Resource representation
-To choose the apropriate representation, the `Content-Type` entity header will be used. See the [IANA document on Media-Types][] to check a comprehensive list of media types approved by the IANA. For example, `text/plain` or `image/png`. An extensible format, like `application/xml` or `application/json` can be used as well.
+To choose the apropriate representation, the `Content-Type` entity header will be used. See the [IANA document on Media-Types][] to check a comprehensive list of media types approved by the IANA. For example, `text/plain` or `image/png`. An extensible format, like `application/xml` or `application/json` can be used as well. Event a binary representation as [Protobuf can be used in REST][Protobuf and REST].
 
 To describe JSON resources, several specifications can be used:
 * [JSON Schema][], using `application/schema+json`.
@@ -368,3 +368,4 @@ Queries paginated, filtering, asynchronous tasks, N+1 with embedded.
 [PayPal and HATEOAS]: https://developer.paypal.com/docs/api/reference/api-responses/#hateoas-links
 [API Change Strategy]: https://nordicapis.com/api-change-strategy/
 [RESTful Web Services Cookbook]: https://learning.oreilly.com/library/view/restful-web-services/9780596809140/
+[Protobuf and REST]: https://medium.com/swlh/supercharge-your-rest-apis-with-protobuf-b38d3d7a28d3

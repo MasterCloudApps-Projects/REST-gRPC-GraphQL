@@ -4,7 +4,7 @@ REST (Representational state transfer) was first introduced in [Roy Fielding's d
 1. It is an _architectural style_, not a _protocol_. For example, SOAP is a protocol. REST, on the other side, is an architectural style which make use of standards, but there is no official standard for REST. Because of this, we often find different solutions to a given problem.
 2. It is for _distributed hypermedia systems_. Clients have access to hypermedia information from a repository which might be in a distributed network.
 
-In REST, we define _resources_ (for example, books), that can be _represented_ in a variety of forms (namely, XML or JSON). When we talk about _state_, we are referring to the current data or version of a _resource_. Taking this into account, REST is just a means for two systems to _transfer_ the _state_ of a _resource_ through one of its _representations_.
+In REST, we define _resources_ (for example, books), that can be _represented_ in a variety of forms (namely, XML, JSON or even protobuf). When we talk about _state_, we are referring to the current data or version of a _resource_. Taking this into account, REST is just a means for two systems to _transfer_ the _state_ of a _resource_ through one of its _representations_.
 
 > Note: we've covered _resource states_. We also have the _application state_, which resides on the client side. It can transition to other states just following the links in the _representations_.
 
