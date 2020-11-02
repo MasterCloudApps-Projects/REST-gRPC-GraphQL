@@ -6,7 +6,7 @@ The REST constraints we've seen so far lead to several signature characteristics
 * **Clients follow hyperlinks**. Again, unlinke RPC, where a client chooses to query a certain _endpoint_.
 
 
-Hablar de que OpenAPI o API Blueprint técnicamente no son REST.
+Hablar de que OpenAPI o API Blueprint técnicamente no son REST. También RAML.
 
 * No promueven la evolución. Un cambio en la descripción puede hacer que un cliente deje de funcionar.
 
