@@ -268,12 +268,6 @@ We use
 * `HTTP Digest Access Authentication`
 * `OAuth 2`
 
-## Performance
-
-Queries paginated, filtering, asynchronous tasks, N+1 with embedded.
-
-### Rate limiting
-
 ## Examples
 1. [Fetch a document](fetch_document/README.md)
 2. [Fetch a document in a specific representation](fetch_specific_format/README.md)
@@ -286,7 +280,6 @@ Queries paginated, filtering, asynchronous tasks, N+1 with embedded.
 9. [Partially update a document](partial_update/README.md)
 10. [Delete a document](delete/README.md)
 11. [Run action](run_action/README.md)
-
 
 [URIs (RFC 3986)]: https://tools.ietf.org/html/rfc3986
 [URI Templates (RFC 6570)]: https://tools.ietf.org/html/rfc6570
