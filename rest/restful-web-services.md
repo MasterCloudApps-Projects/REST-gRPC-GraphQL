@@ -264,21 +264,10 @@ Criticisms of HATEOAS often argue that there are no real-world examples of it, w
 ## Querying URI
 Queries are used to filter, sort and paginate both collections and stores. Brackets or colon might be handy to use operators:
 
-* Get all: `GET /universities`.
 * Basic filtering. Select those whose `country` is `spain`: `GET /universities?country=spain`.
 * Filtering with operand: Select those whose `country` is not equal to `spain`: `GET /universities?country[neq]=spain`.
-* Sorting: `GET /universities?sort_by=-date,id`.
 * Select specific fields: `GET /universities?fields=id,name,departments(name)`. Examples: [Google Tasks API][Partial response in Google Tasks API] or [Sparse Fieldsets in JSON API][JSON API].
 * Include sub-resources: our resource might contain a collection of other type. We can use something like `GET /posts/12?embed=comments,author.name` to fetch a blog post along with all its comments and its author name.
-
-### Pagination
-We tyipically identify two different pagination mechanisms:
-* Offset-based pagination: `GET /universities?limit=10&offset=30`.
-* [Cursor-based pagination][Cursor-based pagination in Facebook API]: `GET /universities?limit=10&next=uc3m`.
-
-_Cursor-based_ pagination is more popular nowadays.
-
-It can also contain `Web Links` headers to help traversing a collection of resources. See for example the [GitHub API][Pagination with Web Links in GitHub API].
 
 ## Security
 We use
@@ -359,8 +348,6 @@ Queries paginated, filtering, asynchronous tasks, N+1 with embedded.
 [JSON-LD]: https://json-ld.org/
 [Hydra]: http://www.hydra-cg.com/spec/latest/core/
 [Partial response in Google Tasks API]: https://developers.google.com/tasks/performance#partial-response
-[Cursor-based pagination in Facebook API]: https://developers.facebook.com/docs/graph-api/using-graph-api/#paging
-[Pagination with Web Links in GitHub API]: https://developer.github.com/v3/#pagination
 [Roy Fielding keynote on Evolve'13]: https://www.slideshare.net/evolve_conference/201308-fielding-evolve
 [Minting new Media Types should be avoided]: http://duncan-cragg.org/blog/post/minting-media-types-usually-less-restful-using-raw/
 [state machine in REST]: https://nordicapis.com/designing-a-true-rest-state-machine/
