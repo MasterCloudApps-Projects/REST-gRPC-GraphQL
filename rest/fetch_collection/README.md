@@ -15,3 +15,16 @@ When using pagination, a sorting mechanism should be used. Typically, our data w
 
 [Cursor-based pagination in Facebook API]: https://developers.facebook.com/docs/graph-api/using-graph-api/#paging
 [Pagination with Web Links in GitHub API]: https://docs.github.com/en/free-pro-team@latest/rest/guides/traversing-with-pagination
+
+## Filtering
+To filter the resultset, query parameters can be used as well. This technique includes basic filtering, like this:
+
+```
+GET /universities?country=spain
+```
+
+But also more advanced filters, making use of operands, for example using something like the following:
+
+```
+GET /universities?country[neq]=spain
+```

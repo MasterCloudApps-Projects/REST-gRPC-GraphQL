@@ -261,12 +261,6 @@ Criticisms of HATEOAS often argue that there are no real-world examples of it, w
 }
 ```
 
-## Querying URI
-Queries are used to filter, sort and paginate both collections and stores. Brackets or colon might be handy to use operators:
-
-* Basic filtering. Select those whose `country` is `spain`: `GET /universities?country=spain`.
-* Filtering with operand: Select those whose `country` is not equal to `spain`: `GET /universities?country[neq]=spain`.
-
 ## Security
 We use
 
