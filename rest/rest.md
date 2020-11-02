@@ -44,16 +44,30 @@ _Controller resources_ can be thought as remote methods: they represent an actio
 ## Implementation
 The above [constraints](#constraints) are not tight to any specific transfer protocol. They fit perfectly on HTTP, where we work with data (_resources_), and the behaviour results from the operations on that data. When HTTP is used to create a RESTful Service, we call it [_RESTful Web Service_][RESTful Web Service].
 
-However, most _REST APIs_ are not HATEOAS compliant. So, instead of take advantage of hypermedia, very often APIs rely on contracts and rules on how identifiers are built (they are not _opaque_, but _predictable_). These APIs, which are not that different from RPC, are often called [_REST-Like Web Services_][REST-LikeWeb Service].
+However, most _REST APIs_ are not HATEOAS compliant. So, instead of take advantage of hypermedia, very often APIs rely on contracts and rules on how identifiers are built (they are not _opaque_, but _predictable_). These APIs, which are not that different from RPC, are often called [_REST-Like Web Services_][REST-LikeWeb Service] (as well as _so-called-REST APIs_). Many people think that, despite being a good idea, [True RESTful market is far from being mature][RESTful HATEOAS market status].
 
 ### Characteristics of a HATEOAS API
-
 * ✔️ Evolvability. Client and server don't rely on a bespoke contract, but in open standards.
-* ✔️ Discoverability. A client can easily discover new functionalities provided by the server.
-* ✔️ Simplicity. Reduces the client-side logic.
+* ✔️ Discoverability. A client can automatically discover new functionalities provided by the server.
 * ✘ Lack of adoption and tooling.
 * ✘ Cost. Developing a RESTful Service is expensive.
 
+## Criticism
+In spite of the large number of benefits of such architecture, REST is not free from criticism:
+
+* **Resources usage**. True REST services might require a high load of network traffic: (1) to auto-discover available services, (2) the payload is often expressed in XML or JSON and (3) since most of the time is browser oriented, it does not leverage HTTP2.
+* **Cost of development**. It forces developers to choose how they want to represent their resources, how they want to expose links, how to create searchers, etc.
+* **Data-oriented**. Classic RPC technologies are procedure-oriented, which for some is easier to understand, and find data-oriented APIs unnatural. There is no consensus on this though; Google even encourages developers to design their gRPC APIs using a data-oriented approach.
+* **Representations**. Most programming languages are able to effectively work with either XML, JSON or any other common extended format. Because of this, there is no real need to let users choose how they want to represent a resource.
+* **Hard to understand**. True RESTful APIs are not that common. Because of it's lack of adoption, training both a server-side and a client-side teams to work on a RESTful API can be expensive.
+
+Read more:
+* [REST is the new SOAP][]
+* [Follow-up to REST is the new SOAP][]
+
 [Roy Fielding's doctoral dissertation Architectural Styles and the Design of Network-based Software Architectures]: https://www.ics.uci.edu/~fielding/pubs/dissertation/top.htm
 [RESTful Web Service]: ./restful-web-services.md
-[REST-LikeWeb Service]: ./restlike-web-services.md
+[REST-Like Web Service]: ./restlike-web-services.md
+[RESTful HATEOAS market status]: https://medium.com/@andreasreiser94/why-hateoas-is-useless-and-what-that-means-for-rest-a65194471bc8
+[REST is the new SOAP]: https://www.freecodecamp.org/news/rest-is-the-new-soap-97ff6c09896d/
+[Follow-up to REST is the new SOAP]: https://medium.com/free-code-camp/follow-up-to-rest-is-the-new-soap-the-origins-of-rest-21c59d243438
