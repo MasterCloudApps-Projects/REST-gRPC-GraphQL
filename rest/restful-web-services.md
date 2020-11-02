@@ -3,10 +3,10 @@ A service which fully adheres to the REST specification is said to be a _RESTful
 
 ## REST Uniform Interface
 When it comes to the REST constraint about _Uniform Interface_, this is how each sub-constraint is enforced in a _RESTful Web Service_:
-* **Identification of resources** - each resource is identified by a [URIs (RFC 3986)][].
-* **Manipulation of resources through representations** - the manipulation of resources state is done through the standard [HTTP (RFC 7231)][]. There are no verbs in REST, but not because HTTP already has verbs, but because we are transfering a _state_, rather than calling instructions.
-* **self-descriptive messages** - the [Media Type Specification (RFC 6838)][] (formerly known as MIME types) is used to make messages self-descriptive.
-* **Hypermedia as the engine of application state (HATEOAS)** - hyperlinks in the resource returned by the browser can be used to allow clients to transition from one state to another.
+* [**Identification of resources**](#identification-of-resources) - each resource is identified by a [URIs (RFC 3986)][].
+* [**Manipulation of resources through representations**](#manipulation-of-resources) - the manipulation of resources state is done through the standard [HTTP (RFC 7231)][]. There are no verbs in REST, but not because HTTP already has verbs, but because we are transfering a _state_, rather than calling instructions.
+* [**self-descriptive messages**](#message-description) - the [Media Type Specification (RFC 6838)][] (formerly known as MIME types) is used to make messages self-descriptive.
+* [**Hypermedia as the engine of application state (HATEOAS)**](#hateoas) - hyperlinks in the resource returned by the browser can be used to allow clients to transition from one state to another.
 
 To sum up: resources have identifiers (URIs), and we can leverage the underlying transfer protocol (namely, HTTP) to modify (for example, using `PUT`) a resource (i.e. change its state) using its representation (for example, a JSON object).
 
