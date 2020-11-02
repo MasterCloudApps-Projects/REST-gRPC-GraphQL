@@ -300,15 +300,18 @@ Queries paginated, filtering, asynchronous tasks, N+1 with embedded.
 ### Rate limiting
 
 ## Examples
-1. [Fetch a document](fetch_document/README.md).
-2. [Fetch a document in a specific representation](fetch_specific_format/package.json)
-3. [Create a document in a collection](create_document_collection/README.md)
-4. [Put a document in a store](put_document_store/README.md)
-5. [Update a document](partial_update/README.md)
-6. [Create a resource asynchronously](asynchronous_operation/README.md)
-7. [Partially update a document](partial_update/README.md)
-8. [Delete a document](delete/README.md)
-9. [Run action](run_action/README.md)
+1. [Fetch a document](fetch_document/README.md)
+2. [Fetch a document in a specific representation](fetch_specific_format/README.md)
+3. [Fetch specific fields from a document](custom_fetch/README.md)
+4. [Create a document in a collection](create_document_collection/README.md)
+5. [Fetch elements from a collection](fetch_collection/README.md)
+6. [Put a document in a store](put_document_store/README.md)
+7. [Update a document](update_document/README.md)
+8. [Create a resource asynchronously](asynchronous_operation/README.md)
+9. [Partially update a document](partial_update/README.md)
+10. [Delete a document](delete/README.md)
+11. [Run action](run_action/README.md)
+
 
 [URIs (RFC 3986)]: https://tools.ietf.org/html/rfc3986
 [URI Templates (RFC 6570)]: https://tools.ietf.org/html/rfc6570
