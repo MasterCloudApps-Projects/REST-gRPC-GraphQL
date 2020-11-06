@@ -5,6 +5,7 @@ The REST constraints we've seen so far lead to several signature characteristics
 * **It is entity-oriented**. Unlike RPC, which is procedure-oriented, a RESTful service transfer entities.
 * **Clients follow hyperlinks**. Again, unlinke RPC, where a client chooses to query a certain _endpoint_.
 
+[Aquí](https://www.vinaysahni.com/best-practices-for-a-pragmatic-restful-api#hateoas) cuentan que todo muy bien con HATEOAS, pero que realmente tampoco es tan grande hoy por hoy la ventaja respecto a otros sistemas.
 
 Hablar de que OpenAPI o API Blueprint técnicamente no son REST. También RAML.
 
