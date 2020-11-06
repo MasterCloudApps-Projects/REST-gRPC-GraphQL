@@ -3,6 +3,11 @@ As we've seen, one key feature of HTTP in general, and in REST in particular, is
 
 To run an operation that does not clearly match any of the verbs provided by HTTP, we have several choices:
 
+## Pure functions
+We can use `GET` to express a _verb_ of a _safe_ and _idempotent_ operation. For example, let's think of an API which returns the distance between two cities. In this case, the resource would be the _input_ of the URI, and the representation would be the distance returned. For example:
+
+```/distance/Madrid/Seville```
+
 ## Custom field
 We can map a state to a field. For example, a field called `status` for a music player which accepts a number of possible options, or a field called `activated` of type boolean.
 
