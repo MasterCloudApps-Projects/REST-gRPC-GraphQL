@@ -1,15 +1,14 @@
+const { exists } = require("../../models/article");
 const Article = require("../../models/article")
 
 module.exports = {
-    articles: async () => {
-        const articlesFetched = await Article.find();
-        return articlesFetched.map(article => {
-            return {
-                ...article._doc,
-                _id: article.id,
-                createdAt: new Date(article._doc.createdAt).toISOString(),
-            }
-        });
+    article: async (params) => {
+        const article = await Article.findById(params.id);
+        return {
+            ...article._doc,
+            id: article.id,
+            createdAt: new Date(article._doc.createdAt).toISOString(),
+        };
     },
 
     createArticle: async args => {

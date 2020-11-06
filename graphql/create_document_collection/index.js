@@ -5,7 +5,12 @@ curl -v -H "Content-Type: application/json" \
     -d '{ "query": "mutation { createArticle(article: { title: \"This is my first post\", description: \"This is the beginning of a beautiful friendship\" }) { id } }" }' \
     http://localhost:4000/graphql
 
- * The above request will return a Location header. To fetch the entry created above, run (updating the identifier):
+ * The above request will return the id of the newly created resource. To fetch the resource, you can run:
+
+ curl -v -H "Content-Type: application/json" \
+    -d '{ "query": "query { article(id: \"5fa5cb0c38137b23c1ac82c4\") { id, title } }" }' \
+    http://localhost:4000/graphql
+
  */
 
 const express = require("express");
