@@ -7,7 +7,6 @@ module.exports = {
         return {
             ...article._doc,
             id: article.id,
-            createdAt: new Date(article._doc.createdAt).toISOString(),
         };
     },
 

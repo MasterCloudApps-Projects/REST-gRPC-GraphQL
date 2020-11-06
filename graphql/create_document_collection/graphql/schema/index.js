@@ -5,7 +5,6 @@ module.exports = buildSchema(`
         id: ID!
         title: String!
         description: String!
-        createdAt: String!
     }
 
     input ArticleInput {
