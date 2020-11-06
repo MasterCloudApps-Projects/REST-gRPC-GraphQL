@@ -1,0 +1,6 @@
+{
+    "env": {
+        "MONGO_DB": "my_database",
+        "MONGO_HOST": "127.0.0.1"
+    }
+}

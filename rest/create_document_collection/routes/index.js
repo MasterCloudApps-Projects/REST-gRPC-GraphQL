@@ -1,5 +1,5 @@
-const news = require('./news.js');
+const article = require('./article.js');
  
 module.exports = {
-    news
+    article
 };

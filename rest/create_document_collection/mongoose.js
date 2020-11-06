@@ -1,11 +1,10 @@
-var mongoose = require('mongoose');
+const mongoose = require('mongoose');
 
 //Set up default mongoose connection
-var mongoDB = 'mongodb://127.0.0.1/my_database';
-mongoose.connect(mongoDB, {useNewUrlParser: true, useUnifiedTopology: true});
-
-//Get the default connection
-var db = mongoose.connection;
-
-//Bind connection to error event (to get notification of connection errors)
-db.on('error', console.error.bind(console, 'MongoDB connection error:'));
+const uri = `mongodb://${process.env.MONGO_HOST}/${process.env.MONGO_DB}?retryWrites=true&w=majority`
+const options = { useNewUrlParser: true, useUnifiedTopology: true }
+mongoose
+    .connect(uri, options)
+    .catch(error => {
+        throw error
+    });

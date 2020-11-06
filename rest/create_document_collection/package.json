@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "start": "nodemon index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Jesús Ruiz-Ayúcar",
@@ -11,5 +12,8 @@
     "express": "^4.17.1",
     "mongoose": "^5.10.12",
     "uuid": "8.3.0"
+  },
+  "devDependencies": {
+    "nodemon": "2.0.4"
   }
 }
