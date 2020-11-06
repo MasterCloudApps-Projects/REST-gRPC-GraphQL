@@ -10,8 +10,7 @@
   "author": "Jesús Ruiz-Ayúcar",
   "dependencies": {
     "express": "^4.17.1",
-    "mongoose": "^5.10.12",
-    "uuid": "8.3.0"
+    "mongoose": "^5.10.12"
   },
   "devDependencies": {
     "nodemon": "2.0.4"
