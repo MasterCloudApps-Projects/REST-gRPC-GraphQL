@@ -37,3 +37,7 @@ GET /posts/12?embed=comments,author.name
 
 [Partial response in Google Tasks API]: https://developers.google.com/tasks/performance#partial-response
 [JSON API Sparse Fieldsets]: https://jsonapi.org/format/#fetching-sparse-fieldsets
+
+TODO - Show:
+* how to fetch custom fields
+* how to fetch embedded resources
