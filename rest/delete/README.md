@@ -4,7 +4,7 @@ To delete a resource (regardless of its type), we can just carry out a `DELETE` 
 ## Request
 
 ### HTTP Method
-`DELETE` will be used. Note this is an _unsafe_ an _idempotent_ operation.
+`DELETE` will be used. Note this is an _unsafe_ and _idempotent_ operation.
 
 ### Example
 ```
