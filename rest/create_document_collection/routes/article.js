@@ -1,6 +1,6 @@
 const { Router: Router } = require('express');
 var mongoose = require('mongoose');
-var ValidationError = mongoose.Error.ValidationError;
+var { ValidationError, CastError } = mongoose.Error;
 
 const router = Router();
 
@@ -44,7 +44,11 @@ router.get('/:id', async (req, res) => {
             res.sendStatus(404);
         }
     } catch (error) {
-        res.status(500);
+        if (error instanceof CastError) {
+            res.sendStatus(400);
+        } else {
+            res.sendStatus(500);
+        }
     }
 });
 
