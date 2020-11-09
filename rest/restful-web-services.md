@@ -269,17 +269,17 @@ We use
 * `OAuth 2`
 
 ## Examples
-1. [Fetch a document](fetch_document/README.md)
-2. [Fetch a document in a specific representation](fetch_specific_format/README.md)
-3. [Fetch specific fields from a document](custom_fetch/README.md)
-4. [Create a document in a collection](create_document_collection/README.md)
-5. [Fetch elements from a collection](fetch_collection/README.md)
-6. [Put a document in a store](put_document_store/README.md)
-7. [Update a document](update_document/README.md)
-8. [Create a resource asynchronously](asynchronous_operation/README.md)
-9. [Partially update a document](partial_update/README.md)
-10. [Delete a document](delete/README.md)
-11. [Run action](run_action/README.md)
+* [Login](login.md)
+* [Fetch a document](fetch_document.md)
+* [Fetch specific fields from a document](custom_fetch.md)
+* [Create a document in a collection](create_document_in_collection.md)
+* [Fetch elements from a collection](fetch_collection.md)
+* [Update a document](update_document.md)
+* [Create a resource asynchronously](asynchronous_operation.md)
+* [Partially update a document](partial_update.md)
+* [Delete a document](delete.md)
+* [Run action](run_action.md)
+* [Subscription](subscription.md)
 
 [URIs (RFC 3986)]: https://tools.ietf.org/html/rfc3986
 [URI Templates (RFC 6570)]: https://tools.ietf.org/html/rfc6570
