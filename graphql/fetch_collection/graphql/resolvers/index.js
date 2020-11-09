@@ -3,7 +3,6 @@ const Article = require("../../models/article")
 
 module.exports = {
     article: async (params) => {
-        console.log("HOLA");
         const article = await Article.findById(params.id);
         return {
             ...article._doc,
