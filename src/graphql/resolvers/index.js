@@ -47,5 +47,16 @@ module.exports = {
                 node: article
             }))
         };
+    },
+
+    deleteArticle: async (params) => {
+        const deletedArticle = await Article.findByIdAndDelete(params.id);
+        if (!deletedArticle) {
+            throw new InvalidInputError(`Item not found ${params.id}`, 200);
+        }
+        return {
+            ...deletedArticle._doc,
+            id: deletedArticle.id
+        }
     }
 };
