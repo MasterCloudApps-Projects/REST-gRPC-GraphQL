@@ -7,4 +7,5 @@ app.use(bodyParser.json()) // for parsing application/json
 app.use('/articles', routes.article);
 app.use('/distances', routes.distance);
 app.use('/videos', routes.video);
-app.listen(4000, () => console.log('Running a REST server at http://localhost:4000/'));
+app.use(require('./graphql/handler'));
+app.listen(4000, () => console.log('Running a REST and GraphQL server at http://localhost:4000/'));
