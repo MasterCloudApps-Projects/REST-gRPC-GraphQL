@@ -271,7 +271,6 @@ We use
 ## Examples
 * [Login](login.md)
 * [Fetch a document](fetch_document.md)
-* [Fetch specific fields from a document](custom_fetch.md)
 * [Create a document in a collection](create_document_in_collection.md)
 * [Fetch elements from a collection](fetch_collection.md)
 * [Update a document](update_document.md)
