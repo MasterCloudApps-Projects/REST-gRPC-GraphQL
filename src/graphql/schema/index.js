@@ -1,10 +1,16 @@
 const { buildSchema } = require("graphql");
 
 module.exports = buildSchema(`
+    type Comment {
+        author: String!
+        text: String!
+    }
+
     type Article {
         id: ID!
         title: String!
         description: String!
+        comments: [Comment]!
     }
 
     type Edge {

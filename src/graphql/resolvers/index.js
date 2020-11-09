@@ -1,22 +1,34 @@
-const { exists } = require("../../models/article");
 const Article = require("../../models/article")
+const Comment = require("../../models/comment")
+
+class GArticle {
+    constructor(row) {
+        this.row = row;
+        this.id = row.id;
+        this.title = row.title;
+        this.description = row.description;
+    }
+
+    async comments() {
+        // N+1 problem here!
+        return await Comment.find({ article: this.id })
+    }
+}
+
+var hola = 0;
 
 module.exports = {
     article: async (params) => {
         const article = await Article.findById(params.id);
-        return {
-            ...article._doc,
-            id: article.id,
-        };
+        if (article) {
+            return new GArticle(article);
+        }
     },
 
     createArticle: async args => {
         const article = new Article(args.article);
         const newArticle = await article.save();
-        return {
-            ...newArticle._doc,
-            id: newArticle.id
-        };
+        return new GArticle(newArticle);
     },
 
     articles: async (params) => {
@@ -44,7 +56,7 @@ module.exports = {
             },
             edges: articles.map(article => ({
                 cursor: article.id,
-                node: article
+                node: new GArticle(article)
             }))
         };
     },
