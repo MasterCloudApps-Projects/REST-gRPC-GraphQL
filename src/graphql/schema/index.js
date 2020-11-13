@@ -42,6 +42,7 @@ module.exports = buildSchema(`
     type Mutation {
         createArticle(article:ArticleInput): Article
         deleteArticle(id: ID!): Article
+        updateArticle(id: ID!, article:ArticleInput): Article
     }
 
     schema {

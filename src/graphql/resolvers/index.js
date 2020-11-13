@@ -68,5 +68,11 @@ module.exports = {
             ...deletedArticle._doc,
             id: deletedArticle.id
         }
+    },
+
+    updateArticle: async ({id, article}) => {
+        const previous = await Article.findById(id);
+        await Article.replaceOne({ _id: id}, Object.assign(previous, article));
+        return new GArticle(Object.assign(previous, article));
     }
 };
