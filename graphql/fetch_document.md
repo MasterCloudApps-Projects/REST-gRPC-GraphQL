@@ -19,12 +19,12 @@ To fetch an article, we first need to know which `article` we want to fetch. So,
 ```
 query {
     articles(first: 1) {
-    edges {
-      node {
-        id
-      }
+        edges {
+            node {
+                id
+            }
+        }
     }
-  }
 }
 ```
 
