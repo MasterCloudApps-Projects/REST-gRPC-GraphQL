@@ -15,8 +15,6 @@ class GArticle {
     }
 }
 
-var hola = 0;
-
 module.exports = {
     article: async (params) => {
         const article = await Article.findById(params.id);
