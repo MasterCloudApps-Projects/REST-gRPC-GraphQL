@@ -74,5 +74,17 @@ module.exports = {
         const previous = await Article.findById(id);
         await Article.replaceOne({ _id: id}, Object.assign(previous, article));
         return new GArticle(Object.assign(previous, article));
+    },
+
+    patchArticle: async ({id, title, description}) => {
+        const previous = await Article.findById(id);
+        if (title !== undefined) {
+            previous.title = title;
+        }
+        if (description !== undefined) {
+            previous.description = description;
+        }
+        await Article.replaceOne({ _id: id}, previous);
+        return new GArticle(previous);
     }
 };

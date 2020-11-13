@@ -43,6 +43,7 @@ module.exports = buildSchema(`
         createArticle(article:ArticleInput): Article
         deleteArticle(id: ID!): Article
         updateArticle(id: ID!, article:ArticleInput): Article
+        patchArticle(id: ID!, title:String, description:String): Article
     }
 
     schema {
