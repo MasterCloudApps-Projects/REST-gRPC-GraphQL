@@ -261,13 +261,6 @@ Criticisms of HATEOAS often argue that there are no real-world examples of it, w
 }
 ```
 
-## Security
-We use
-
-* `HTTP Basic Access Authentication`
-* `HTTP Digest Access Authentication`
-* `OAuth 2`
-
 ## Examples
 * [Login](login.md)
 * [Fetch a document](fetch_document.md)

@@ -1,6 +1,8 @@
 {
     "env": {
         "MONGO_DB": "my_database",
-        "MONGO_HOST": "127.0.0.1"
+        "MONGO_HOST": "127.0.0.1",
+        "ACCESS_TOKEN_SECRET": "randomaccesstokensecret",
+        "CORS_ALLOWED_DOMAIN": "http://localhost:4000/"
     }
 }
