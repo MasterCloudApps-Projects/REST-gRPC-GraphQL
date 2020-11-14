@@ -13,6 +13,12 @@ module.exports = buildSchema(`
         comments: [Comment]!
     }
 
+    type Client {
+        id: ID!
+        dni: String!
+        iban: String!
+    }
+
     type Edge {
         cursor: String!
         node: Article!
@@ -37,6 +43,7 @@ module.exports = buildSchema(`
     type Query {
         article(id: String!): Article!
         articles(after: String, first: Int): ArticlesPayload
+        client(dni: String!): Client!
     }
 
     type Mutation {

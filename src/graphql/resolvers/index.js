@@ -1,5 +1,6 @@
 const Article = require("../../models/article")
 const Comment = require("../../models/comment")
+const Client = require("../../models/client")
 
 class GArticle {
     constructor(row) {
@@ -12,6 +13,12 @@ class GArticle {
     async comments() {
         // N+1 problem here!
         return await Comment.find({ article: this.id })
+    }
+}
+
+function assertUserLogIn(user) {
+    if (user == undefined || user.username == undefined) {
+        throw new Error("Access restricted. Please, provide a valid access token");
     }
 }
 
@@ -86,5 +93,14 @@ module.exports = {
         }
         await Article.replaceOne({ _id: id}, previous);
         return new GArticle(previous);
-    }
+    },
+
+    client: async ({dni}, context) => {
+        assertUserLogIn(context.user);
+        const client = await Client.findOne({dni});
+        if (client) {
+            return client;
+        }
+    },
+
 };
