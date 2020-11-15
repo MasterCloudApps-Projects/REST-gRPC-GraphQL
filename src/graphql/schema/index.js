@@ -1,6 +1,6 @@
-const { buildSchema } = require("graphql");
+const { gql } = require('apollo-server-express');
 
-module.exports = buildSchema(`
+module.exports = gql`
     type Comment {
         author: String!
         text: String!
@@ -64,4 +64,4 @@ module.exports = buildSchema(`
         query: Query
         mutation: Mutation
     }
-`);
+`;

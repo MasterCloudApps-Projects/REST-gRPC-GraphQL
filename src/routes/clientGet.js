@@ -3,6 +3,10 @@ const Client = require('../models/client');
 var { CastError } = mongoose.Error;
 
 module.exports = async (req, res) => {
+    if (!req.user) {
+        res.sendStatus(401);
+        return;
+    }
     try {
         const clientFetched = await Client.findOne({dni: req.params.dni});
         if (clientFetched) {
