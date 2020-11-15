@@ -103,4 +103,6 @@ module.exports = {
         }
     },
 
+    distance: ({from, to}) => ({from, to, km: 540})
+
 };

@@ -19,6 +19,12 @@ module.exports = buildSchema(`
         iban: String!
     }
 
+    type Distance {
+        from: String!
+        to: String!
+        km: Int!
+    }
+
     type Edge {
         cursor: String!
         node: Article!
@@ -44,6 +50,7 @@ module.exports = buildSchema(`
         article(id: String!): Article!
         articles(after: String, first: Int): ArticlesPayload
         client(dni: String!): Client!
+        distance(from: String!, to: String!): Distance!
     }
 
     type Mutation {
