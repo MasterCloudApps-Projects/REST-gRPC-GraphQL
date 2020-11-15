@@ -11,5 +11,9 @@ module.exports = {
 
     Mutation: {
         ...articleResolver.Mutation
+    },
+
+    Subscription: {
+        ...articleResolver.Subscription
     }
 };

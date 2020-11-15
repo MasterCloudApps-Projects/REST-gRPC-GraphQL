@@ -5,13 +5,17 @@ const resolvers = require('./resolvers');
 const server = new ApolloServer({
     typeDefs,
     resolvers,
-    context: ({req}) => {
+    context: ({req, connection}) => {
+        if (connection) {
+            return connection.context;
+        }
         return {
             user: req.user
         }
     }
 });
 
-module.exports = function(app) {
+module.exports = function(app, httpServer) {
     server.applyMiddleware({ app });
+    server.installSubscriptionHandlers(httpServer);
 };

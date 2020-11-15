@@ -1,4 +1,6 @@
+const http = require('http');
 const app = require('express')();
+const httpServer = http.createServer(app);
 require('./mongoose.js');
 const bodyParser = require('body-parser')
 const routes = require('./routes/index.js');
@@ -13,5 +15,11 @@ app.use('/articles', routes.article);
 app.use('/distances', routes.distance);
 app.use('/videos', routes.video);
 app.use('/clients', routes.client);
-require('./graphql/graphql')(app);
-app.listen(4000, () => console.log('Running a REST and GraphQL server at http://localhost:4000/'));
+require('./graphql/graphql')(app, httpServer);
+
+const PORT = 4000;
+
+httpServer.listen(PORT, () => {
+    console.log(`🚀 Server ready at http://localhost:${PORT}`)
+    console.log(`🚀 Subscriptions ready at ws://localhost:${PORT}`)
+});

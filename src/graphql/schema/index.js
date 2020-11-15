@@ -60,8 +60,13 @@ module.exports = gql`
         patchArticle(id: ID!, title:String, description:String): Article
     }
 
+    type Subscription {
+        newArticle: Article
+    }
+
     schema {
         query: Query
         mutation: Mutation
+        subscription: Subscription
     }
 `;
