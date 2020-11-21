@@ -1,6 +1,7 @@
 # GraphQL
 
 To read: [Why GitHub adopted GraphQL instead of REST](https://github.blog/2016-09-14-the-github-graphql-api/).
+https://apisyouwonthate.com/blog/understanding-rpc-rest-and-graphql
 
 ## Error handling
 * https://www.apollographql.com/docs/apollo-server/data/errors/
@@ -57,3 +58,5 @@ it returns this:
   ]
 }
 ```
+
+Aquí cuentan parte de la historia, bentajas, etc: https://apisyouwonthate.com/blog/understanding-rpc-rest-and-graphql
