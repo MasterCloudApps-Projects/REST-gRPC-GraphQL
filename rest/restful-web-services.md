@@ -1,6 +1,14 @@
 # RESTful Web Service
 A service which fully adheres to the REST specification is said to be a _RESTful Service_. Also note that, according to Roy's dissertation, _"REST does not restrict communication to a particular protocol"_. However, most of the time REST is Web-based. In such case, we would call it a _RESTful Web Service_.
 
+REST leaves to the implementer a lot of decisions. Because of this, many standards have been developed:
+* [OData](https://www.odata.org/)
+* [JSON:API](https://jsonapi.org/)
+* [OpenAPI](https://swagger.io/specification/)
+* [JSON Schema][JSON Schema]
+
+And many more!
+
 ## REST Uniform Interface
 When it comes to the REST constraint about _Uniform Interface_, this is how each sub-constraint is enforced in a _RESTful Web Service_:
 * [**Identification of resources**](#identification-of-resources) - each resource is identified by a [URIs (RFC 3986)][].
@@ -272,6 +280,9 @@ Criticisms of HATEOAS often argue that there are no real-world examples of it, w
 * [Delete a document](delete.md)
 * [Run action](run_action.md)
 * [Subscription](subscription.md)
+
+## Resources
+* [Web API Design: The Missing Link](https://cloud.google.com/files/apigee/apigee-web-api-design-the-missing-link-ebook.pdf)
 
 [URIs (RFC 3986)]: https://tools.ietf.org/html/rfc3986
 [URI Templates (RFC 6570)]: https://tools.ietf.org/html/rfc6570
