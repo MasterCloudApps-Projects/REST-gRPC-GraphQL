@@ -249,16 +249,6 @@ Criticisms of HATEOAS often argue that there are no real-world examples of it, w
 }
 ```
 
-## Examples
-* [Login](login.md)
-* [Create a document in a collection](create_document_in_collection.md)
-* [Fetch elements from a collection](fetch_collection.md)
-* [Update a document](update_document.md)
-* [Create a resource asynchronously](asynchronous_operation.md)
-* [Partially update a document](partial_update.md)
-* [Delete a document](delete.md)
-* [Subscription](subscription.md)
-
 ## Resources
 * [Web API Design: The Missing Link](https://cloud.google.com/files/apigee/apigee-web-api-design-the-missing-link-ebook.pdf)
 
