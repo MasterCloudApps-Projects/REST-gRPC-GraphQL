@@ -404,7 +404,7 @@ query {
 }
 ```
 
-Here, we execute two queries of the type `article()`, each one returning a different result.
+Here, we execute two queries of the type `article()`, each one returning a different result. Also note that they might be processed in parallel.
 
 
 ## Resources
