@@ -15,3 +15,4 @@
     * [Delete document](usage/delete_document.md)
     * [Custom methods](usage/custom_methods.md)
     * [Security](usage/security.md)
+    * [Asynchronous operation](usage/asynchronous_operation.md)
