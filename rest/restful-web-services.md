@@ -222,26 +222,6 @@ There is no unique medium to express them:
 
 Typically, the type of relation in a link is specified in a `rel` field. IANA maintains a [list of standard link relations][IANA list of link relations].
 
-To generate a [state machine in REST][] we can think in a microwave oven. When we first get it, it might returns to turn it on:
-
-```
-GET /microwaves/12
-
-{
-    "state": "off",
-    "actions": [
-        {
-            "rel": "on",
-            "href": "/microwaves/12",
-            "method": "PUT",
-            "Expects": { "state": "on"}
-        }
-    ]
-}
-```
-
-Then, following the `on` link, the microwave would be turned on.
-
 ### About `rel`
 Some people (See [RESTful Web Services Cookbook][]) suggest we express the action type in the `rel` following these rules:
 
@@ -278,7 +258,6 @@ Criticisms of HATEOAS often argue that there are no real-world examples of it, w
 * [Create a resource asynchronously](asynchronous_operation.md)
 * [Partially update a document](partial_update.md)
 * [Delete a document](delete.md)
-* [Run action](run_action.md)
 * [Subscription](subscription.md)
 
 ## Resources
@@ -321,7 +300,6 @@ Criticisms of HATEOAS often argue that there are no real-world examples of it, w
 [Hydra]: http://www.hydra-cg.com/spec/latest/core/
 [Roy Fielding keynote on Evolve'13]: https://www.slideshare.net/evolve_conference/201308-fielding-evolve
 [Minting new Media Types should be avoided]: http://duncan-cragg.org/blog/post/minting-media-types-usually-less-restful-using-raw/
-[state machine in REST]: https://nordicapis.com/designing-a-true-rest-state-machine/
 [IANA list of link relations]: https://www.iana.org/assignments/link-relations/link-relations.xhtml
 [PayPal and HATEOAS]: https://developer.paypal.com/docs/api/reference/api-responses/#hateoas-links
 [API Change Strategy]: https://nordicapis.com/api-change-strategy/
