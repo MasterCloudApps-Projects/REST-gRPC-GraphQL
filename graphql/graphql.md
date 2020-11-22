@@ -59,4 +59,5 @@ it returns this:
 }
 ```
 
-Aquí cuentan parte de la historia, bentajas, etc: https://apisyouwonthate.com/blog/understanding-rpc-rest-and-graphql
+Aquí cuentan parte de la historia, ventajas, etc: https://apisyouwonthate.com/blog/understanding-rpc-rest-and-graphql
+Aquí cuentan por qué quizás no lo necesitas: https://blog.runscope.com/posts/you-might-not-need-graphql
