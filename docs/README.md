@@ -2,4 +2,5 @@
 
 1. [Introduction](apis_introduction.md)
 2. Usage examples:
-   * [Custom methods](usage/custom_methods.md)
+    * [Fetch document](usage/fetch_document.md)
+    * [Custom methods](usage/custom_methods.md)
