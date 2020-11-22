@@ -4,10 +4,10 @@ Putting it simply, an API, or _Application Progamming Interface_, is a product w
 ## Paradigms
 
 ### Request-response APIs
-* **RPC API**: this is the simplest form, where the API is designed around arbitrary procedures and typically described using an IDL (Interface Definition Language). There are several existing specifications, like SOAP, JSON-RPC or XML-RPC. There is also the [gRPC](../grpc/grpc.md) specification, which also has an official implementation.
-* **Web API**: Or [REST](../rest/rest.md). It is an architectural style where the system behaviour is based on transitions of data (or _resources_, as called in HTTP). There is no official implementation.
-    * [REST-like](../rest/restlike-web-services.md). A key characteristic of REST is that their clients just _follow_ (or _bookmark_) opaque URIs. When we use a so-called REST API where clients construct URIs, then it is not _pure REST_, but RPC over HTTP. This is often refered as _REST-Like_, _So-called REST_ or [_OpenAPI_][OpenAPI] (because of one of its most popular implementations).
-* **Query API**: then we have a query-oriented API, [GraphQL](../graphql/graphql.md). It is esentialy an RPC service, exposing a single entrypoint, that allow clients to run _queries_, using a SQL-like syntax, and make changes through _mutations_.
+* **RPC API**: this is the simplest form, where the API is designed around arbitrary procedures and typically described using an IDL (Interface Definition Language). There are several existing specifications, like SOAP, JSON-RPC or XML-RPC. There is also the [gRPC](grpc.md) specification, which also has an official implementation.
+* **Web API**: Or [REST](rest.md). It is an architectural style where the system behaviour is based on transitions of data (or _resources_, as called in HTTP). There is no official implementation.
+    * [REST-like](restlike-web-services.md). A key characteristic of REST is that their clients just _follow_ (or _bookmark_) opaque URIs. When we use a so-called REST API where clients construct URIs, then it is not _pure REST_, but RPC over HTTP. This is often refered as _REST-Like_, _So-called REST_ or [_OpenAPI_][OpenAPI] (because of one of its most popular implementations).
+* **Query API**: then we have a query-oriented API, [GraphQL](graphql.md). It is esentialy an RPC service, exposing a single entrypoint, that allow clients to run _queries_, using a SQL-like syntax, and make changes through _mutations_.
 
 Very often, we see a clear separation between: _resource-oriented_ and _action-oriented_ APIs:
 
