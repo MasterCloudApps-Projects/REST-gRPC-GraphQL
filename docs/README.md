@@ -6,5 +6,6 @@
     * [Fetch collection](usage/fetch_collection.md)
     * [Create document](usage/create_document.md)
     * [Update document](usage/update_document.md)
+    * [Delete document](usage/delete_document.md)
     * [Custom methods](usage/custom_methods.md)
     * [Security](usage/security.md)
