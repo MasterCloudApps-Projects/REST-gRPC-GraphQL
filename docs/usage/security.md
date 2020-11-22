@@ -217,7 +217,7 @@ We will get a `Access-Control-Allow-Origin: http://localhost:4000/` response hea
 * 🔗 [JWT for Bearer Tokens][]
 * 🔗 [Authorization schemes in IANA][]
 * 🔗 [Hypertext Transfer Protocol (HTTP) Digest Algorithm Values][] in IANA
-* 📖 [RESTFul Web Services Cookbook, Chapter 12]https://www.oreilly.com/library/view/restful-web-services/9780596809140/
+* 📖 [RESTFul Web Services Cookbook, Chapter 12](https://www.oreilly.com/library/view/restful-web-services/9780596809140/)
 
 [TLS (RFC 8446)]: https://tools.ietf.org/html/rfc8446
 [HTTP over TLS (RFC 2818)]: https://tools.ietf.org/html/rfc2818
