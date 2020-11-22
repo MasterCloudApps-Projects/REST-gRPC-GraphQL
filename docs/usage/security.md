@@ -1,11 +1,11 @@
 # Security
-An API needs to ensure several things, for example: only allowed users can access resources; the integrity and confidentiality of the information is ensured. In _RESTful Web Service_ many standard HTTP practices are used to provide this.
+An API needs to ensure several things, for example: only allowed users can access resources; the integrity and confidentiality of the information is ensured. Since both REST and GraphQL typically are used over the same transport protocol, same HTTP security practices usually apply.
 
 ## Integritiy and confidentiality of the data
 We need to make sure that:
 
-* the representation of the data is consistent and accurante during its life cycle. This is the **integrity**.
-* the information is protected from third-partys accesses. This is known as **confidentiality**.
+* **Integrity**: the representation of the data is consistent and accurante during its life cycle.
+* **Confidentiality**: the information is protected from third-partys accesses.
 
 HTTP is an non-secure protocol, which means the data on an HTTP request does not ensure neither integrity nor confidentiality. To overcome this, _Transport Layer Securty_, also known as [TLS (RFC 8446)][], is used:
 
@@ -13,21 +13,17 @@ HTTP is an non-secure protocol, which means the data on an HTTP request does not
 
 When using [HTTP over TLS (RFC 2818)][], we call it `HTTPS`. In this case, the URI (resource identifier), the headers and the body are encrypted. Note that some information is not encrypted, like the server name. There are some initiatives to also encrypt this: [TLS Encrypted Client Hello][].
 
-* `HTTP Basic Access Authentication`
-* `HTTP Digest Access Authentication`
-* `OAuth 2`
-
 ## Authentication and authorization
 First, lets recap what authentication and authorization are:
 
-* Authentication: let a system know who you are.
-* Authorization: tells what you can do.
+* **Authentication**: let a system know who you are.
+* **Authorization**: tells what you can do.
 
 This means you might be authentication in a system, but not authorized to access a certain resource.
 
-Even though cookies can be used to provide authentication, and it's usage is not necessarely discouraged (as long as they are not used to provide _state_, and prevents CSRF attacks), they are not very commonly used.
+Even though cookies can be used to provide authentication, and it's usage is not necessarely discouraged (as long as they are not used to provide _state_, and prevents CSRF attacks), they are not very commonly used in APIs. Instead, typically [HTTP Authorization][] is used for this.
 
-Instead, typically [HTTP Authorization][] is used for this. [HTTP: Authentication (RFC 7235)][], by Roy Fielding (creator of REST), tells that:
+[HTTP: Authentication (RFC 7235)][], by Roy Fielding (creator of REST), tells that:
 
 >  The "Authorization" header field allows a user agent to authenticate itself with an origin server.
 
@@ -35,13 +31,20 @@ Instead, typically [HTTP Authorization][] is used for this. [HTTP: Authenticatio
 Authorization: <type> <credentials>
 ```
 
-Where the `<type>` will specify which _scheme_ is being used; the HTTP Authorization framework supports multiple schemes. There are several of them already [registered in the IANA][Authorization schemes in IANA].
+Where the `<type>` will specify which _scheme_ being used; the HTTP Authorization framework supports multiple schemes. There are several of them already [registered in the IANA][Authorization schemes in IANA].
 
 When a request lacks of valid authentication credentials to access a protected resource, the server will return a `401 Unauthorized` response. It will also provide a `WWW-Authenticate` header field ([see section 4.1 of RFC 7235][HTTP: Authentication (RFC 7235)]) to indicate which _scheme_ should be used.
 
 Also note that, in order to prevent cache servers from storing private and sensitive data, `Cache-Control: private` can be used.
 
-Note: We are using the `Authorization` header to both authenticate and check authorization. This is because of the stateless nature of REST.
+We are using the `Authorization` header to both authenticate and check authorization. This is because of the stateless nature of request-response APIs.
+
+Let's see the most commonly used mechanisms to provide authorization to an API:
+
+* [`Basic` scheme](#basic-scheme).
+* [`Digest` scheme](#digest-scheme).
+* [`Bearer` scheme](#bearer-scheme).
+* [API Keys](#api-keys).
 
 ### `Basic` scheme
 [The 'Basic' HTTP Authentication Scheme (RFC 7617)] is the simplest mechanism, where the user identifier is sent together with its secret, all encoded in `base64`.
@@ -66,7 +69,7 @@ WWW-Authenticate: Digest nonce="7ypf/xlj9XXwfDPEoM4URrv/xwf94BcCAzFZH4GiTo0v", q
 With those values, the client identifier, and the client secret, a `response` value will be calculated and sent in the `Authorization` header of the request (See section 3.4.1 Response of the [RFC 7616][HTTP Digest Access Authentication (RFC 7616)] for details).
 
 ### `Bearer` scheme
-Originally created for OAuth 2.0, the [Bearer Token][The OAuth 2.0 Authorization Framework: Bearer Token Usage], also known as _Token Authorization_, is a scheme that specifies that:
+Originally created for OAuth 2.0, the [Bearer Token][The OAuth 2.0 Authorization Framework: Bearer Token Usage (RFC 6750)], also known as _Token Authorization_, is a scheme that specifies that:
 
 > Any party in possession of a bearer token (a "bearer") can use it to get access to the associated resources
 
@@ -112,12 +115,11 @@ When browser in a site, `foo.com`, wants to access a resource on another site, `
 
 This _preflight request_ is done automatically by the browser when using `XMLHttpRequest` or the `Fetch API` and the request is not _simple_ (for example, when using `application/json` as the `Content-Type`, or when sending a credential through cookies or the `Authorization` header).
 
-## More information
-* [REST Security Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/REST_Security_Cheat_Sheet.html), in OWASP.
-* [RESTful API Authentication Basics](https://blog.restcase.com/restful-api-authentication-basics/).
+## Source code
+Our sample application contains some API calls protected. Let's see how we can access them:
 
-## Example
-The provided example code shows how we can use `Bearer` scheme using `JWT`. To log in, a POST request to `/login` will be done, sending a JSON payload with the `username` and the `password`:
+### REST
+The provided example code shows how we can use `Bearer` scheme using `JWT`. To log in, a POST request to `/login` will be done sending a JSON payload with the `username` and the `password`:
 
 ```
 curl -v -H "Content-Type: application/json" \
@@ -152,6 +154,71 @@ Which will return:
 
 Also note that CORS is enabled for the whole REST API. For example, if we request `curl -v http://localhost:4000/distances/Madrid/Barcelona`, we will get a response header `Access-Control-Allow-Origin: http://localhost:4000/`, thus preventing browsers from using this requests in unauthorized pages.
 
+### GraphQL
+Let's try to access a `client`, which is restricted resource, without any authorization mechanism:
+
+```
+curl -X POST -H "Content-Type: application/json" \
+    -d '{"query": "{client(dni:\"06580190M\") {iban} }"}' \
+    http://localhost:4000/graphql
+```
+
+We will get this error message: `Access restricted. Please, provide a valid access token`. To get an `accessToken`, we need to login:
+
+```
+curl -v -H "Content-Type: application/json" \
+    -X POST -d '{"username": "pepe", "password":"secret"}'
+    http://localhost:4000/login
+```
+
+Once we have the `accessToken`, we will set it in the `Authorization` header using the `Bearer` scheme:
+
+```
+curl -X POST -H "Content-Type: application/json" \
+    -H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InBlcGUiLCJpYXQiOjE2MDUzNzkyMzh9.qo2ovz3Zm99OQH_rcAqEsPiYfKBlfKpmnDlXHjBNzkk" \
+    -d '{"query": "{client(dni:\"06580190M\") {iban} }"}' \
+    http://localhost:4000/graphql
+```
+
+Now, the client private data has been returned:
+
+```json
+{
+    "dni": "06580190M",
+    "IBAN": "ES4404877434913522416372"}
+}
+```
+
+In addition, CORS is also enabled. For example, if we run this query:
+
+```
+curl -X POST -v -H "Content-Type: application/json" \
+    -d '{"query": "{articles {totalCount}}"}' \
+    http://localhost:4000/graphql
+```
+
+We will get a `Access-Control-Allow-Origin: http://localhost:4000/` response header.
+
+## Resources
+* 🔗 [REST Security Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/REST_Security_Cheat_Sheet.html), in OWASP.
+* 🔗 [RESTful API Authentication Basics](https://blog.restcase.com/restful-api-authentication-basics/).
+* 🔗 [TLS (RFC 8446)][]
+* 🔗 [HTTP over TLS (RFC 2818)][]
+* 🔗 [TLS Encrypted Client Hello][] - still a draft (Dec 2020)
+* 🔗 [HTTP: Authentication (RFC 7235)][]
+* 🔗 [The 'Basic' HTTP Authentication Scheme (RFC 7617)][]
+* 🔗 [HTTP Digest Access Authentication (RFC 7616)][]
+* 🔗 [The OAuth 2.0 Authorization Framework: Bearer Token Usage (RFC 6750)][]
+* 🔗 [The OAuth 2.0 Authorization Framework (RFC 6749)][]
+* 🔗 [JWT (RFC 7519)][]
+* 🔗 [The Web Origin Concept (RFC 6454)][]
+* 🔗 [HTTP Authorization][] in the MDN
+* 🔗 [CORS][] in the MDN
+* 🔗 [JWT for Bearer Tokens][]
+* 🔗 [Authorization schemes in IANA][]
+* 🔗 [Hypertext Transfer Protocol (HTTP) Digest Algorithm Values][] in IANA
+* 📖 [RESTFul Web Services Cookbook, Chapter 12]https://www.oreilly.com/library/view/restful-web-services/9780596809140/
+
 [TLS (RFC 8446)]: https://tools.ietf.org/html/rfc8446
 [HTTP over TLS (RFC 2818)]: https://tools.ietf.org/html/rfc2818
 [TLS Encrypted Client Hello]: https://datatracker.ietf.org/doc/draft-ietf-tls-esni/?include_text=1
@@ -161,8 +228,9 @@ Also note that CORS is enabled for the whole REST API. For example, if we reques
 [The 'Basic' HTTP Authentication Scheme (RFC 7617)]: https://tools.ietf.org/html/rfc7617
 [Hypertext Transfer Protocol (HTTP) Digest Algorithm Values]: https://www.iana.org/assignments/http-dig-alg/http-dig-alg.xhtml
 [HTTP Digest Access Authentication (RFC 7616)]: https://tools.ietf.org/html/rfc7616
-[The OAuth 2.0 Authorization Framework: Bearer Token Usage]: https://tools.ietf.org/html/rfc6750
+[The OAuth 2.0 Authorization Framework: Bearer Token Usage (RFC 6750)]: https://tools.ietf.org/html/rfc6750
 [The OAuth 2.0 Authorization Framework (RFC 6749)]: https://tools.ietf.org/html/rfc6749#section-1
 [JWT (RFC 7519)]: https://tools.ietf.org/html/rfc7519
+[The Web Origin Concept (RFC 6454)]: https://tools.ietf.org/html/rfc6454
 [JWT for Bearer Tokens]: https://oauth.net/2/jwt/
 [CORS]: https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS
