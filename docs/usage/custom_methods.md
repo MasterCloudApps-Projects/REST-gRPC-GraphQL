@@ -100,6 +100,15 @@ type Mutation {
 ## Source code
 The demo project contains a naive example of how to implement a custom operation. Specifically, using a pure function to calculate the distance between to cities.
 
+### REST
+To get the distance between Madrid an Barcelona in REST, we can just:
+
+```
+curl -v http://localhost:4000/distances/madrid/barcelona
+```
+
+It will return a distance expressed in `text/plain`.
+
 ### GraphQL
 To get the distance between `Madrid` and `Barcelona`, run this query:
 
@@ -112,16 +121,6 @@ To get the distance between `Madrid` and `Barcelona`, run this query:
   }
 }
 ```
-
-### REST
-To get the distance between Madrid an Barcelona in REST, we can just:
-
-```
-curl -v http://localhost:4000/distances/madrid/barcelona
-```
-
-It will return a distance expressed in `text/plain`.
-
 
 ## Resources
 * [Representing state in REST and GraphQL](https://apisyouwonthate.com/blog/representing-state-in-rest-and-graphql)
