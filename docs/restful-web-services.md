@@ -165,24 +165,6 @@ application/vnd.github.v3.patch
 
 However, some people argue that [minting new Media Types should be avoided][].
 
-### Content Negotiation
-Content negotiation is the process to selected the apropriate representation for a resource. It can be [Server-Driven Negotiation][] or [Agent-Driven Negotiation][]
-
-#### Server-Driven Negotiation
-Clients can use HTTP to tell the server about their preferences. Then the server uses their choices to select a representation. Please note, there is no standard algorithm for this.
-
-* [`Accept`][]: to specify a weighted list of the accepted media types, as in `Accept: text/html, application/xhtml+xml, application/xml;q=0.9, */*;q=0.8`.
-* [`Accept-Charset`][]: characters encodings accepted, as in `Accept-Charset: utf-8, iso-8859-1;q=0.5`.
-* [`Accept-Language`][]: specifies the accepted languages. `Accept-Language: fr-CH, fr;q=0.9, en;q=0.8, de;q=0.7, *;q=0.5`.
-* [`Accept-Encoding`][]: compression algorithms accepted. `Accept-Encoding: deflate, gzip;q=1.0, *;q=0.5`.
-
-Servers will return the selected values, as well as a [`Vary`][] header to tell a cache whether a new request is needed or not.
-
-#### Agent-Driven Negotiation
-Sometimes, it is useful to let the user agent (manually or through a script) selected the desired representation. And even though HTTP includes some important selection features (type, charset, language, encoding...), it still lacks of many other useful representations, for example, currency unit or distance unit.
-
-For all of the above, the _Agent-Driven Negociation_ was defined. In this case, the server will return a `300 - Multiple Choices` with a list of URIs for each representation. Note there is no standarized way to return the list of possible choices. Sometimes, subdomains, query parameters or URI extensions are used as a workaround.
-
 ## HATEOAS
 We want to leverage hypermedia turn our service into a states machine. The state is the resource itself. To change the state we will use hyperlinks.
 
@@ -253,13 +235,6 @@ Criticisms of HATEOAS often argue that there are no real-world examples of it, w
 [`Content-Language`]: https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Language
 [IANA document on Media-Types]: https://www.iana.org/assignments/media-types/media-types.xhtml
 [GitHub custom Media Types]: https://docs.github.com/en/free-pro-team@latest/rest/overview/media-types
-[Server-Driven Negotiation]: https://developer.mozilla.org/en-US/docs/Web/HTTP/Content_negotiation#Server-driven_content_negotiation
-[Agent-Driven Negotiation]: https://developer.mozilla.org/en-US/docs/Web/HTTP/Content_negotiation#Agent-driven_negotiation
-[`Accept`]: https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Accept
-[`Accept-Charset`]: https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Accept-Charset
-[`Accept-Language`]: https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Accept-Language
-[`Accept-Encoding`]: https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Accept-Encoding
-[`Vary`]: https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Vary
 [JSON-LD]: https://json-ld.org/
 [Hydra]: http://www.hydra-cg.com/spec/latest/core/
 [Roy Fielding keynote on Evolve'13]: https://www.slideshare.net/evolve_conference/201308-fielding-evolve

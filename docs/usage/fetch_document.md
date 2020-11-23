@@ -67,12 +67,30 @@ query GetProduct {
 Here, the client code is defining an operation of type `query`, using `GetProduct` as the _operation name_, which will invoke the remote query `product`, setting 12 as the value of the `id` parameter. Finally, the client app is specifying all the Product fields it is interested in.
 
 ## Representation
-A resource might be represented in a variety of forms. For example, a product can be represented as a JSON, as an XML object, as a text description readable for humans, or even as a PDF as it happens with the data sheets of electronic components.
+A resource might be represented in a variety of forms. For example, a product can be represented as a JSON, as an XML object, as a text description readable for humans, or even as a PDF as it happens with the data sheets of electronic components. Let's see how each API style deals with this.
 
 ### REST
-HTTP has always handled this content negotiation using several headers. A typical usage case is selecting the appropriate charset encoding or language. But it also has support for Media Types. REST leverages this to allow client applications negotiate the specific representation they are interested in. The requested Media Type will be returned as long as the server supports it.
+HTTP provides native support for _Content Negotiation_. This is the process to selected the apropriate representation for a resource. It can be [Server-Driven Negotiation][] or [Agent-Driven Negotiation][]
 
-> Most of the time, the resources will be represented using a meta-language, using either XML, JSON or YAML. Some people argue that this feature of REST is not that useful, since most modern programming languages can easily handle all those formats.
+#### Server-Driven Negotiation
+Clients can use HTTP to tell the server about their preferences. Then the server uses their choices to select a representation. Please note, there is no standard algorithm for this.
+
+* [`Accept`][]: to specify a weighted list of the accepted media types, as in `Accept: text/html, application/xhtml+xml, application/xml;q=0.9, */*;q=0.8`.
+* [`Accept-Charset`][]: characters encodings accepted, as in `Accept-Charset: utf-8, iso-8859-1;q=0.5`.
+* [`Accept-Language`][]: specifies the accepted languages. `Accept-Language: fr-CH, fr;q=0.9, en;q=0.8, de;q=0.7, *;q=0.5`.
+* [`Accept-Encoding`][]: compression algorithms accepted. `Accept-Encoding: deflate, gzip;q=1.0, *;q=0.5`.
+
+Servers will return the selected values, as well as a [`Vary`][] header to tell a cache whether a new request is needed or not.
+
+#### Agent-Driven Negotiation
+Sometimes, it is useful to let the user agent (manually or through a script) selected the desired representation. And even though HTTP includes some important selection features (type, charset, language, encoding...), it still lacks of many other useful representations, for example, currency unit or distance unit.
+
+For all of the above, the _Agent-Driven Negociation_ was defined. In this case, the server will return a `300 - Multiple Choices` with a list of URIs for each representation. Note there is no standarized way to return the list of possible choices. Sometimes, subdomains, query parameters or URI extensions are used as a workaround.
+
+#### Conteng-Negotiation in REST
+REST leverages this featore to allow client applications negotiate the specific representation they are interested in. The requested Media Type will be returned as long as the server supports it.
+
+> Most of the time, the resources will be represented using a meta-language, either in XML, JSON or YAML. Some people argue that this feature of REST is not that useful, since most modern programming languages can easily handle all those formats.
 
 To negotiate the representation of a resource, the client may suggest its preference to the server using the `Accept` header, as in `Accept: application/json, text/plain, */*;q=0.8`.
 
@@ -418,3 +436,10 @@ Here, we execute two queries of the type `article()`, each one returning a diffe
 [JSON:API Sparse Fieldsets]: https://jsonapi.org/format/#fetching-sparse-fieldsets
 [OData: Querying]: https://www.odata.org/getting-started/basic-tutorial/
 [GraphQL Leveler]: https://www.fourkitchens.com/blog/development/graphql-leveler-controlling-shape-query/
+[Server-Driven Negotiation]: https://developer.mozilla.org/en-US/docs/Web/HTTP/Content_negotiation#Server-driven_content_negotiation
+[Agent-Driven Negotiation]: https://developer.mozilla.org/en-US/docs/Web/HTTP/Content_negotiation#Agent-driven_negotiation
+[`Accept`]: https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Accept
+[`Accept-Charset`]: https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Accept-Charset
+[`Accept-Language`]: https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Accept-Language
+[`Accept-Encoding`]: https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Accept-Encoding
+[`Vary`]: https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Vary
