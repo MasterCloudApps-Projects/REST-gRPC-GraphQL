@@ -9,6 +9,7 @@
 5. Usage cases:
     * [Schema definition](usage/schema_definition.md) TODO
     * [Contract](usage/contract.md) TODO
+    * [Error handling](usage/error_handling.md) TODO
     * [Fetch document](usage/fetch_document.md)
     * [Fetch collection](usage/fetch_collection.md)
     * [Create document](usage/create_document.md)
