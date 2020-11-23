@@ -7,7 +7,7 @@
 3. [GraphQL](graphql.md) TODO: write foundations
 4. [gRPC](grpc.md) TODO: write foundations, examples and usage cases
 5. Usage cases:
-    * [Schema definition](usage/schema_definition.md) TODO
+    * [Schema definition](usage/schema_definition.md) TODO graphql
     * [Contract](usage/contract.md) TODO
     * [Error handling](usage/error_handling.md)
     * [Fetch document](usage/fetch_document.md)

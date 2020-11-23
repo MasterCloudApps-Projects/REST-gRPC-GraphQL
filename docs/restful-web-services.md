@@ -13,7 +13,7 @@ And many more!
 When it comes to the REST constraint about _Uniform Interface_, this is how each sub-constraint is enforced in a _RESTful Web Service_:
 * [**Identification of resources**](#identification-of-resources) - each resource is identified by a [URIs (RFC 3986)][].
 * [**Manipulation of resources through representations**](#manipulation-of-resources) - the manipulation of resources state is done through the standard [HTTP (RFC 7231)][]. There are no verbs in REST, but not because HTTP already has verbs, but because we are transfering a _state_, rather than calling instructions.
-* [**self-descriptive messages**](#message-description) - the [Media Type Specification (RFC 6838)][] (formerly known as MIME types) is used to make messages self-descriptive.
+* **self-descriptive messages** - the [Media Type Specification (RFC 6838)][] (formerly known as MIME types) is used to make messages self-descriptive.
 * [**Hypermedia as the engine of application state (HATEOAS)**](#hateoas) - hyperlinks in the resource returned by the browser can be used to allow clients to transition from one state to another.
 
 To sum up: resources have identifiers (URIs), and we can leverage the underlying transfer protocol (namely, HTTP) to modify (for example, using `PUT`) a resource (i.e. change its state) using its representation (for example, a JSON object).
@@ -131,40 +131,6 @@ It's fundamental to notice several things. Neither REST nor HTTP are CRUD. Some 
 * `POST` can run a number of _non-idempotent_ and _unsafe_ operations. One of those operations might be _Create_. Performing other actions it is also correct. Remember, the entire SOAP protocol is _tunnelled_ through `POST`.
 * `PUT` does not only _Update_ a resource. It can also _Create_ a specific resource.
 
-## Message description
-This constraint states that we need each message to be self-descriptive; this comprehends the payload as well as the metadata.
-
-### Metadata
-In _RESTful Web Services_, we rely on HTTP to specify the metadata:
-
-* [`Content-Type`][]: the Media Type plus a charset. This is also used to let clients specify the desired representation.
-* [`Last-Modified`][]: last modification date and time of a resource.
-* [`Content-Encoding`][]: compression method: `gzip`, `compress`, `deflate`, `identity`, `br`...
-* [`Content-Length`][]: size in bytes of the body.
-* [`Content-Language`][]: describes the language intended for the audience.
-
-### Resource representation
-To choose the apropriate representation, the `Content-Type` entity header will be used. See the [IANA document on Media-Types][] to check a comprehensive list of media types approved by the IANA. For example, `text/plain` or `image/png`. An extensible format, like `application/xml` or `application/json` can be used as well. Event a binary representation as [Protobuf can be used in REST][Protobuf and REST].
-
-To describe JSON resources, several specifications can be used:
-* [JSON Schema][], using `application/schema+json`.
-* [JSON API][], using `application/vnd.api+json`.
-
-[GitHub defines its own media types][GitHub custom Media Types], as in:
-
-```
-application/vnd.github+json
-application/vnd.github.v3+json
-application/vnd.github.v3.raw+json
-application/vnd.github.v3.text+json
-application/vnd.github.v3.html+json
-application/vnd.github.v3.full+json
-application/vnd.github.v3.diff
-application/vnd.github.v3.patch
-```
-
-However, some people argue that [minting new Media Types should be avoided][].
-
 ## HATEOAS
 We want to leverage hypermedia turn our service into a states machine. The state is the resource itself. To change the state we will use hyperlinks.
 
@@ -222,25 +188,15 @@ Criticisms of HATEOAS often argue that there are no real-world examples of it, w
 [Atom (RFC 5023)]: https://tools.ietf.org/html/rfc5023#section-11
 [Conditional Requests (RFC 7232)]: https://tools.ietf.org/html/rfc7232
 [HAL (Hypertext Application Language)]: https://tools.ietf.org/html/draft-kelly-json-hal-08
-[JSON Schema]: https://tools.ietf.org/html/draft-handrews-json-schema-02
 [JSON Hyper-Schema]: https://tools.ietf.org/html/draft-handrews-json-schema-hyperschema-02
 [Richardson Maturity Model]: https://www.crummy.com/writing/speaking/2008-QCon/act3.html
 [JSON API]: https://jsonapi.org/
 [Roy Fielding about the opacity of resource identifiers]: https://roy.gbiv.com/untangled/2008/rest-apis-must-be-hypertext-driven
 [REST API Design Rulebook, by Mark Masse]: https://learning.oreilly.com/library/view/rest-api-design/9781449317904/
-[`Content-Type`]: https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Type
-[`Last-Modified`]: https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Last-Modified
-[`Content-Encoding`]: https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Encoding
-[`Content-Length`]: https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Length
-[`Content-Language`]: https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Language
-[IANA document on Media-Types]: https://www.iana.org/assignments/media-types/media-types.xhtml
-[GitHub custom Media Types]: https://docs.github.com/en/free-pro-team@latest/rest/overview/media-types
 [JSON-LD]: https://json-ld.org/
 [Hydra]: http://www.hydra-cg.com/spec/latest/core/
 [Roy Fielding keynote on Evolve'13]: https://www.slideshare.net/evolve_conference/201308-fielding-evolve
-[Minting new Media Types should be avoided]: http://duncan-cragg.org/blog/post/minting-media-types-usually-less-restful-using-raw/
 [IANA list of link relations]: https://www.iana.org/assignments/link-relations/link-relations.xhtml
 [PayPal and HATEOAS]: https://developer.paypal.com/docs/api/reference/api-responses/#hateoas-links
 [API Change Strategy]: https://nordicapis.com/api-change-strategy/
 [RESTful Web Services Cookbook]: https://learning.oreilly.com/library/view/restful-web-services/9780596809140/
-[Protobuf and REST]: https://medium.com/swlh/supercharge-your-rest-apis-with-protobuf-b38d3d7a28d3
