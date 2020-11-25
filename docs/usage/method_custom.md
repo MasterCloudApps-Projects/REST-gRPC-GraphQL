@@ -27,25 +27,7 @@ Resources have both _state_ and _state transitions_. For example, an _order_ mig
 ### REST
 For simple cases, we can map a state to a field: a field called `status` for a music player, which accepts a number of possible options, or a field called `activated` of type boolean.
 
-On a truly _RESTFul Web Service_, we can generate a [State machine][Designing a true REST state machine]. Let's think of a microwave oven. When we first get the microwave, its representation might contain an `action` to turn it on:
-
-```
-GET /microwaves/12
-
-{
-    "state": "off",
-    "actions": [
-        {
-            "rel": "on",
-            "href": "/microwaves/12",
-            "method": "PUT",
-            "Expects": { "state": "on"}
-        }
-    ]
-}
-```
-
-The `actions` property contains a list of possible transitions in a certain hypermedia specification, so that the client only needs to _follow links_. In this case, to turn the microwave on we just need to following the `on` link. This is HATEOAS in action. A client is only required to understand the semantics of each available transition. This technique, which [is mandatory for a REST API][REST APIs must be hypertext-driven], promotes evolvability.
+On a truly _RESTFul Web Service_ that follows the HATEOAS constraint, a _custom action_ can be expressed just as a possible state transition to a resource.
 
 ### GraphQL
 A _mutation_ will be used to express a change state. This can be done either in a _resource-oriented_ or in a _procedure-oriented_ approach. If our API is _resource-oriented_, we can define a custom field which contains the state, as in a field called `status`. To update it, a generic update mutation can be used, or a specific mutation:
@@ -124,11 +106,7 @@ To get the distance between `Madrid` and `Barcelona`, run this query:
 
 ## Resources
 * [Representing state in REST and GraphQL](https://apisyouwonthate.com/blog/representing-state-in-rest-and-graphql)
-* [Designing a true REST state machine][]
-* [REST APIs must be hypertext-driven][]
 
-[Designing a true REST state machine]: https://nordicapis.com/designing-a-true-rest-state-machine/
-[REST APIs must be hypertext-driven]: https://roy.gbiv.com/untangled/2008/rest-apis-must-be-hypertext-driven
 [GitHub embedded resources to star gists]: https://developer.github.com/v3/gists/#star-a-gist
 [Paypal embedded resources to authorize payments]: https://developer.paypal.com/docs/api/orders/v2/#orders_authorize
 [RESTful Web Services Cookbook]: https://learning.oreilly.com/library/view/restful-web-services/9780596809140/

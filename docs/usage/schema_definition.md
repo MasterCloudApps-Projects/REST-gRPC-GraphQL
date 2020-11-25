@@ -33,7 +33,7 @@ application/vnd.github.v3.patch
 
 However, some people argue that [minting new Media Types should be avoided][].
 
-Let's see an example from the JSON Schema documentation:
+Let's see an example from the JSON Schema (the language used to describe schemas in OpenAPI) documentation:
 
 ```json
 {
