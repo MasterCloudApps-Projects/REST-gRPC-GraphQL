@@ -7,7 +7,7 @@
 5. Usage cases:
     * [Contract](usage/contract.md)
     * [Schema definition](usage/schema_definition.md)
-    * [Standard methods](usage/standard_methods.md)
+    * [Standard methods](usage/methods.md)
       * [Fetch document](usage/method_get.md)
       * [Fetch collection](usage/method_list.md)
       * [Create document](usage/method_create.md)
