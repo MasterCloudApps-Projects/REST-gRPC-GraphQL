@@ -2,5 +2,5 @@
 
 TODO
 
-* Go to the [documentation](docs/README.md)
-* See [implementation project](src/README.md)
+* Go to the [documentation](docs/)
+* See [implementation project](src/)
