@@ -33,6 +33,8 @@ Constantly sending requests to a remote API to find out when something happens m
 * 📖 [Designing Web APIs, Chapter 2](https://www.oreilly.com/library/view/designing-web-apis/9781492026914/)
 * 🔗 [An Expert’s Guide to Choosing the Right API Style](https://nordicapis.com/an-experts-guide-to-choosing-the-right-api-style/)
 * 🔗 [GraphQL vs REST: Overview](https://phil.tech/2017/graphql-vs-rest-overview/)
+* 🔗 [REST vs. GraphQL: A Critical Review, by Zdenek "Z" Nemec](https://goodapi.co/blog/rest-vs-graphql)
+* 🔗 [API design: Understanding gRPC, OpenAPI and REST and when to use them](https://cloud.google.com/blog/products/api-management/understanding-grpc-openapi-and-rest-and-when-to-use-them)
 
 [OpenAPI]: https://swagger.io/specification/
 [Google API design Guide: Resource Oriented Design]: https://cloud.google.com/apis/design/resources

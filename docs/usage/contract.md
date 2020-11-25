@@ -209,7 +209,6 @@ query {
 * [HATEOAS 101: Opinionated Introduction to a REST API Style](https://www.youtube.com/watch?v=6UXc71O7htc)
 * [REST APIs must be hypertext-driven][]
 * [Designing a true REST state machine][]
-* [API design: Understanding gRPC, OpenAPI and REST and when to use them](https://cloud.google.com/blog/products/api-management/understanding-grpc-openapi-and-rest-and-when-to-use-them)
 * [OpenAPI specification][OpenAPI]
 
 [REST APIs must be hypertext-driven]: https://roy.gbiv.com/untangled/2008/rest-apis-must-be-hypertext-driven
