@@ -1,8 +1,8 @@
-# Partial Update
+#  Standard method: update (partial)
 Sometimes, we want to be able to update a resource partially: for example, to update the state of an element, or to atomically increment a value. In these cases, a full replacement might not be convenient. This allows a client application to submit only those changes it is interesting in, thus improving client-side code maintainability, and reducing the traffic and hence improving the network performance.
 
 ## REST
-Updates in REST are typically done using [`PUT`](update_document.md). However, `PUT` completely updates a resource. When a client wants to update only part of a resource, [`PATCH` (RFC 5789)][PATCH Method for HTTP] might be used instead. The representation of the _patch_ can be expressed in a variety of forms. Specifically, for JSON several specifications exists:
+Updates in REST are typically done using [`PUT`](method_update.md). However, `PUT` completely updates a resource. When a client wants to update only part of a resource, [`PATCH` (RFC 5789)][PATCH Method for HTTP] might be used instead. The representation of the _patch_ can be expressed in a variety of forms. Specifically, for JSON several specifications exists:
 
 * [JSON Merge Patch (RFC 7396)][].
 * [JSON Patch (RFC 6902)][]

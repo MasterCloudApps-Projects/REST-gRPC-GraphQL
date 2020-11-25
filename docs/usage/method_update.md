@@ -1,4 +1,4 @@
-# Update document in a collection
+# Standard method: update (replace)
 Sometimes, we need to update an existing resource. This resource might be a single document or might be a document in a repository of type _collection_. For example, to update a product in a shop.
 
 ## Regular updates

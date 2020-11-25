@@ -1,4 +1,4 @@
-# Fetching collections
+# Standard method: list
 In addition to fetching a single document, we need to be able to fetch a list of documents: a _collection_. In simplest clases, a colection will never contain many elements: for example, professors for a given department. However, when collections can become arbitrarily large, for example with mail messages in a mailbox, we need to be able to specify which elements we are interested in. In this case, we will use pagination, sorting and optionally filtering.
 
 To provide pagination, two main approaches are followed:

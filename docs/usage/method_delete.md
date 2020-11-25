@@ -1,4 +1,4 @@
-# Delete a document
+#  Standard method: delete
 
 ## REST
 To delete a resource (regardless of its type), we can just carry out a `DELETE` HTTP call to the resource.

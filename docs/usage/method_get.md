@@ -1,4 +1,4 @@
-# Fetch a document
+# Standard method: get
 Reading a document, the most basic operation we can run on a resource, has also a lot of differences between API Styles.
 
 ## Simple read

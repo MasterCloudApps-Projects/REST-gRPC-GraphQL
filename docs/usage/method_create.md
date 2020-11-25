@@ -1,4 +1,4 @@
-# Create a document
+# Standard method: create
 Sometimes, we want to add a new item to a collection. For example, to create a new article in a blog. Let's see how we would tackle this in each API style.
 
 ## REST

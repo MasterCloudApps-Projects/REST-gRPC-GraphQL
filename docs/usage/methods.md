@@ -1,5 +1,5 @@
 # Contract
-Sticking to the [Google Coud API Design Guide][], we can distinguise between _standard methods_ and [_custom methods_](./custom_methods.md). _Standard methods_ are:
+Sticking to the [Google Coud API Design Guide][], we can distinguise between _standard methods_ and [_custom methods_](method_custom.md). _Standard methods_ are:
 
 * `List` - Fetches a list of resources from a collection.
 * `Get` - Fetches a single resource.

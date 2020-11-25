@@ -8,16 +8,16 @@
 4. [gRPC](grpc.md) TODO: write foundations, examples and usage cases
 5. Usage cases:
     * [Schema definition](usage/schema_definition.md) TODO graphql
-    * [Standard methods](usage/standard_methods.md)
     * [Contract](usage/contract.md) TODO
     * [Error handling](usage/error_handling.md)
-    * [Fetch document](usage/fetch_document.md)
-    * [Fetch collection](usage/fetch_collection.md)
-    * [Create document](usage/create_document.md)
-    * [Update document](usage/update_document.md)
-    * [Partial update](usage/partial_update.md)
-    * [Delete document](usage/delete_document.md)
-    * [Custom methods](usage/custom_methods.md)
+    * [Standard methods](usage/standard_methods.md)
+      * [Fetch document](usage/method_get.md)
+      * [Fetch collection](usage/method_list.md)
+      * [Create document](usage/method_create.md)
+      * [Update document](usage/method_update.md)
+      * [Partial update](usage/method_update_partial.md)
+      * [Delete document](usage/method_delete.md)
+    * [Custom methods](usage/method_custom.md)
     * [Security](usage/security.md)
     * [Subscriptions](usage/subscriptions.md)
     * [Asynchronous operation](usage/asynchronous_operation.md)
