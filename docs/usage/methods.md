@@ -82,6 +82,40 @@ Both REST and GraphQL run on top of HTTP, but unlike REST, GraphQL does not prom
 | `mutation`     | Operation which causes side effects in the remote entity graph             |
 | `subscription` | Let an client application create a websocket-based subscription to a topic |
 
+Each of these will be defined in their own type in the schema:
+
+```graphql
+{
+    type Query {
+        myFirstQuery(param: Int): ReturnType
+        mySecondQuery(param: Int): OtherReturnType
+    }
+
+    type Mutation {
+        myFirstMutation(param: FirstMutationInput!): ReturnType
+        mySeconMutation(param: SecondMutationInput): OtherReturnType
+    }
+    type Subscription {
+        someTopic: ReturnType
+    }
+}
+```
+
+### Arguments and return values
+Every GraphQL operation may accept [arguments][GraphQL: Operations arguments]. This let a `List` query operation filter the results, or a `Get` query operation select the specific resource. Mutations, on the other side, accept a special type of elements called `Input Types`.
+
+In addition to optional input values, every GraphQL operation will return an element. If this element is of any compound type, caller will need to provide the fields it is interested in:
+
+```graphql
+query {
+    myFirstQuery(param: 12) {
+        field1
+        field2
+    }
+}
+```
+
+### API Standard Methods
 The mapping between this operations types and our _standard methods_ is straightforward:
 
 | Standard Method   | GraphQL operation type    |
@@ -97,3 +131,4 @@ The mapping between this operations types and our _standard methods_ is straight
 [PATCH Method for HTTP (RFC 5789)]: https://tools.ietf.org/html/rfc5789
 [Conditional Requests (RFC 7232)]: https://tools.ietf.org/html/rfc7232
 [WebDAV (RFC 4918)]: https://tools.ietf.org/html/rfc4918
+[GraphQL: Operations arguments]: https://graphql.org/learn/queries/#arguments
