@@ -165,7 +165,45 @@ components:
 The schema, expressed in JSON Schema, describes how a User object is organized. Then, that schema is referenced from the `200` response of the `getUser` operation. 
 
 ## GraphQL
-Schema
+GraphQL contrasts with REST on how easy it is to define the available operations. Three _Operation Types_ are defined (see [methods](methods.md) for more info on what each operation do):
+
+* `query`
+* `mutation`
+* `subscription`
+
+The [GraphQL Schema Language][] let us specify each of these operations in their own section:
+
+```graphql
+{
+    type Query {
+        myFirstQuery(param: Int): ReturnType
+        mySecondQuery(param: Int): OtherReturnType
+    }
+
+    type Mutation {
+        myFirstMutation(param: FirstMutationInput!): ReturnType
+        mySeconMutation(param: SecondMutationInput): OtherReturnType
+    }
+
+    type Subscription {
+        someTopic: ReturnType
+    }
+}
+```
+
+### Arguments and return values
+Each operation acts as an RPC method that accept both arguments and a return value. [Arguments][GraphQL: Operations arguments], which are optional, can be used to for example let a `List` operation filter the results, or a `Get` operation select a specific resource.
+
+In addition to optional input values, every GraphQL operation will return an element. If this element is of any compound type, caller will need to provide the fields it is interested in:
+
+```graphql
+query {
+    myFirstQuery(param: 12) {
+        field1
+        field2
+    }
+}
+```
 
 ## Resources
 * [HATEOAS 101: Opinionated Introduction to a REST API Style](https://www.youtube.com/watch?v=6UXc71O7htc)
@@ -201,3 +239,5 @@ Schema
 [OpenAPI Data Models]: https://swagger.io/docs/specification/data-models/
 [OpenAPI Links]: https://swagger.io/docs/specification/links/
 [Hypermedia in API design]: https://smartbear.com/learn/api-design/what-is-hypermedia/
+[GraphQL Schema Language]: https://graphql.org/learn/schema/
+[GraphQL: Operations arguments]: https://graphql.org/learn/queries/#arguments
