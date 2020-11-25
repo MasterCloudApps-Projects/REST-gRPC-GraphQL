@@ -28,35 +28,21 @@ A method is considered _safe_ as long as it does not have side-effects. And it i
 
 REST specification does not mention much about which HTTP methods should be used for a certain operation. This is because REST is all about the architectural style, while HTTP methods are part of the Web's architecture. When mapping an API operation to an HTTP method we should consider: the semantic of the method; whether the operation is safe or idempotent; how affect caching; etc. But from the client point of view, it is not important which HTTP method maps an operation. There are some consensus, though:
 
-### GET
-`GET` is used for _safe_ and _idempotent_ data retrieval, either on documents or in collections/stores.
+* `GET` - Used for _safe_ and _idempotent_ data retrieval, either on documents or in collections/stores.
+* `HEAD` - Used for data inspection. When only the metadata (header) of a resource is required, `HEAD` can be used instead of `GET`.
+* `OPTIONS` - Used for data inspection. To discover how we can interact with a resource, `OPTIONS` will be used. This will return an `Allow` header listing all available methods. Note that, even though a client application can fetch this information at runtime, it increases the network traffic.
+* `POST` - This is the most controversial HTTP method. It can be used for a number of things:
+  * To add a new item into a _collection_. This is like calling to a factory method. A `Slug` (a suggested identifier) can optionally be set, but the identifier will be defined by the server.
+  * To exercise a _controller_.
+  * To run _safe_ and _idempotent_ operations that exceed the maximum length for an identifier. For example, when running a complex query whose URI-representation is invalid.
+  * And to run any other _unsafe_ and _nonidempotent_ operation. For example, an **asynchronous task**.
+* `PUT`:
+  * Update a mutable resource. [Conditional Requests (RFC 7232)][] are recommended in order to prevent concurrency problems.
+  * Add a new item into a _store_, this is, when the client can decide the identifier of the resource.
+* `DELETE` - It is used to remove a resource. This operation is not _safe_ (i.e. it has side effects), but it is _idempotent_. This is controversial: what should we return when asked to remove a resource that never existed? A `404 Not Found`? What should we return when deleting a resource that was previously removed? `204 No Content`? Is this secure enough? Should we maintain a list of removed identifiers?
+* `PATCH` - Allows to partially update a resource.
+* Other HTTP methods - It is encouraged not to use other HTTP methods, like those proposed by [WebDAV (RFC 4918)][], and instead use `POST`.
 
-### HEAD and OPTIONS
-These two methods are used for data inspection, so they both are _safe_ and _idempotent_. When only the metadata (header) of a resource is required, `HEAD` can be used instead of `GET`.
-
-To discover how we can interact with a resource, `OPTIONS` will be used. This will return an `Allow` header listing all available methods. Note that, even though a client application can fetch this information at runtime, it increases the network traffic.
-
-### POST
-`POST` is the most controversial HTTP method. It can be used for a number of things:
-
-* To add a new item into a _collection_. This is like calling to a factory method. A `Slug` (a suggested identifier) can optionally be set, but the identifier will be defined by the server.
-* To exercise a _controller_.
-* To run _safe_ and _idempotent_ operations that exceed the maximum length for an identifier. For example, when running a complex query whose URI-representation is invalid.
-* And to run any other _unsafe_ and _nonidempotent_ operation. For example, an **asynchronous task**.
-
-### PUT
-Used to:
-
-* Update a mutable resource. [Conditional Requests (RFC 7232)][] are recommended in order to prevent concurrency problems.
-* Add a new item into a _store_, this is, when the client can decide the identifier of the resource.
-
-### DELETE
-It is used to remove a resource. This operation is not _safe_ (i.e. it has side effects), but it is _idempotent_. This is controversial: what should we return when asked to remove a resource that never existed? A `404 Not Found`? What should we return when deleting a resource that was previously removed? `204 No Content`? Is this secure enough? Should we maintain a list of removed identifiers?
-
-### Other HTTP methods
-It is encouraged not to use other HTTP methods, like those proposed by [WebDAV (RFC 4918)][], and instead use `POST`. However, some people does not discourage using `PATCH`.
-
-### HTTP is not CRUD
 It's fundamental to notice several things. Neither REST nor HTTP are CRUD. Some HTTP methods clearly map CRUD action (i.e. `GET` maps _Read_ and `DELETE` maps _Delete_). However:
 
 * `POST` can run a number of _non-idempotent_ and _unsafe_ operations. One of those operations might be _Create_. Performing other actions it is also correct. Remember, the entire SOAP protocol is _tunnelled_ through `POST`.
