@@ -1,11 +1,11 @@
 # Contract
 Sticking to the [Google Coud API Design Guide][], we can distinguise between _standard methods_ and [_custom methods_](method_custom.md). _Standard methods_ are:
 
-* `List` - Fetches a list of resources from a collection.
-* `Get` - Fetches a single resource.
-* `Create` - Creates a new resource.
-* `Update` - Updates an existing resource.
-* `Delete` - Deletes a resource.
+* [`List`](method_list.md) - Fetches a list of resources from a collection.
+* [`Get`](method_get.md) - Fetches a single resource.
+* [`Create`](method_create.md) - Creates a new resource.
+* [`Update`](method_update.md) - Updates an existing resource. Optional, a resource can be [_partially updated_](method_update_partial.md).
+* [`Delete`](method_delete.md) - Deletes a resource.
 
 Each of these are mapped to a different _operation_ in each API style.
 
