@@ -19,5 +19,5 @@
     * [Error handling](usage/error_handling.md)
     * [Security](usage/security.md)
     * [Subscriptions](usage/subscriptions.md)
-    * [Caching](usage/caching.md) TODO
+    * [Caching](usage/caching.md)
     * Introspection?
