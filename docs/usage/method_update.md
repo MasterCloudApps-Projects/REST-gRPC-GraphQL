@@ -61,7 +61,7 @@ Here our backend will be protected against race conditions.
 ### REST
 Since REST promotes visibility, a _RESTful Web Services_ takes advantage of the HTTP built-in caching and of the [Conditional Requests (RFC 7232)][]. Every response might contain:
 
-* `ETag` - or `entity tag`. Part of the HTTP specification, this is a header to represent a specific version of a resource from. Tipically, hash functions are used for this. Clients may save a copy of the resource so that, once they are expired (which is controlled by the `Expired` and/or `Cache-Control` headers), they can make a new request sending its `ETag` in the `If-None-Match` header field. If the server detects the `ETag` has not change, then it will return a `304 - Not Modified` response.
+* `ETag` - or `entity tag`. Part of the HTTP specification, this is a header to represent a specific version of a resource from. Tipically, hash functions are used for this. Clients may save a copy of the resource so that, once they are expired (which is controlled by the `Expires` and/or `Cache-Control` headers), they can make a new request sending its `ETag` in the `If-None-Match` header field. If the server detects the `ETag` has not change, then it will return a `304 - Not Modified` response.
 * `Last-Modified` - This works like `ETag` but, unlike this, it is timestamp-based. This timestamp is set into `If-Modified-Since` header when sending a new request.
 
 When running a _safe_ request, as in `GET`, this is useful to save resources. For _unsafe_ requests, like `POST`, `PUT`, `PATCH` or `DELETE`, these values can be used to provide concurrency control.
