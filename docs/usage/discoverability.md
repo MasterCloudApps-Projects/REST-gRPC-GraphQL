@@ -1,0 +1,71 @@
+# Discoverability
+We call discoverability to the ability of an API to expose its interface and types.
+
+## REST
+In a truly _RESTful Web Service_, where the hypertext acts as the engine of the application state, when a resource its returned it is also revealing every available _transition_ in it. This means there is no need to exchange complex documents describing the operations in the API. The degree of information of the transitions will depend on the specification used to describe links. Some allow to specify the _schema_ of the input fields of an operation. Clients can make use of Content Negotiation to try to select which Media Type they want the resource of a link to be represented.
+
+The [`OPTIONS`][OPTIONS HTTP method] method might be used as well to gather information about who to interact with a service; it will return the available HTTP methods to a certain resource.
+
+_REST-Like Web Service_, in contrast, are driven by RPC-Like calls _made_ from the client. The specification of how these RPC-Like calls are built is usually provided in a human-readable documentation. Solutions like OpenAPI promote the creation of an ecosystem to improve the development experience:
+
+* [Swagger UI](https://swagger.io/swagger-ui/) renders an in-browser interactive documentation for an OpenAPI schema.
+* [Swagger Codegen](https://github.com/swagger-api/swagger-codegen) can generate a client library in over 40 programming languages.
+
+## GraphQL
+GraphQL natively supports [_introspection_][GraphQL: Introspection], a feature that let client applications ask a server about the operations and types it supports. This is done running a querying the `__schema` field:
+
+```graphql
+{
+    __schema {
+        types {
+            name
+        }
+    }
+}
+```
+This will return the name of every type in a GraphQL server.
+
+## Source Code
+
+### REST
+We can easily discover the available HTTP methods in our `/distances` REST resource running:
+
+```
+curl -X OPTIONS -v http://localhost:4000/distances
+```
+
+Which will specify that only `GET` is allowed:
+
+```
+Access-Control-Allow-Methods: GET
+```
+
+### GraphQL
+In the example above we saw how to fetch every _type_ defined in a GraphQL server. Now, let's run this query to fetch details about our `Article` object:
+
+```graphql
+{
+  __type(name: "Article") {
+    name
+    fields {
+      name
+      type {
+        name
+        kind
+        ofType {
+          name
+          kind
+        }
+      }
+    }
+  }
+}
+```
+
+## Resources
+* [REST API Discoverability and HATEOAS][]
+* [GraphQL: Introspection][]
+
+[REST API Discoverability and HATEOAS]: https://www.baeldung.com/restful-web-service-discoverability
+[OPTIONS HTTP method]: https://tools.ietf.org/html/rfc7231#section-4.3.7
+[GraphQL: Introspection]: https://graphql.org/learn/introspection/

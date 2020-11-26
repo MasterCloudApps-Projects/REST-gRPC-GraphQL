@@ -20,4 +20,4 @@
     * [Security](usage/security.md)
     * [Subscriptions](usage/subscriptions.md)
     * [Caching](usage/caching.md)
-    * Introspection?
+    * [Discoverability](usage/discoverability.md)
