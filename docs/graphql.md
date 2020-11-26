@@ -126,6 +126,7 @@ The most popular ones are JavaScript based:
 * [graphql-js reference implementation][graphql-js]
 * [express-graphql][]
 * [GitHub Blog post: The GitHub GraphQL API][The GitHub GraphQL API]
+* [36 Concepts GraphQL Developers Should Know](https://36-concepts-graphql.netlify.app/)
 
 [Design Principles behind GraphQL]: http://spec.graphql.org/draft/#sec-Overview
 [graphql-js]: https://github.com/graphql/graphql-js
