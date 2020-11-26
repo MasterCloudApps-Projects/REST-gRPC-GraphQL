@@ -2,7 +2,7 @@ const router = require('express').Router();
 
 router.get('/', require('./articlesGet'));
 
-router.post('/', require('./articlePost'));
+router.post('/', require('./articlesPost'));
 
 /**
  * Accepts an id.
