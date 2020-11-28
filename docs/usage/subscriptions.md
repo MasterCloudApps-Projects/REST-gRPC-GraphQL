@@ -25,7 +25,7 @@ Long polling is a technique that consists in letting an open TCP connection betw
 
 HTTP Streaming is quite similar: the client opens an HTTP connection to the server using a special header, `Transfer-Encoding: chunked` ([the response will come in a series of chunks][Transfer Encoding in MDN]).
 
-> Note: [HTTP/2 does not support `chunked`][HTTP/2 (RFC 7540)] anymore, as it has its own mechanism to create streaming.
+> Note: [HTTP/2 does not support `chunked`][HTTP/2 (RFC 7540)] anymore, as it has its own mechanism `stream` mechanism which support concurrent streaming connections.
 
 These techniques, in contrast to WebHooks, can be used to let HTTP clients be notified of events. For example, HTTP streaming is used by [Twitter][Twitter API: Filtered Stream] in their API to Filtered Streams.
 
@@ -46,6 +46,35 @@ subscription($productType: String!){
     }
 }
 ```
+
+## gRPC
+Protocol Buffers implements a very powerful service definition, which allows for streaming from and to the client application, where each _method_ (`rpc`) can be of any of the following types (example stubs taken from [grpc.io](https://grpc.io/docs/what-is-grpc/core-concepts/))):
+
+* **Unary** - a regular request-response request:
+
+    ```proto
+    rpc SayHello(HelloRequest) returns (HelloResponse);
+    ```
+
+* **Server streaming** - the client will receive a _stream_ from the server, as in the HTTP streaming technique above.
+
+    ```proto
+    rpc LotsOfReplies(HelloRequest) returns (stream HelloResponse);
+    ```
+
+* **Client streaming** - the server will receive a _stream_ from the client.
+
+    ```proto
+    rpc LotsOfGreetings(stream HelloRequest) returns (HelloResponse);
+    ```
+
+* **Bidirectional streaming** - both ends will receive a _stram_ from each other.
+
+    ```proto
+    rpc BidiHello(stream HelloRequest) returns (stream HelloResponse);
+    ```
+
+An rpc with an `stream` response will allow to create a _subscription_ to a topic. This mimics the [HTTP/2 stream connections][HTTP/2 (RFC 7540)].
 
 ## Source code
 

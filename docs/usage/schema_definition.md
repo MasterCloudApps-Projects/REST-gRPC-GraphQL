@@ -205,6 +205,99 @@ Finally, GraphQL allows to define object types expected to be used as the input 
 }
 ```
 
+## gRPC
+Although gRPC can be used with any extensible language, such as JSON, most of the time it uses [Protocol Buffers](https://developers.google.com/protocol-buffers/docs/overview) to define the schema of its entites. It consists in a platform-agnostic language for serializing data, toghether with a [compiler](https://developers.google.com/protocol-buffers/docs/proto3#generating) to generate language-specific code out from the schema definition. To define a schema, a `.proto` file will be used.
+
+There are several versions of Protocol Buffers. Here, we will cover [proto3](https://developers.google.com/protocol-buffers/docs/proto3) version, specifying it in the first line of the `.proto` file, as in:
+
+```proto
+syntax = "proto3";
+```
+
+### Scalar types
+Up to [15 scalar types](https://developers.google.com/protocol-buffers/docs/proto3#scalar) are accepted, with transport concerns to take into consideration. For the sake of simplicity, only a couple of them, with their Java equivalent, are enumerated here:
+
+| .proto type | Java type |
+|-------------|-----------|
+| double      | double    |
+| float       | float     |
+| int32       | int       |
+| int64       | long      |
+| bool        | boolean   |
+| string      | String    |
+
+### Enumeration type
+Enumeration types can be used to restrict the allowed values:
+
+```proto
+enum Status {
+    READY = 0;
+    WAITING = 1;
+    RUNNING = 2;
+    TERMINATED = 3;
+}
+```
+### Message type
+Finally, to define a composite type, we can use the Message type:
+
+```proto
+syntax = "proto3";
+
+message Article {
+    int32 id = 1;
+    string title = 2;
+    User author = 3;
+    string thumbnail = 4;
+    repeated Comment comment = 5;
+}
+```
+
+There are several things to note:
+
+* **Field Rules**: message fields can be either: (1) _singular_, the default; or (2) `repeated`, an ordered list of elements.
+* **Field numbers**: each field is _identified_ with a unique number. If a message is updated and a field is remover, its field number should be marked as forbidden using the [`reserved` statement](https://developers.google.com/protocol-buffers/docs/proto3#reserved).
+
+### Any message type
+[`Any`](https://developers.google.com/protocol-buffers/docs/proto3#any) adds support to embed a field of an unknown type. For example, our API might have an _abstract_ `Operation` message type as a response to any requested operation. The `Operation` message might have a concret `status` field, plus a `response` field of type `Any`:
+
+```proto
+import "google/protobuf/any.proto";
+
+message Operation {
+    int32 id = 1
+    Status status = 2
+    google.protobuf.Any response = 3;
+}
+```
+
+Note we need to import `google/protobuf/any.proto` in order to use it.
+
+### Oneof message type
+Similar to [GraphQL Union Type](#union-type), and sometimes referred to as _union fields_, [`Oneof`](https://developers.google.com/protocol-buffers/docs/proto3#oneof) allows to ser a list of possible fields where at most one of them will be specified. For example, if a request can result in either `OK` or failed, the result might contain a `result` field of type `Oneof` with two possible fields:
+
+* `response` - with the response, when the request was successfully run. For example, of type `Any`.
+* `error` - with an object representing the error, in case of any failure.
+
+Which might result in something like this:
+
+```proto
+import "google/protobuf/any.proto";
+
+message Operation {
+    int32 id = 1
+    Status status = 2
+    oneof result {
+        google.protobuf.Any response = 3;
+        Error error = 4;
+    }
+}
+```
+
+There is much more with regard to Protocol Buffers:
+* **Nested types**: we can define a Message or an Enumeration type within another message declaration.
+* **Importing definitions**: a `.proto` file can reference another `.proto` file to import its definitions. This is not supported in Java.
+* **Maps**: we can create hash tables, to map a `key_type` to a `value_type`.
+
 ## Source Code
 
 [`Content-Type`]: https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Type

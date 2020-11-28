@@ -107,6 +107,40 @@ this is what we get:
 }
 ```
 
+## gRPC
+When a call runs succesfully, it will return an `OK` status code to the client application. When it fails, though, gRPC defines a list of [error status codes](https://grpc.io/docs/guides/error/#error-status-codes) that will be sent back to the client. This error model is independent of the data format used (i.e. it's independent of Protocol Buffers). For example:
+
+* `GRPC_STATUS_CANCELLED` - The client application cancelled the request.
+* `GRPC_STATUS_DEADLINE_EXCEEDED` - Exceeded the deadline/timeout specified by the client.
+* `GRPC_STATUS_UNIMPLEMENTED` - Method undefined in the server.
+* `GRPC_STATUS_INTERNAL` - Covers several errors, like parsing errors in either the request or the response or compression algorithsm errors.
+* `GRPC_STATUS_UNKNOWN` - The server threw an unhandled exception.
+
+### Google Error model
+The above error model, standard to gRPC, it's very limited and lacks of enough error detail. gRPC recommends that API designers follow the [Google Error Model](https://cloud.google.com/apis/design/errors). It's the protocol-agnostic mechanism to express errors used by Google, both in HTTP and gRPC APIs.
+
+When a client makes a request, the response might _union field_ of either:
+* type `status`, when the request failed.
+* or type `response`, with the request response, when successful.
+
+Then, the field of type `status` will contain a number of details of the error/s:
+
+```proto
+message Status {
+  // A simple error code that can be easily handled by the client. The
+  // actual error code is defined by `google.rpc.Code`.
+  int32 code = 1;
+
+  // A developer-facing human-readable error message in English. It should
+  // both explain the error and offer an actionable resolution to it.
+  string message = 2;
+
+  // Additional error information that the client code can use to handle
+  // the error, such as retry delay or a help link.
+  repeated google.protobuf.Any details = 3;
+}
+```
+
 ## Source code
 
 [Section 6 of the RFC 7231]: https://tools.ietf.org/html/rfc7231#section-6

@@ -29,6 +29,12 @@ GraphQL servers expose a single entry point for the whole entity graph, so most 
 * When tunnelling GraphQL through `GET`, HTTP cache can be used as well. We need to prevent _mutations_ and _subscriptions_ from being cached, though. For example, making it mandatory to run them over `POST`.
 * [Global object identification](https://graphql.org/learn/global-object-identification/) can be used to unequivocally identify an entity in GraphQL. This tool let client developers easily maintain their [local GraphQL cache](https://graphql.org/learn/caching/).
 
+## gRPC
+gRPC, like GraphQL, hijacks the HTTP protocol, so it cannot befeit from the native HTTP cache. Instead, we can use:
+
+* _Application cache_ in the server side.
+* _Local cache_ in the client side as long as we implement a robust identifiers model, as the Goblat Object Identification proposal of GraphQL.
+
 ## Resources
 * [Caching Tutorial](https://www.mnot.net/cache_docs/)
 * [HTTP Caching, in MDN][]

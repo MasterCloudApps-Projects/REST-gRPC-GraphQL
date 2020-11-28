@@ -115,6 +115,15 @@ When browser in a site, `foo.com`, wants to access a resource on another site, `
 
 This _preflight request_ is done automatically by the browser when using `XMLHttpRequest` or the `Fetch API` and the request is not _simple_ (for example, when using `application/json` as the `Content-Type`, or when sending a credential through cookies or the `Authorization` header).
 
+## gRPC Authentication
+Nativelly, gRPC nativelly supports three authentication methods:
+
+* **TLS** - TLS certificates can be used to provide authentication, integrity and confidetiality.
+* **ALTS** - Similar to TLS, [ALTS](https://cloud.google.com/security/encryption-in-transit/application-layer-transport-security) is a Protocol Buffer based authentication mechanism conceived for the Google Cloud Platform.
+* **Token-based for Google** - When connection to Google Services, this third mechanism can be used.
+
+Since gRPC hijacks the HTTP communication protocol, it's not that easy to take advantage of the native HTTP authentication mechanisms. Most solutions leverage the use of middlewares to add a custom authentication layer on top of gRPC ([Example in nodejs](https://medium.com/compli-engineering/grpc-nodejs-using-jwt-authentication-b048fef6ecb2), [Example in Go](https://medium.com/@tillknuesting/grpc-http-basic-auth-oauth2-bearer-tokens-f088b5a2314)).
+
 ## Source code
 Our sample application contains some API calls protected. Let's see how we can access them:
 

@@ -213,6 +213,17 @@ query {
 }
 ```
 
+## gRPC
+gRPC uses gRPC uses [Protocol Buffers] as the Interface Definition Language for describing its _contract_ and to define its [schema](schema_definition.md). To define a [service interface in Protocol Buffers](https://developers.google.com/protocol-buffers/docs/proto3#services), the Service type will be used:
+
+```proto
+service myService {
+  rpc Search(SearchRequest) returns (SearchResponse);
+}
+```
+
+Here, we define a named service, `myService`, that exposes a single entry point, `Searcher`, which accepts an argument of type `SearchRequest` and returns a message of type `SearchResponse`. Note that even though this service definition in Protocol Buffers is the de-facto standard for gRPC, it can also be used with other API styles, for example with REST.
+
 ## Resources
 * [HATEOAS 101: Opinionated Introduction to a REST API Style](https://www.youtube.com/watch?v=6UXc71O7htc)
 * [REST APIs must be hypertext-driven][]
