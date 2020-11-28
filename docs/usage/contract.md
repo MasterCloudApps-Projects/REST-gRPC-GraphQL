@@ -165,7 +165,7 @@ components:
 The schema, expressed in JSON Schema, describes how a User object is organized. Then, that schema is referenced from the `200` response of the `getUser` operation. 
 
 ## GraphQL
-GraphQL contrasts with REST on how easy it is to define the available operations. Three _Operation Types_ are defined (see [methods](methods.md) for more info on what each operation do):
+GraphQL contrasts with REST on how easy it is to define the available operations. Three _Operation Types_ are defined (see [methods](methods.md) for more info on what each operation do) in the `schema` section:
 
 * `query`
 * `mutation`
@@ -188,8 +188,16 @@ The [GraphQL Schema Language][] let us specify each of these operations in their
     type Subscription {
         someTopic: ReturnType
     }
+
+    schema {
+        query: Query
+        mutation: Mutation
+        subscription: Subscription
+    }
 }
 ```
+
+Note: we have defined three types, each mapping to its _operation type_. We can have used whatever name, but its a convention to name `Query`, `Mutation` and `Subscription` each of these types. Also note that our `Query` type is just a regular _Object Type_, with a number of typed fields that can optionally define arguments, as any other _Object Type_.
 
 ### Arguments and return values
 Each operation acts as an RPC method that accept both arguments and a return value. [Arguments][GraphQL: Operations arguments], which are optional, can be used to for example let a `List` operation filter the results, or a `Get` operation select a specific resource.

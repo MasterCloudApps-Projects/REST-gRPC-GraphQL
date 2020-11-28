@@ -117,6 +117,55 @@ Defines a structure, which is made up of other types. A field can be set as mand
 }
 ```
 
+Each field in a type can optionally accept arguments. They can be used to for example customize the representation of a resource, to limit the response, or to filter a result:
+
+```graphql
+{
+    type Article {
+        id: ID!
+        title: String!
+        date(format: DateFormats = ISO8601): String!
+        author: User!
+        thumbnail: String
+        comments(limit: Int = 20, offset: Int = 0): [Comment!]
+    }
+}
+```
+
+Here we are leting the client application specify how it want the date to be represented (let's assume `DateFormats` is an existing Enumeration Type), with a default format `ISO8601`. They can also paginate the returned `comments`.
+
+### Union type
+Union types indicates a list of various possible types. When a union type is used as a field, any of its concrete types may be used:
+
+```graphql
+{
+    union SearchResult = Professor | Student | Subject
+}
+```
+
+If a query returns an array `SearchResult`, we can specify fields for each type, as in:
+
+```graphql
+{
+    search(keyword: "Smith")  {
+        __typename
+        ... on Professor {
+            name
+            lastname
+        }
+        ... on Student {
+            name
+            lastname
+        }
+        ... on Subject {
+            name
+        }
+    }
+}
+```
+
+### Interface type
+
 `Object types` can also make use of `Interface types`:
 
 ```graphql
