@@ -74,6 +74,19 @@ There are some usage cases where _idempotency_ is a convenient mechanism to enha
 ### Real World Example
 * [GitHub GraphQL API](https://docs.github.com/en/free-pro-team@latest/graphql/reference/mutations#createproject) the `createProject` mutation returns a `Project`.
 
+## gRPC
+
+Following the _resource-oriented_ design, a [`Create` method](https://cloud.google.com/apis/design/standard_methods#create) will be defined for each resource that can be created.
+
+```proto
+rpc CreateArticle(CreateArticleRequest) returns (Article);
+```
+
+Optionally, the request resource may contain a client-assigned id, similarly to [REST stores](#stores). If the resource exists:
+
+* The server might fail, returning a `ALREADY_EXISTS` error message.
+* The server may also assign a new resource identifier.
+
 ## Source code
 
 ### REST
