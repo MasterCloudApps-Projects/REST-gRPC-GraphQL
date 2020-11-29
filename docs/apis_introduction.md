@@ -4,7 +4,7 @@ Putting it simply, an API, or _Application Progamming Interface_, is a product w
 ## Paradigms
 
 ### Request-response APIs
-* **RPC API**: this is the simplest form, where the API is designed around arbitrary procedures and typically described using an IDL (Interface Definition Language). There are several existing specifications, like SOAP, JSON-RPC or XML-RPC. There is also the [gRPC](grpc.md) specification, which also has an official implementation.
+* **RPC API**: this is the simplest form, where the API is designed around arbitrary procedures and typically described using an IDL (Interface Definition Language). There are several existing specifications, like SOAP, JSON-RPC or XML-RPC. Currently, [Apache Thrift](https://thrift.apache.org/) and [gRPC](grpc.md) specifications are very popular, both of them containing official implementations.
 * **Web API**: Or [REST](rest.md). It is an architectural style where the system behaviour is based on transitions of data (or _resources_, as called in HTTP). There is no official implementation.
     * REST-like. A key characteristic of REST is that their clients just _follow_ (or _bookmark_) opaque URIs. When we use a so-called REST API where clients construct URIs, then it is not _pure REST_, but RPC over HTTP. This is often refered as _REST-Like_.
 * **Query API**: then we have a query-oriented API, [GraphQL](graphql.md). It is esentialy an RPC service, exposing a single entrypoint, that allow clients to run _queries_, using a SQL-like syntax, and make changes through _mutations_.
