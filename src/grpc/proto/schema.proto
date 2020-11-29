@@ -4,6 +4,7 @@ package example;
 
 service Main {
     rpc GetDistance(DistanceRequest) returns (DistanceReply);
+    rpc GetArticle(GetArticleRequest) returns (Article);
 }
 
 message DistanceRequest {
@@ -15,4 +16,15 @@ message DistanceReply {
     string from = 1;
     string to = 2;
     int32 km = 3;
+}
+
+message GetArticleRequest {
+    string id = 1;
+}
+
+message Article {
+    string id = 1;
+    string title = 2;
+    string description = 3;
+    repeated Comment comments = 4;
 }

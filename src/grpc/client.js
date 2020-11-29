@@ -30,6 +30,15 @@ function main() {
                 console.log(`Distance from ${from} to ${to}: ${km}Km`);
             });
             break;
+        case 'GetArticle':
+            client.getArticle({id: process.argv[3]}, function(err, article) {
+                if (err) {
+                    console.log('GetArticle Error', err);
+                } else {
+                    console.log('GetArticle', article);
+                }
+            });
+            break;
         default:
             throw new Error("Unknown operation: " + operation);
     }

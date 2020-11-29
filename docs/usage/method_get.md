@@ -490,6 +490,17 @@ query {
 
 Here, we execute two queries of the type `article()`, each one returning a different result. Also note that they might be processed in parallel.
 
+### gRPC
+An `rpc` has been defined to fetch a single article in the gRPC service:
+
+```proto
+rpc GetArticle(GetArticleRequest) returns (Article);
+```
+
+To exercise it, first identify which articles are available running `node ./grpc/client.js ListArticles`.
+
+Then, run the client application setting an `article_id`, as in `node ./grpc/client.js GetArticle 5fc3ffe378b3dd2565ed83a5`. A full article, together with its comments, will be returned.
+
 ## Resources
 * [Partial response in Google Tasks API][]
 * [JSON:API Sparse Fieldsets][]
