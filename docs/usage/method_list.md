@@ -261,6 +261,36 @@ query {
 }
 ```
 
+### gRPC
+A new `rpc` has been created. It accepts a request object to configure the pagination, and returns a response object that contains the next cursor, as well as a list of articles:
+
+```proto
+rpc ListArticles(ListArticlesRequest) returns (ListArticlesResponse);
+
+message ListArticlesRequest {
+    int32 page_size = 1;
+    optional string page_token = 2;
+}
+
+message ListArticlesResponse {
+    message BasicArticle {
+        string id = 1;
+        string title = 2;
+        string description = 3;
+    }
+    repeated BasicArticle articles = 1;
+    string next_page_token = 2;
+}
+```
+
+To execute it, run:
+
+`node ./grpc/client.js ListArticles`
+
+Then, to get from a specific page, set a valid article id, as in:
+
+` node ./grpc/client.js ListArticles 5fc3ffe378b3dd2565ed83db`
+
 ## Resources
 * [Cursor-based pagination in Facebook API][]
 * [Pagination with Web Links in GitHub API][]

@@ -39,6 +39,15 @@ function main() {
                 }
             });
             break;
+        case 'ListArticles':
+            client.listArticles({page_size: 10, page_token: process.argv[3]}, function(err, articles) {
+                if (err) {
+                    console.log('ListArticles Error', err);
+                } else {
+                    console.log('ListArticles', articles);
+                }
+            });
+            break;
         default:
             throw new Error("Unknown operation: " + operation);
     }

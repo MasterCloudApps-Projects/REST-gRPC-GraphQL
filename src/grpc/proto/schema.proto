@@ -5,6 +5,7 @@ package example;
 service Main {
     rpc GetDistance(DistanceRequest) returns (DistanceReply);
     rpc GetArticle(GetArticleRequest) returns (Article);
+    rpc ListArticles(ListArticlesRequest) returns (ListArticlesResponse);
 }
 
 message DistanceRequest {
@@ -27,4 +28,24 @@ message Article {
     string title = 2;
     string description = 3;
     repeated Comment comments = 4;
+}
+
+message Comment {
+    string author = 1;
+    string text = 2;
+}
+
+message ListArticlesRequest {
+    int32 page_size = 1;
+    optional string page_token = 2;
+}
+
+message ListArticlesResponse {
+    message BasicArticle {
+        string id = 1;
+        string title = 2;
+        string description = 3;
+    }
+    repeated BasicArticle articles = 1;
+    string next_page_token = 2;
 }
