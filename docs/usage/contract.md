@@ -224,11 +224,30 @@ service myService {
 
 Here, we define a named service, `myService`, that exposes a single entry point, `Searcher`, which accepts an argument of type `SearchRequest` and returns a message of type `SearchResponse`. Note that even though this service definition in Protocol Buffers is the de-facto standard for gRPC, it can also be used with other API styles, for example with REST.
 
+### gRPC with REST
+It is also possible to implement a REST Web Service using gRPC. For this, we will annotate the `.proto` definition with `google.api.http` to map an RPC with an HTTP request:
+
+```proto
+rpc CreatArticle(CreateArticleRequest) returns (Article) {
+  option (google.api.http) = {
+    post: "/articles"
+    body: "article"
+  };
+}
+
+message CreateArticleRequest {
+  Article article = 1;
+}
+```
+
+Then, using the [`grpc-gateway`][grpc-gateway] (a plugin for `protoc`), a _RESTful Web Service_ will be automatically generated.
+
 ## Resources
 * [HATEOAS 101: Opinionated Introduction to a REST API Style](https://www.youtube.com/watch?v=6UXc71O7htc)
 * [REST APIs must be hypertext-driven][]
 * [Designing a true REST state machine][]
 * [OpenAPI specification][OpenAPI]
+* [grpc-gateway][]
 
 [REST APIs must be hypertext-driven]: https://roy.gbiv.com/untangled/2008/rest-apis-must-be-hypertext-driven
 [Designing a true REST state machine]: https://nordicapis.com/designing-a-true-rest-state-machine/
@@ -259,3 +278,4 @@ Here, we define a named service, `myService`, that exposes a single entry point,
 [Hypermedia in API design]: https://smartbear.com/learn/api-design/what-is-hypermedia/
 [GraphQL Schema Language]: https://graphql.org/learn/schema/
 [GraphQL: Operations arguments]: https://graphql.org/learn/queries/#arguments
+[grpc-gateway]: https://github.com/grpc-ecosystem/grpc-gateway
