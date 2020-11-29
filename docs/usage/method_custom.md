@@ -164,6 +164,26 @@ To get the distance between `Madrid` and `Barcelona`, run this query:
 }
 ```
 
+### gRPC
+The gRPC project contains an `rpc` to calculate a distance:
+
+```proto
+rpc distance(DistanceRequest) returns (DistanceReply);
+
+message DistanceRequest {
+    string from = 1;
+    string to = 2;
+}
+
+message DistanceReply {
+    string from = 1;
+    string to = 2;
+    int32 km = 3;
+}
+```
+
+Run the client application to see how it works: `node ./grpc/client.js distance`.
+
 ## Resources
 * [Representing state in REST and GraphQL](https://apisyouwonthate.com/blog/representing-state-in-rest-and-graphql)
 

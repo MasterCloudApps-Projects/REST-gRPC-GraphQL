@@ -9,6 +9,8 @@
   },
   "author": "Jesús Ruiz-Ayúcar",
   "dependencies": {
+    "@grpc/grpc-js": "^1.2.1",
+    "@grpc/proto-loader": "^0.5.5",
     "apollo-server-express": "^2.19.0",
     "cors": "^2.8.5",
     "express": "^4.17.1",

@@ -1,0 +1,18 @@
+syntax = "proto3";
+
+package example;
+
+service Main {
+    rpc GetDistance(DistanceRequest) returns (DistanceReply);
+}
+
+message DistanceRequest {
+    string from = 1;
+    string to = 2;
+}
+
+message DistanceReply {
+    string from = 1;
+    string to = 2;
+    int32 km = 3;
+}
