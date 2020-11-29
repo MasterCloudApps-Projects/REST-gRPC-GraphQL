@@ -39,7 +39,7 @@ In spite of the large number of benefits of such architecture, REST is not free 
 
 * **Resources usage**. True REST services might require a high load of network traffic: (1) to auto-discover available services, (2) the payload is often expressed in XML or JSON and (3) since most of the time is browser oriented, it does not leverage HTTP2.
 * **Cost of development**. It forces developers to choose how they want to represent their resources, how they want to expose links, how to create searchers, etc.
-* **Data-oriented**. Classic RPC technologies are procedure-oriented, which for some is easier to understand, and find data-oriented APIs unnatural. There is no consensus on this though; Google even encourages developers to design their gRPC APIs using a data-oriented approach.
+* **Data-oriented**. Classic RPC technologies are action-oriented, which for some is easier to understand, and find resource-oriented APIs unnatural. There is no consensus on this though.
 * **Representations**. Most programming languages are able to effectively work with either XML, JSON or any other common extended format. Because of this, there is no real need to let users choose how they want to represent a resource.
 * **Hard to understand**. True RESTful APIs are not that common. Because of it's lack of adoption, training both a server-side and a client-side teams to work on a RESTful API can be expensive.
 

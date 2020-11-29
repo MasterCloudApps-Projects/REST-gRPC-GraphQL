@@ -30,7 +30,7 @@ For simple cases, we can map a state to a field: a field called `status` for a m
 On a truly _RESTFul Web Service_ that follows the HATEOAS constraint, a _custom action_ can be expressed just as a possible state transition to a resource.
 
 ### GraphQL
-A _mutation_ will be used to express a change state. This can be done either in a _resource-oriented_ or in a _procedure-oriented_ approach. If our API is _resource-oriented_, we can define a custom field which contains the state, as in a field called `status`. To update it, a generic update mutation can be used, or a specific mutation:
+A _mutation_ will be used to express a change state. This can be done either in a _resource-oriented_ or in a _action-oriented_ approach. If our API is _resource-oriented_, we can define a custom field which contains the state, as in a field called `status`. To update it, a generic update mutation can be used, or a specific mutation:
 
 ```graphql
 type Mutation {
@@ -39,7 +39,7 @@ type Mutation {
 }
 ```
 
-If the API follows a _procedure-oriented_ style, then it might expose specific methods. For example, to turn a microwave on:
+If the API follows an _action-oriented_ style, then it might expose specific methods. For example, to turn a microwave on:
 
 ```graphql
 type Mutation {
@@ -71,7 +71,7 @@ Another option available to REST APIs is creating a resource of type _controller
 Chapter 11 of [RESTful Web Services Cookbook] gives lot of details on how these controllers can be articulated. [Google Cloud API Design guide][] also provides good examples on when and how to create custom methods.
 
 ### GraphQL
-As its name suggest, _mutations_ will be used to express any other operation that _changes_ the state of a resource. But, unlike other styles, GraphQL does not impose any restriction on how to address this operation: it can be _resource oriented_ or it can be _procedure oriented_. For example, we can define a _mutation_ to merge two users:
+As its name suggest, _mutations_ will be used to express any other operation that _changes_ the state of a resource. But, unlike other styles, GraphQL does not impose any restriction on how to address this operation: it can be _resource-oriented_ or it can be _action-oriented_. For example, we can define a _mutation_ to merge two users:
 
 ```graphql
 type Mutation {
