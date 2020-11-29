@@ -224,7 +224,7 @@ service myService {
 
 Here, we define a named service, `myService`, that exposes a single entry point, `Searcher`, which accepts an argument of type `SearchRequest` and returns a message of type `SearchResponse`. Note that even though this service definition in Protocol Buffers is the de-facto standard for gRPC, it can also be used with other API styles, for example with REST.
 
-### gRPC with REST
+### gRPC with REST and GraphQL
 It is also possible to implement a REST Web Service using gRPC. For this, we will annotate the `.proto` definition with `google.api.http` to map an RPC with an HTTP request:
 
 ```proto
@@ -241,6 +241,8 @@ message CreateArticleRequest {
 ```
 
 Then, using the [`grpc-gateway`][grpc-gateway] (a plugin for `protoc`), a _RESTful Web Service_ will be automatically generated.
+
+There is also the [`rejoiner` project](https://github.com/google/rejoiner), which aims to generate a GraphQL schema out of gRPC services.
 
 ## Resources
 * [HATEOAS 101: Opinionated Introduction to a REST API Style](https://www.youtube.com/watch?v=6UXc71O7htc)
