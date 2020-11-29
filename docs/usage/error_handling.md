@@ -117,7 +117,7 @@ When a call runs succesfully, it will return an `OK` status code to the client a
 * `GRPC_STATUS_UNKNOWN` - The server threw an unhandled exception.
 
 ### Google Error model
-The above error model, standard to gRPC, it's very limited and lacks of enough error detail. gRPC recommends that API designers follow the [Google Error Model](https://cloud.google.com/apis/design/errors). It's the protocol-agnostic mechanism to express errors used by Google, both in HTTP and gRPC APIs.
+The above error model, standard to gRPC, it's very limited and lacks of enough error detail. gRPC recommends that API designers follow the [Google API Error Model][]. It's the protocol-agnostic mechanism to express errors used by Google, both in HTTP and gRPC APIs.
 
 When a client makes a request, the response might _union field_ of either:
 * type `status`, when the request failed.
@@ -141,6 +141,10 @@ message Status {
 }
 ```
 
+## Resources
+* [Google API Error Model][]
+* [Guide to gRPC Errors](http://avi.im/grpc-errors/)
+
 ## Source code
 
 [Section 6 of the RFC 7231]: https://tools.ietf.org/html/rfc7231#section-6
@@ -150,3 +154,4 @@ message Status {
 [Custom errors and error reporting in GraphQL]: https://codeburst.io/custom-errors-and-error-reporting-in-graphql-bbd398272aeb
 [express-graphql]: https://www.npmjs.com/package/express-graphql
 [Validation and user errors in GraphQL mutations]: https://medium.com/@koistya/validation-and-user-errors-in-graphql-mutations-39ca79cd00bf
+[Google API Error Model]: https://cloud.google.com/apis/design/errors
