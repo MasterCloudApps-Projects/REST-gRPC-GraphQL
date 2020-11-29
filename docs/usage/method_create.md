@@ -130,6 +130,23 @@ query {
 }
 ```
 
+### gRPC
+The `rpc` to create a new article is as follows:
+
+```proto
+rpc CreateArticle(CreateArticleRequest) returns (Article);
+
+message CreateArticleRequest {
+    Article article = 1;
+}
+```
+
+We can execute using the client application:
+
+`node ./grpc/client.js CreateArticle "New article" "This is the description"`
+
+The newly-created article will be returned.
+
 ## Resources
 * [Slug (RFC 5023)][Slug]
 * [Building Resilient GraphQL APIs Using Idempotency][]

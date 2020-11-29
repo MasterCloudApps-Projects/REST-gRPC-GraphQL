@@ -48,6 +48,15 @@ function main() {
                 }
             });
             break;
+        case 'CreateArticle':
+            client.createArticle({article: {title: process.argv[3], description: process.argv[4]}}, function(err, article) {
+                if (err) {
+                    console.log('CreateArticle Error', err);
+                } else {
+                    console.log('CreateArticle', article);
+                }
+            })
+            break;
         default:
             throw new Error("Unknown operation: " + operation);
     }

@@ -77,6 +77,17 @@ async function getArticle(call, callback) {
 
 }
 
+async function createArticle(call, callback) {
+    const article = new Article(call.request.article);
+    const newArticle = await article.save();
+    callback(null, {
+        id: newArticle.id,
+        title: newArticle.title,
+        description: newArticle.description,
+        comments: []
+    });
+}
+
 module.exports = () => {
     var server = new grpc.Server();
     server.addService(
@@ -85,6 +96,7 @@ module.exports = () => {
             GetDistance: getDistance,
             GetArticle: getArticle,
             ListArticles: listArticles,
+            CreateArticle: createArticle,
         }
     );
     const PORT = 50051;

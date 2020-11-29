@@ -6,6 +6,7 @@ service Main {
     rpc GetDistance(DistanceRequest) returns (DistanceReply);
     rpc GetArticle(GetArticleRequest) returns (Article);
     rpc ListArticles(ListArticlesRequest) returns (ListArticlesResponse);
+    rpc CreateArticle(CreateArticleRequest) returns (Article);
 }
 
 message DistanceRequest {
@@ -48,4 +49,8 @@ message ListArticlesResponse {
     }
     repeated BasicArticle articles = 1;
     string next_page_token = 2;
+}
+
+message CreateArticleRequest {
+    Article article = 1;
 }
