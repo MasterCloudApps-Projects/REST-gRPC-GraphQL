@@ -21,6 +21,22 @@ type Query {
 }
 ```
 
+### gRPC
+A regular `rpc` operation can be used to express a pure function:
+
+```proto
+rpc GetDistance(DistanceRequest) returns (DistanceResponse);
+
+message DistanceRequest {
+  string from = 1;
+  string to = 2;
+}
+
+message DistanceResponse {
+  int32 distance = 1;
+}
+```
+
 ## State transitions
 Resources have both _state_ and _state transitions_. For example, an _order_ might be _pending_, _paid_, _shipped_ or _delivered_. We can think of a resource as a _state machine_ with allowed transitions.
 
@@ -48,6 +64,42 @@ type Mutation {
 ```
 
 There is no such think as HATEOAS for GraphQL. This means client applications will need more knowlodege, but also they will do a better use of the network traffic.
+
+### gRPC
+To express a state transition, a `status` field of type enum can be used, as in:
+
+```proto
+rpc updateOrder(UpdateOrderRequest) returns (Order);
+
+message UpdateOrderRequest {
+  Order order = 1;
+  FieldMask update_mask = 2;
+}
+
+message Order {
+  string id = 1;
+  OrderStatus status = 2;
+}
+
+enum OrderStatus {
+  PENDING = 1;
+  PAID = 2;
+  SHIPPED = 3;
+  DELIVERED = 4;
+}
+```
+
+Then the `FieldMask` will may be used to update only the `status` field.
+
+Additionally, for common status, an custom rpc might be created. For example, a `Cancel` method can be created to cancel an order:
+
+```proto
+rpc cancelOrder(CancelOrderRequest) returns (Order);
+
+message CancelOrderRequest {
+  string name = 1;
+}
+```
 
 ## Other unsafe operations
 Even though almost any operation can be expressed in terms of just state transitions, sometimes this approach does not naturally fit our action. There are several ways to workaround this for each API style.
@@ -78,6 +130,14 @@ type Mutation {
     mergeUsers(from:ID!,to:ID!): User!
 }
 ```
+
+### gRPC
+Any other operation can be express without restrictions in an `rpc` message type. Google Cloud API Design Guide suggest that developers follow a standard naming policy for these regular operations, as in:
+
+* `Cancel` - see above
+* `BatchGet`
+* `Move`
+* `Search` - see [method List](method_list.md)
 
 ## Source code
 The demo project contains a naive example of how to implement a custom operation. Specifically, using a pure function to calculate the distance between to cities.

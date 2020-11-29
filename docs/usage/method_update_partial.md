@@ -72,6 +72,18 @@ A custom _input_ type could have been used as well: a `PatchProductInput` that a
 
 Whatever of these approaches we use, they are not as powerful as [JSON-PATCH][JSON Patch (RFC 6902)]: we cannot run more complex operations, like adding or removing an entry to an array. Of course, a JSON-PATCH object can be embedded into a string in a mutation, but this goes against the static-typing nature of GraphQL, although there are [some attempts to get a similar experience][GraphQL Mutation Design: Batch Updates].
 
+## gRPC
+Partial updates are the recommended way to run an update operation in gRPC. They are carried out using a [`FieldMask`](https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#fieldmask), as in a [Get method](method_get.md). In this case, in addition to the resource, the response will also contain a `FieldMask` field specifying which fields will be updated.
+
+```proto
+rpc UpdateArticle(UpdateArticleRequest) returns (Article);
+
+message UpdateArticleRequest {
+  Article article = 1;
+  FieldMask update_mask = 2;
+}
+```
+
 ## Source code
 
 ### REST

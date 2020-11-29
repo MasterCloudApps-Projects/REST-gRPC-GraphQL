@@ -55,6 +55,21 @@ Note that the _operation_ has been named `UpdateFullProduct`; an _operation_ mig
 
 Also note that since our _mutation_ `updateProduct` returns a `Product`, we can ask for the specific fields we are interested in, as we do with _queries_.
 
+### gRPC
+A full update can be carried out using a regular RPC, as in:
+
+```proto
+rpc UpdateArticle(UpdateArticleRequest) returns (Article);
+
+message UpdateArticleRequest {
+  Article article = 1;
+}
+```
+
+The updated resource will be returned.
+
+Even though it is possible to perform this full update, [Google Cloud API Design Guide](https://cloud.google.com/apis/design/standard_methods#update) recommends that a [partial update](method_update_partial.md) should be used instead, to make the API more resilient to schema evolution.
+
 ## Conditional requests
 Here our backend will be protected against race conditions.
 
@@ -102,8 +117,8 @@ We can also use _one-time URIs_ to implement conditional `POST` requests. These 
 Link: <http://www.example.com/comments/gtlrx8et2l>;rel="remove"
 ```
 
-### GraphQL
-GraphQL, unlike REST, does not provide a native pattern to prevent concurrent requests. However, it's straight forward to implement the same protection as long as our types contains some kind of versioning field, like a version number or a last-modified field. This fits well with _update_ operations, but might be _cumbersome_ with patch or delete operations.
+### GraphQL and gRPC
+Unlike REST, neither GraphQL nor gRPC provide a native pattern to prevent concurrent requests. However, it's straight forward to implement the same protection as long as our entities contain some kind of versioning field, like a version number or a last-modified field. This fits well with _update_ operations, but might be _cumbersome_ with patch or delete operations.
 
 ## Source code
 The source code comes with a battery of preexisting articles.

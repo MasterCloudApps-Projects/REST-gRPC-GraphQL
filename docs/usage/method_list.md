@@ -4,7 +4,7 @@ In addition to fetching a single document, we need to be able to fetch a list of
 To provide pagination, two main approaches are followed:
 
 * **Offset-based pagination** - A fixed position, or _offset_, is given to the query of the collection.
-* **Cursor-based pagination** - An identifier for the first item, or _cursor_, is given to the query of the collection. This strategy is more popular nowadays.
+* **Cursor-based pagination** - An identifier for the first item, or _cursor_, is given to the query of the collection. This strategy is more popular nowadays, because the cursor is opaque and promotes evolution of the API.
 
 When using pagination, a _sorting mechanism_ should be used. Typically, our data will be backed in a datasore, like a database, with indices and keys. A public id can be used to paginate, but other options can be provided. For example, we can let our users sort our collection by a date field.
 
@@ -134,6 +134,31 @@ query {
 ### Real World Examples
 * [Relay][Relay: Pagination container], the JS framework for react app powered by GraphQL, uses the Connection Specification.
 * [Hasura: Filter query results][Hasura: Filter query results], the engine that easily provides a GraphQL server from existing databases, allows the use of advance search operators.
+
+## gRPC
+
+### Pagination and sorting
+Google Cloud API Design Guide recommends that every [List operation]() contains [cursor-based pagination](https://cloud.google.com/apis/design/design_patterns#list_pagination) and [result ordering](https://cloud.google.com/apis/design/design_patterns#sorting_order) from the beginning-
+
+```proto
+rpc ListArticle(ListArticlesRequest) returns (ListArticlesResponse);
+
+message ListArticlesRequest {
+  int32 page_size = 1;
+  string page_token = 2;
+  string order_by = 3;
+}
+
+message ListArticlesResponse {
+  repeated Article articles = 1;
+  string next_page_token = 2;
+}
+```
+
+The `order_by` will be like the SQL `ORDER BY`, so that it accepts several fields and sorting criteria, as in `id, name desc`.
+
+### Filtering
+To perform a filtering, gRPC suggest we use a custom method `Search` instead of `List`. In this case, a custom implementation will be done. [Some Google services](https://cloud.google.com/service-infrastructure/docs/service-consumer-management/reference/rest/v1/services/search) use a `query` string argument that accepts its own query definition, as in `field_name=literal_string`.
 
 ## Source code
 The blog-like repository in the sample code supports traversing the articles collection:

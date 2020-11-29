@@ -79,6 +79,11 @@ The mapping between this operations types and our _standard methods_ is straight
 | `Update`          | `mutation`                |
 | `Delete`          | `mutation`                |
 
+## gRPC
+RPC services in general, and gRPC in particular, are very flexible interfaces that allow both _resource-oriented_ and _action-oriented_ API styles. Google, as the creators of Protocol Buffers, encourages developers to follow a resource oriented approach.
+
+Since Protocol Buffers wraps every remot procedure into an `rpc` type definition, we just need to create an `rpc` named after the method it follows, as in `GetArticle` or `ListArticles`.
+
 [Google Coud API Design Guide]: https://cloud.google.com/apis/design/standard_methods
 [HTTP/1.1 Request Methods (RFC 7231)]: https://tools.ietf.org/html/rfc7231#section-4.1
 [PATCH Method for HTTP (RFC 5789)]: https://tools.ietf.org/html/rfc5789
