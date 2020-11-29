@@ -66,6 +66,17 @@ query GetProduct {
 
 Here, the client code is defining an operation of type `query`, using `GetProduct` as the _operation name_, which will invoke the remote query `product`, setting 12 as the value of the `id` parameter. Finally, the client app is specifying all the Product fields it is interested in.
 
+### gRPC
+In gRPC, a single [`Get` method](https://cloud.google.com/apis/design/standard_methods#get) will be defined. This will accept an request object to specify which resource to fetch:
+
+```proto
+rpc GetArticle(GetArticleRequest) returns (Article);
+
+message GetArticleRequest {
+    string id = 1;
+}
+```
+
 ## Representation
 A resource might be represented in a variety of forms. For example, a product can be represented as a JSON, as an XML object, as a text description readable for humans, or even as a PDF as it happens with the data sheets of electronic components. Let's see how each API style deals with this.
 
@@ -96,6 +107,9 @@ To negotiate the representation of a resource, the client may suggest its prefer
 
 ### GraphQL
 GraphQL does not have support to negotiate the representation of a resource. Instead, JSON is always used.
+
+### gRPC
+Even though gRPC runs on top of HTTP/2, and [can be used with any data representation (Protobuf, XML, JSON or Thrift)](https://grpc.io/faq/#can-i-use-grpc-with-my-favorite-data-format-json-protobuf-thrift-xml-), it does not support Content Negotiation out of the box.
 
 ## Custom fetching
 Sometimes, the _shape_ of the returned representation does not match the requirements of the client application. This might be because of:
@@ -273,6 +287,56 @@ Although GraphQL is an incredible powerful query language, it does not allow to 
 
 There are some proposals to workaround this, like [GraphQL Leveler][].
 
+### gRPC
+Similar to JSON:API Sparse Fieldsets or fields selections of GraphQL, [`FieldMask` from Google](https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#fieldmask) can be used to fetch a [partial response](https://cloud.google.com/apis/design/design_patterns#partial_response) from a projection. Let's consider the following projection:
+
+```
+f {
+  a : 22
+  b {
+    d : 1
+    x : 2
+  }
+  y : 13
+}
+z: 8
+```
+
+`FieldMask` let express a list of paths to specify the fields a requested is interested in. For example:
+
+```
+paths: "f.a"
+paths: "f.b.d"
+```
+
+After applying these paths, we will get:
+
+```
+f {
+  a : 22
+  b {
+    d : 1
+  }
+}
+```
+
+Additionally, the [Resource View](https://cloud.google.com/apis/design/design_patterns#resource_view) pattern to select a specific view of a resource. For example, we might have two views, _basic_ and _full_, for a resource. Then the request object will specify which particular view it will use:
+
+```proto
+service Blog {
+    rpc ListArticles(ListArticlesRequest) return (ListArticlesResponse);
+}
+
+enum ArticleView {
+    BASIC = 1;
+    FULL = 2;
+}
+
+message ListArticlesRequest {
+    ArticleView view = 1
+}
+```
+
 ## Source code
 The demo project contains a blog-like database with articles, comments and comments authors. Let's see how to navigate the blog using our APIs:
 
@@ -423,7 +487,6 @@ query {
 ```
 
 Here, we execute two queries of the type `article()`, each one returning a different result. Also note that they might be processed in parallel.
-
 
 ## Resources
 * [Partial response in Google Tasks API][]
