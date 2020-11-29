@@ -88,6 +88,19 @@ async function createArticle(call, callback) {
     });
 }
 
+async function deleteArticle(call, callback) {
+    const id = call.request.id;
+    const deletedArticle = await Article.findByIdAndDelete(id);
+    if (!deletedArticle) {
+        return callback({
+            code: grpc.status.NOT_FOUND,
+            message: `Article ${id} not found`,
+        });
+    }
+
+    callback();
+}
+
 module.exports = () => {
     var server = new grpc.Server();
     server.addService(
@@ -97,6 +110,7 @@ module.exports = () => {
             GetArticle: getArticle,
             ListArticles: listArticles,
             CreateArticle: createArticle,
+            DeleteArticle: deleteArticle,
         }
     );
     const PORT = 50051;

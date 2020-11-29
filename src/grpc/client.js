@@ -57,6 +57,16 @@ function main() {
                 }
             })
             break;
+        case 'DeleteArticle':
+            client.deleteArticle({id: process.argv[3]}, function(err, article) {
+                if (err) {
+                    console.log('DeleteArticle Error', err);
+                } else {
+                    console.log('DeleteArticle', article);
+                }
+            })
+            break;
+            break;
         default:
             throw new Error("Unknown operation: " + operation);
     }

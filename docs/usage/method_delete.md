@@ -84,3 +84,14 @@ mutation {
     deleteArticle(id: "5fa6d242bc92b1350046395d" ) { id }
 }
 ```
+
+### gRPC
+An `rpc` has been defined to delete an article in the gRPC service:
+
+```proto
+    rpc DeleteArticle(DeleteArticleRequest) returns (google.protobuf.Empty);
+```
+
+To exercise it, first identify which articles are available running `node ./grpc/client.js ListArticles`.
+
+Then, run the client application setting an `article_id`, as in `node ./grpc/client.js DeleteArticle 5fc3ffe378b3dd2565ed83a5`.
