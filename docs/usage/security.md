@@ -208,6 +208,37 @@ curl -X POST -v -H "Content-Type: application/json" \
 
 We will get a `Access-Control-Allow-Origin: http://localhost:4000/` response header.
 
+### gRPC
+Let's start the gRPC client. Run `npm run grpcc`. Now, let's try to read a client:
+
+```js
+client.getClient({dni: "06580190M"}, pr)
+```
+
+An error will be returned: `UNAUTHENTICATED: jwt must be provided`. A jwt access token is needed:
+
+```
+curl -v -H "Content-Type: application/json" \
+    -X POST -d '{"username": "pepe", "password":"secret"}'
+    http://localhost:4000/login
+```
+
+Let's try again, this time sending the access token in the metadata:
+
+```js
+let metadata = createMetadata({'authorization': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InBlcGUiLCJpYXQiOjE2MDUzNzQzNzJ9.luGIDxqgRBr-na8bFlxWO_iq_lUQcHzXZ5RjKwXw6Ig'});
+client.getClient({dni: "06580190M"}, metadata, pr);
+```
+
+Now, the client private data has been returned:
+
+```json
+{
+    "dni": "06580190M",
+    "IBAN": "ES4404877434913522416372"}
+}
+```
+
 ## Resources
 * 🔗 [REST Security Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/REST_Security_Cheat_Sheet.html), in OWASP.
 * 🔗 [RESTful API Authentication Basics](https://blog.restcase.com/restful-api-authentication-basics/).

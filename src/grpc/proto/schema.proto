@@ -2,14 +2,13 @@ syntax = "proto3";
 
 package example;
 
-import "google/protobuf/empty.proto";
-
 service Main {
     rpc GetDistance(DistanceRequest) returns (DistanceReply);
     rpc GetArticle(GetArticleRequest) returns (Article);
     rpc ListArticles(ListArticlesRequest) returns (ListArticlesResponse);
     rpc CreateArticle(CreateArticleRequest) returns (Article);
-    rpc DeleteArticle(DeleteArticleRequest) returns (google.protobuf.Empty);
+    rpc DeleteArticle(DeleteArticleRequest) returns (Empty);
+    rpc GetClient(GetClientRequest) returns (Client);
 }
 
 message DistanceRequest {
@@ -60,4 +59,15 @@ message CreateArticleRequest {
 
 message DeleteArticleRequest {
   string id = 1;
+}
+
+message Empty {}
+
+message GetClientRequest {
+    string dni = 1;
+}
+
+message Client {
+    string dni = 1;
+    string iban = 2;
 }

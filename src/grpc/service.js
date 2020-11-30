@@ -3,8 +3,10 @@ var PROTO_PATH = __dirname + '/proto/schema.proto';
 
 const Article = require("../models/article");
 const Comment = require("../models/comment");
+const Client = require('../models/client');
 var grpc = require('@grpc/grpc-js');
 var protoLoader = require('@grpc/proto-loader');
+var jsonwebtoken = require('jsonwebtoken');
 
 var packageDefinition = protoLoader.loadSync(
     PROTO_PATH,
@@ -17,6 +19,31 @@ var packageDefinition = protoLoader.loadSync(
     }
 );
 var example_proto = grpc.loadPackageDefinition(packageDefinition).example;
+
+async function getClient(call, callback) {
+    try {
+        jsonwebtoken.verify(call.metadata.get('authorization')[0], process.env.ACCESS_TOKEN_SECRET);
+    } catch (jsonWebTokenError) {
+        return callback({
+            code: grpc.status.UNAUTHENTICATED,
+            message: jsonWebTokenError.message,
+        });
+    }
+
+    const clientFetched = await Client.findOne({dni: call.request.dni});
+    if (clientFetched) {
+        callback(null, {
+            dni: clientFetched.dni,
+            iban: clientFetched.iban
+        });
+    } else {
+        return callback({
+            code: grpc.status.NOT_FOUND,
+            message: "Client not found",
+        });
+    }
+
+}
 
 function getDistance(call, callback) {
     callback(
@@ -111,6 +138,7 @@ module.exports = () => {
             ListArticles: listArticles,
             CreateArticle: createArticle,
             DeleteArticle: deleteArticle,
+            GetClient: getClient,
         }
     );
     const PORT = 50051;
@@ -118,7 +146,7 @@ module.exports = () => {
         `0.0.0.0:${PORT}`,
         grpc.ServerCredentials.createInsecure(),
         () => {
-            console.log(`🚀 Subscriptions ready at http://localhost:${PORT}`);
+            console.log(`🚀 gRPC ready at http://localhost:${PORT}`);
             server.start();
         }
     );
