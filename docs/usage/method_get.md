@@ -497,9 +497,19 @@ An `rpc` has been defined to fetch a single article in the gRPC service:
 rpc GetArticle(GetArticleRequest) returns (Article);
 ```
 
-To exercise it, first identify which articles are available running `node ./grpc/client.js ListArticles`.
+To exercise it, first identify which articles are available. Run the gprc client, `npm run grpcc`, and then:
 
-Then, run the client application setting an `article_id`, as in `node ./grpc/client.js GetArticle 5fc3ffe378b3dd2565ed83a5`. A full article, together with its comments, will be returned.
+```js
+client.ListArticles({}, pr)
+```
+
+Then, run `GetClient` setting an `article_id`, as in:
+
+```js
+client.GetArticle({id: '5fc3ffe378b3dd2565ed83e1'}, pr);
+```
+
+A full article, together with its comments, will be returned.
 
 ## Resources
 * [Partial response in Google Tasks API][]

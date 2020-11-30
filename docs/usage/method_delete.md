@@ -92,6 +92,14 @@ An `rpc` has been defined to delete an article in the gRPC service:
     rpc DeleteArticle(DeleteArticleRequest) returns (google.protobuf.Empty);
 ```
 
-To exercise it, first identify which articles are available running `node ./grpc/client.js ListArticles`.
+To exercise it, first identify which articles are available. Run the gprc client, `npm run grpcc`, and then:
 
-Then, run the client application setting an `article_id`, as in `node ./grpc/client.js DeleteArticle 5fc3ffe378b3dd2565ed83a5`.
+```js
+client.ListArticles({}, pr)
+```
+
+Then, run delete an article setting its `article_id`, as in:
+
+```js
+client.deleteArticle({id: '5fc3ffe378b3dd2565ed83ed'}, pr)
+```

@@ -182,7 +182,12 @@ message DistanceReply {
 }
 ```
 
-Run the client application to see how it works: `node ./grpc/client.js distance`.
+Run the client application, `npm run grpcc`, and ask for a distance:
+
+```js
+client.getDistance({from:"Madrid", to:"Barcelona"}, pr);
+```
+
 
 ## Resources
 * [Representing state in REST and GraphQL](https://apisyouwonthate.com/blog/representing-state-in-rest-and-graphql)

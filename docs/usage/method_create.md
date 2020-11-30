@@ -141,9 +141,11 @@ message CreateArticleRequest {
 }
 ```
 
-We can execute using the client application:
+We can create a new article using the client application, `npm run grpcc`, and then:
 
-`node ./grpc/client.js CreateArticle "New article" "This is the description"`
+```js
+client.createArticle({article:{title:"New article", description:"This is the description"}}, pr)
+```
 
 The newly-created article will be returned.
 

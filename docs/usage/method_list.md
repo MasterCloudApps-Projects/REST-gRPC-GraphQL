@@ -283,13 +283,17 @@ message ListArticlesResponse {
 }
 ```
 
-To execute it, run:
+To exercute it, run the gprc client, `npm run grpcc`, and then:
 
-`node ./grpc/client.js ListArticles`
+```js
+client.ListArticles({}, pr)
+```
 
 Then, to get from a specific page, set a valid article id, as in:
 
-` node ./grpc/client.js ListArticles 5fc3ffe378b3dd2565ed83db`
+```js
+client.ListArticles({page_token:'5fc3ffe378b3dd2565ed83f3'}, pr)
+```
 
 ## Resources
 * [Cursor-based pagination in Facebook API][]
