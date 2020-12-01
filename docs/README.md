@@ -4,27 +4,43 @@
 2. [REST](rest.md)
 3. [GraphQL](graphql.md)
 4. [gRPC](grpc.md)
-5. Usage cases:
 
-| Usage                 | REST                                                                 | GraphQL                                  | gRPC                                                     |
-|-----------------------|----------------------------------------------------------------------|------------------------------------------|----------------------------------------------------------|
-| [Contract][]          | HATEOAS or OpenAPI                                                   | GraphQL Schema Language: operations      | Protocol Buffers: rpc                                    |
-| [Schema definition][] | Resource oriented. HTTP response headers, Media Type and JSON Schema | Graph oriented. GraphQL Schema Language  | Resource and Action oriented. Protocol Buffers: messages |
+| Usage                              | REST                                                                      | GraphQL                                       | gRPC                                                          |
+|------------------------------------|---------------------------------------------------------------------------|-----------------------------------------------|---------------------------------------------------------------|
+| [Contract][]                       | HATEOAS or OpenAPI                                                        | GraphQL Schema Language: operations           | Protocol Buffers: rpc                                         |
+| [Schema definition][]              | Resource oriented.<br />HTTP response headers, Media Type and JSON Schema | Graph oriented.<br />GraphQL Schema Language  | Resource and Action oriented.<br />Protocol Buffers: messages |
+| [Standard methods][]               | `GET`, `POST`, `PUT`, `PATCH`, `DELETE`                                   | `query` and `mutation`                        | Through rpc operations                                        |
+| [Get][]                            | `GET`                                                                     | `query`                                       | `Get` rpc operation                                           |
+| [Get (representation)][]           | ✔️ Content Negotiation                                                     | ✘ Only JSON                                   | ✘ only one. Default: Protocol Buffers                         |
+| [Get (custom)][]                   | Sparse fieldsets. Embedded resources                                      | Native support                                | `FieldMask`                                                   |
+| [List][]                           | `GET`. Custom pagination, sorting and filtering                           | `query`. Standard pagination and sorting      | `List` and `Search` rpc operations                            |
+| [Create][]                         | `POST` or `PUT`                                                           | `mutation`                                    | `Create` rpc operation                                        |
+| [Update][]                         | `PUT`                                                                     | `mutation`                                    | `Update` rpc operation (unrecommended)                        |
+| [Partial update][]                 | `PATCH`                                                                   | ✘ Workarounds                                 | `Update` rpc operation with `FieldMask`                       |
+| [Delete][]                         | `DELETE`                                                                  | `mutation`                                    | `Delete` rpc operation                                        |
+| [Custom methods][]                 | HATEOAS or `POST`                                                         | pure functions: `query`, other: `mutation`    | Custom rpc operation                                          |
+| [Long-requests][]                  | Resource `operation`                                                      |                                               | Interface `Operation`                                         |
+| [Error handling][]                 | Native in HTTP. Extensible                                                | `errors` property. Extensible                 | Standard errors. Google Error Model                           |
+| [Security][]                       | HTTP: Bearer, OAuth, CORS, API Keys                                       | HTTP: Bearer, OAuth, CORS, API Keys           | TLS, ALTS, token-based (Google), custom                       |
+| [Subscriptions][]                  | Unsupported. WebHook and HTTP streaming                                   | `subscription`                                | HTTP/2 streaming                                              |
+| [Caching][]                        | HTTP, application and local cache                                         | `GET`, application and local cache            | Application and local cache                                   |
+| [Discoverability][]                | HATEOAS and `OPTIONS` or OpenAPI                                          | Native introspection                          | ✘ autogenerated client code                                   |
 
-    * [Standard methods](usage/methods.md)
-      * [Fetch document](usage/method_get.md)
-      * [Fetch collection](usage/method_list.md)
-      * [Create document](usage/method_create.md)
-      * [Update document](usage/method_update.md)
-      * [Partial update](usage/method_update_partial.md)
-      * [Delete document](usage/method_delete.md)
-    * [Custom methods](usage/method_custom.md)
-    * [Asynchronous operation](usage/asynchronous_operation.md)
-    * [Error handling](usage/error_handling.md)
-    * [Security](usage/security.md)
-    * [Subscriptions](usage/subscriptions.md)
-    * [Caching](usage/caching.md)
-    * [Discoverability](usage/discoverability.md)
-
-[Contract]: usage/contract.md
-[Schema definition]: usage/schema_definition.md
+[Contract]: usage/contract
+[Schema definition]: usage/schema_definition
+[Standard methods]: usage/methods
+[Get]: usage/method_get
+[Get (representation)]: usage/method_get#representation
+[Get (custom)]: usage/method_get#custom-fetching
+[List]: usage/method_list
+[Create]: usage/method_create
+[Update]: usage/method_update
+[Partial update]: usage/method_update_partial
+[Delete]: usage/method_delete
+[Custom methods]: usage/method_custom
+[Long-requests]: usage/asynchronous_operation
+[Error handling]: usage/error_handling
+[Security]: usage/security
+[Subscriptions]: usage/subscriptions
+[Caching]: usage/caching
+[Discoverability]: usage/discoverability
