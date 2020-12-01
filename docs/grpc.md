@@ -1,7 +1,9 @@
 # gRPC
 [gRPC][], a [Cloud Native Computing Foundation (CNCF)][CNCF] project, is a complete RPC framework originally created by Google in 2015. By default, it works on top of HTTP/2 and uses [Protocol Buffers][] as its Interface Definition Language and serialization mechanism, but can work with other transport protocols or schemas.
 
-It can run on any environment, as it comes with native support for most modern programming languages. It can even work on [browsers](https://github.com/grpc/grpc-web).
+![gRPC logo](media/grpc.png)
+
+It can run on any environment, as it comes with native support for most modern programming languages. Although it works even on [browsers](https://github.com/grpc/grpc-web), it is most commonly used to create services in and across data centers.
 
 ## HTTP/2
 gRPC main abstraction is the _channel_. A channel represents a gRPC connection between a client and a server, and is basically an HTTP/2 connection. This is fundamental, as thanks to [HTTP/2][HTTP/2: Smarter at scale], gRPC natively supports concurrent, bidirectional persistent connections.
