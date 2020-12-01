@@ -1,5 +1,5 @@
 # Introduction to APIs
-Putting it simply, an API, or _Application Progamming Interface_, is a product which allows a   system to be used by an external application.
+Putting it simply, an API, or _Application Progamming Interface_, is a product which allows a system to be used by an external application.
 
 ## Paradigms
 

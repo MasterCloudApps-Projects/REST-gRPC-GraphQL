@@ -2,13 +2,7 @@
 This chapter covers how the different API styles let API developers define their operations: which is the recommended approach, what alternatives there are, which Interface Definition Languages can be used, and so on. This chapter does not cover how to define schemas to shape our models (see [schema definition](schema_definition.md) for this), nor how to express each operation (see [methods](methods.md)).
 
 ## REST
-For a Web API to be called RESTful, it is mandatory that it is hypermedia-based (HATEOAS). This means all their resources can be traversed with no prior knowledge of their URI, but as a succesion of links. This mechanism, that inspired Roy Fielding when creating REST, has been proven succesful in the World Wide Web: people browse the Web as a series of links. However, most _REST APIs_ are not HATEOAS compliant. So, instead of take advantage of hypermedia, very often APIs rely on _contracts_ and _uri templates_ on how identifiers are built (links are not _opaque_ anymore, but _predictable_). These APIs, which are like _resource-based_ RPC, are often called _REST-Like Web Services_. Many people think that, despite being a good idea, [true RESTful market is far from being mature][Why HATEOAS is useless and what that means for REST].
-
-Characteristics of a HATEOAS API:
-* ✔️ Evolvability. Client and server don't rely on a bespoke contract, but in open standards.
-* ✔️ Discoverability. A client can automatically discover new functionalities provided by the server.
-* ✘ Lack of adoption and tooling.
-* ✘ Cost. Developing a RESTful Service is expensive.
+For a Web API to be called RESTful, it is mandatory that it is **hypermedia-based** (HATEOAS). This means all their resources can be traversed with no prior knowledge of their URI, but as a succesion of links. This mechanism, that inspired Roy Fielding when creating REST, has been proven succesful in the World Wide Web: people browse the Web as a series of links. However, most _REST APIs_ are not HATEOAS compliant. So, instead of take advantage of hypermedia, very often APIs rely on _contracts_ and _uri templates_ on how identifiers are built; links are not _opaque_ anymore, but _predictable_. These APIs, which are like _resource-based_ RPC, are often called _REST-Like Web Services_. Many people think that, despite being a good idea, [true RESTful market is far from being mature][Why HATEOAS is useless and what that means for REST].
 
 Let's see each one of these _REST styles_.
 
@@ -17,10 +11,16 @@ Let's see each one of these _REST styles_.
 
 > If the engine of application state (and hence the API) is not being driven by hypertext, then it cannot be RESTful and cannot be a REST API. Period.
 
+Characteristics of a HATEOAS API:
+* ✔️ Evolvability. Client and server don't rely on a bespoke contract, but in open standards.
+* ✔️ Discoverability. A client can automatically discover new functionalities provided by the server.
+* ✘ Lack of adoption and tooling.
+* ✘ Cost. Developing a RESTful Service is expensive.
+
 What this means is that each resouce is somehow connected to other resources, thus creating a graph. If a client application uses that graph as its engine, then that means that the graph is a [_state machine_][Designing a true REST state machine], where each resource/node is a state, and each link/connection is a state transition. Let's think of a microwave oven. When we first get the microwave, its representation might contain an `action` to turn it on:
 
-```
-GET /microwaves/12
+```json
+// GET /microwaves/12
 
 {
     "state": "off",
@@ -281,3 +281,4 @@ There is also the [`rejoiner` project](https://github.com/google/rejoiner), whic
 [GraphQL Schema Language]: https://graphql.org/learn/schema/
 [GraphQL: Operations arguments]: https://graphql.org/learn/queries/#arguments
 [grpc-gateway]: https://github.com/grpc-ecosystem/grpc-gateway
+[Why HATEOAS is useless and what that means for REST]: https://medium.com/@andreasreiser94/why-hateoas-is-useless-and-what-that-means-for-rest-a65194471bc8
