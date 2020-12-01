@@ -27,7 +27,11 @@ When it comes to delete instead of create, same steps apply: when a `DELETE` tak
 ## GraphQL
 TODO
 
-## Resources
+## gRPC
+TODO
+Recommendation: use the `Operation` interface: https://cloud.google.com/apis/design/design_patterns#long_running_operations
+
+## External Resources
 * [Google Cloud pattern for Long Running Operations](https://cloud.google.com/apis/design/design_patterns#long_running_operations)
 
 ## Source code

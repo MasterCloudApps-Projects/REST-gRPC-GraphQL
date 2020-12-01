@@ -23,8 +23,8 @@ However, if we want to stick to the most commonly used name standard, we will us
 
 Putting all this together, to fetch a resource we will just invoke the `GET` method on that resource:
 
-```
-GET /products/12
+```json
+// GET /products/12
 
 {
     "name": "Digital clock",
