@@ -24,6 +24,12 @@ As defined by Google, _Protocol buffers are a language-neutral, platform-neutral
 ## Resource and action oriented
 As any RPC style, a gRPC API can be defined using either a _resource-oriented_ or an _action-oriented_ approach. However, it is [recommended following an _action-oriented_ approach](https://cloud.google.com/apis/design/resources), so that it can easily be mapped as a REST (see [gRPC Transcoding](https://github.com/googleapis/googleapis/blob/master/google/api/http.proto)).
 
+## External resources
+* [gRPC Main Page][gRPC]
+* [Protocol Buffers][]
+* [HTTP/2: Smarter at scale][]
+* [gRPC over HTTP2](https://github.com/grpc/grpc/blob/master/doc/PROTOCOL-HTTP2.md)
+
 [gRPC]: https://grpc.io/
 [CNCF]: https://www.cncf.io/
 [Protocol Buffers]: https://developers.google.com/protocol-buffers
