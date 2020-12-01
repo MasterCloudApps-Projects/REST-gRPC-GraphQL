@@ -5,8 +5,12 @@
 3. [GraphQL](graphql.md)
 4. [gRPC](grpc.md)
 5. Usage cases:
-    * [Contract](usage/contract.md)
-    * [Schema definition](usage/schema_definition.md)
+
+| Usage                 | REST                                                                 | GraphQL                                  | gRPC                                                     |
+|-----------------------|----------------------------------------------------------------------|------------------------------------------|----------------------------------------------------------|
+| [Contract][]          | HATEOAS or OpenAPI                                                   | GraphQL Schema Language: operations      | Protocol Buffers: rpc                                    |
+| [Schema definition][] | Resource oriented. HTTP response headers, Media Type and JSON Schema | Graph oriented. GraphQL Schema Language  | Resource and Action oriented. Protocol Buffers: messages |
+
     * [Standard methods](usage/methods.md)
       * [Fetch document](usage/method_get.md)
       * [Fetch collection](usage/method_list.md)
@@ -21,3 +25,6 @@
     * [Subscriptions](usage/subscriptions.md)
     * [Caching](usage/caching.md)
     * [Discoverability](usage/discoverability.md)
+
+[Contract]: usage/contract.md
+[Schema definition]: usage/schema_definition.md
