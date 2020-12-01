@@ -35,6 +35,8 @@ gRPC, like GraphQL, hijacks the HTTP protocol, so it cannot befeit from the nati
 * _Application cache_ in the server side.
 * _Local cache_ in the client side as long as we implement a robust identifiers model, as the Goblat Object Identification proposal of GraphQL.
 
+TODO: https://cloud.google.com/apis/design/design_patterns#etags
+
 ## Resources
 * [Caching Tutorial](https://www.mnot.net/cache_docs/)
 * [HTTP Caching, in MDN][]
