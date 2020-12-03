@@ -1,5 +1,7 @@
 # REST, gRPC and GraphQL
 
+This project is born as an attempt to gather the foundations of three common API Styles –REST, gRPC and GraphQL. It also works as a guide on how each one of these styles tackles some everyday usage cases.
+
 ## Demo project
 See [implementation project](src/)
 
