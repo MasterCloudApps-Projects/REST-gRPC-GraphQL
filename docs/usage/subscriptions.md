@@ -118,6 +118,9 @@ The first Graphiql, which is subscribed to `newArticle` events, would have recei
 }
 ```
 
+### gRPC
+TODO
+
 ## Resources
 * [Transfer Encoding in MDN][]
 * [Stackoverflow question about different push technologies in the Web](https://stackoverflow.com/questions/12555043/my-understanding-of-http-polling-long-polling-http-streaming-and-websockets)
