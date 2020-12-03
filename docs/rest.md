@@ -76,6 +76,7 @@ The so called [Richardson Maturity Model][] describes different levels on how RE
 * [Why HATEOAS is useless and what that means for REST][]
 * [REST is the new SOAP][] and [Follow-up to REST is the new SOAP][]
 * [Web API Design: The Missing Link](https://cloud.google.com/files/apigee/apigee-web-api-design-the-missing-link-ebook.pdf)
+* [Standards.REST](http://standards.rest/)
 
 [Roy Fielding's doctoral dissertation Architectural Styles and the Design of Network-based Software Architectures]: https://www.ics.uci.edu/~fielding/pubs/dissertation/top.htm
 [Why HATEOAS is useless and what that means for REST]: https://medium.com/@andreasreiser94/why-hateoas-is-useless-and-what-that-means-for-rest-a65194471bc8
