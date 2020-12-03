@@ -1,20 +1,22 @@
 # Introduction to APIs
-Putting it simply, an API, or _Application Progamming Interface_, is a product which allows a system to be used by an external application.
+Putting it simply, an API, or _Application Progamming Interface_, is a _language_ which allows two systems to talk to each other through the network. We use them constantly, when browsing the Internet or when using a mobile application. For example, they let the Twitter application interact with the Twitter server to read and publish tweets. [Some people](https://www.youtube.com/watch?v=_nAfNxhzJy0) even say that for a service to be considered an API, it also needs to be _reusable_.
+
+APIs are so important that many business, like [Twilio](https://www.twilio.com/), are completely based on their API. This leads to very trendy topic: [API Managament](https://www.redhat.com/en/topics/api/what-is-api-management), the process to improve the adoption and engagement of an API.
 
 ## Paradigms
+In addition to providing a good value, API needs to be designed to effectively solve the requirements of their users or customers. This issue is addressed by picking the right API style. In order to classify each API style, let's first introduce some paradigms.
+
+### Consumers
+Not every API is intentended for the same audience:
+
+* **Public APIs**: these are publicly available to third-parties. Sometimes, they will require a registration.
+* **Private APIs**: in contrast, private APIs are only available to services within a company.
 
 ### Request-response APIs
 * **RPC API**: this is the simplest form, where the API is designed around arbitrary procedures and typically described using an IDL (Interface Definition Language). There are several existing specifications, like SOAP, JSON-RPC or XML-RPC. Currently, [Apache Thrift](https://thrift.apache.org/) and [gRPC](grpc.md) specifications are very popular, both of them containing official implementations.
 * **Web API**: Or [REST](rest.md). It is an architectural style where the system behaviour is based on transitions of data (or _resources_, as called in HTTP). There is no official implementation.
     * REST-like. A key characteristic of REST is that their clients just _follow_ (or _bookmark_) opaque URIs. When we use a so-called REST API where clients construct URIs, then it is not _pure REST_, but RPC over HTTP. This is often refered as _REST-Like_.
-* **Query API**: then we have a query-oriented API, [GraphQL](graphql.md). It is esentialy an RPC service, exposing a single entrypoint, that allow clients to run _queries_, using a SQL-like syntax, and make changes through _mutations_.
-
-Very often, we see a clear separation between: _resource-oriented_ and _action-oriented_ APIs:
-
-* **Resource-oriented API**. The API is structured around resource identifiers, _nouns_, and a small set of _operation_ to manipulate them. For example, in a _resource-oriented_ API like REST, to read a user we will use the predefined `GET` method of HTTP on its identifier. This is very useful because it let API users to follow a well-known pattern. When facing a new API, the will already know how to do most operations, like creating or updating a resource.
-* **Action-oriented API**. The interface is designed around the actions. RPC fits here, where an _arbitrary method_ is exposed. For example, a custom method `getUser(int id)` can be created. Given the simple nature of RPC, this style is convenient to express whatever operation an API designer wanted to expose. For example: `mergeUsers(int idFrom, int idTo)`.
-
-There are design proposals to converge both approaches. For example, [Google recommends API designers to always follow a _resource-oriented_ style][Google API design Guide: Resource Oriented Design] (even in gRPC) using a predefined set of _standard methods_: `List`, `Get`, `Create`, `Update` and `Delete`. And when an operation does not naturally match any of these, then a _custom method_ can be created.
+* **Query API**: in addition to the styles above, we also have query APIs, like [GraphQL](graphql.md). It is esentialy an RPC API, exposing a single service, that allow clients to run _queries_, using a SQL-like syntax, and make changes through _mutations_. Its state is represented in form of graph.
 
 ### Event-Driven APIs
 Constantly sending requests to a remote API to find out when something happens might be resource-expensive. According to [some studies][Zapier RESTHooks.org], 1.5% of those API calls returns new data. To prevent this, Event-Driven APIs might be used:
@@ -23,6 +25,23 @@ Constantly sending requests to a remote API to find out when something happens m
 * **WebHooks**: an application subscribes to a topic, and will receive events through an HTTP endpoint. These subscriptions can be done programmatically (for example, in [Microsoft Graph API][Microsoft Graph API subscriptions]) or manually (supported for example in [GitHub][GitHub webhooks]).
 * **WebSocket**: programmatically, an application subscribes to a topic and will receive events through a websocket. Used by [GraphQL subscriptions][].
 * **HTTP Streaming**: very common back in the day, consists in an open HTTP request which allows the API server to sent data back to the client at will. Used, for example, by [Twitter][Twitter API: Filtered Stream].
+
+### Resource or action oriented
+Very often, we see a clear separation between: _resource-oriented_ and _action-oriented_ APIs:
+
+* **Resource-oriented API**. The API is structured around resource identifiers, _nouns_, and a small set of _operation_ to manipulate them. For example, in a _resource-oriented_ API like REST, to read a user we will use the predefined `GET` method of HTTP on its identifier. This is very useful because it let API users to follow a well-known pattern. When facing a new API, they will already know how to do most operations, like creating or updating a resource.
+* **Action-oriented API**. The interface is designed around the actions. RPC fits here, where an _arbitrary method_ is exposed. For example, a custom method `getUser(int id)` can be created. Given the simple nature of RPC, this style is convenient to express whatever operation an API designer wanted to expose. For example: `mergeUsers(int idFrom, int idTo)`.
+
+There are design proposals to converge both approaches. For example, [Google recommends API designers to always follow a _resource-oriented_ style][Google API design Guide: Resource Oriented Design], even in RPC APIs like gRPC, using a predefined set of _standard methods_: `List`, `Get`, `Create`, `Update` and `Delete`. And when an operation does not naturally match any of these, then a _custom method_ can be created.
+
+## REST, gRPC and GraphQL
+This project is focused on three specific styles of request-response APIs:
+
+1. a WEB API style: REST, an architectural style with no official implementation that leverages all HTTP capabilities.
+2. an RPC style: gRPC, an implementation with no standard, developed by Google and with support for many languages.
+3. a query API: GraphQL, a framework developed by Facebook that can be used on any programming language.
+
+They have been chosen because of their maturity, adoption and popularity. The [Software Architecture and Design InfoQ Trends Report of April 2020], an opinionated report measuring the adoption of trends and technologies, places GraphQL and gRPC as technologies that have already _crossed the chasm_, reaching to the _early majority_, whereas REST fits into the _late majority_ category.
 
 ## Resources
 
@@ -43,3 +62,4 @@ Constantly sending requests to a remote API to find out when something happens m
 [GitHub webhooks]: https://docs.github.com/en/free-pro-team@latest/developers/webhooks-and-events/creating-webhooks
 [GraphQL Subscriptions]: https://graphql.org/blog/subscriptions-in-graphql-and-relay/
 [Twitter API: Filtered Stream]: https://developer.twitter.com/en/docs/twitter-api/tweets/filtered-stream/introduction
+[Software Architecture and Design InfoQ Trends Report of April 2020]: https://www.infoq.com/articles/architecture-trends-2020/
