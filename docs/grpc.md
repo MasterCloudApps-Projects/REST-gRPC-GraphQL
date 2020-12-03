@@ -31,6 +31,7 @@ As any RPC style, a gRPC API can be defined using either a _resource-oriented_ o
 * [Protocol Buffers][]
 * [HTTP/2: Smarter at scale][]
 * [gRPC over HTTP2](https://github.com/grpc/grpc/blob/master/doc/PROTOCOL-HTTP2.md)
+* [gRPC-Web announcement](https://grpc.io/blog/grpc-web-ga/)
 
 [gRPC]: https://grpc.io/
 [CNCF]: https://www.cncf.io/
