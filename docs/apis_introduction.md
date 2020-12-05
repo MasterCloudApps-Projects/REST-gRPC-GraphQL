@@ -45,6 +45,9 @@ They have been chosen because of their maturity, adoption and popularity. The [S
 
 ## Resources
 
+* 👤 [Zdenek "Z" Nemec](https://twitter.com/zdne)
+* 👤 [Erik Wilde](https://twitter.com/dret) [YouTube](https://www.youtube.com/channel/UCDD75qoXHJSz4pv0o3WcTUw)
+* 🔗 [Nordic APIs](https://nordicapis.com/)
 * 🔗 [Google API design Guide](https://cloud.google.com/apis/design)
 * 🔗 [Zdenek talk on API Styles](https://youtu.be/gRZbgsmDj_0)
 * 🔗 [Understanding RPC, REST and GraphQL](https://apisyouwonthate.com/blog/understanding-rpc-rest-and-graphql)
