@@ -24,7 +24,7 @@ In gRPC, each `rpc` (_endpoint_), either _unary_ or _long-lived_, has its own st
 As defined by Google, _Protocol buffers are a language-neutral, platform-neutral extensible mechanism for serializing structured data._ They allow for service definition, as an IDL, as well as a strongly-typed payload definition. This is helpful to make an efficient usage of the network, because messages are serialized to binary format.
 
 ## Resource and action oriented
-As any RPC style, a gRPC API can be defined using either a _resource-oriented_ or an _action-oriented_ approach. However, it is [recommended following an _action-oriented_ approach](https://cloud.google.com/apis/design/resources), so that it can easily be mapped as a REST (see [gRPC Transcoding](https://github.com/googleapis/googleapis/blob/master/google/api/http.proto)).
+As any RPC style, a gRPC API can be defined using either a _resource-oriented_ or an _action-oriented_ approach. However, it is [recommended following a _resource-oriented_ approach](https://cloud.google.com/apis/design/resources), so that it can easily be mapped as a REST (see [gRPC Transcoding](https://github.com/googleapis/googleapis/blob/master/google/api/http.proto)).
 
 ## External resources
 * [gRPC Main Page][gRPC]
