@@ -14,7 +14,7 @@ For example, when requesting a nonexisting resource, return a `404`. However, so
 HTTP responses are limited, as we have just seen. Sometimes, we need room to add more details. We can express error descriptions in the body. For this, several solutions have been proposed: [JSend][], [Problem Details For HTTP APIs (RFC 7807)][]. For example, in the RFC 7807 we can express an _out of credit_ error like this:
 
 ```json
- {
+{
     "type": "https://example.com/probs/out-of-credit",
     "title": "You do not have enough credit.",
     "detail": "Your current balance is 30, but that costs 50.",
@@ -66,7 +66,7 @@ Most implementations will fill the `errors` array automatically, providing clien
 
 In addition, most GraphQL server implementations provide a mechanism to let API designers to format a custom error message, as in the [`CustomFormatErrorFn` option of the `express-graphql` project][express-graphql].
 
-Also note that the `errors` field is an array, so several errors can be reported to a single API call. This comes handy when [validing every field from a form][Validation and user errors in GraphQL mutations].
+Also note that the `errors` field is an array, so several errors can be reported to a single API call. This comes handy when [validating every field from a form][Validation and user errors in GraphQL mutations].
 
 ### Example
 When we try to remove an non-existing issue in GitHub:
@@ -119,9 +119,9 @@ When a call runs succesfully, it will return an `OK` status code to the client a
 ### Google Error model
 The above error model, standard to gRPC, it's very limited and lacks of enough error detail. gRPC recommends that API designers follow the [Google API Error Model][]. It's the protocol-agnostic mechanism to express errors used by Google, both in HTTP and gRPC APIs.
 
-When a client makes a request, the response might _union field_ of either:
+When a client makes a request, the response will contain a _union field_ of either:
 * type `status`, when the request failed.
-* or type `response`, with the request response, when successful.
+* or type `response`, with the request response, when it was run successfully.
 
 Then, the field of type `status` will contain a number of details of the error/s:
 
