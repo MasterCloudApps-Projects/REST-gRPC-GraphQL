@@ -329,6 +329,8 @@ f {
 }
 ```
 
+They have some caveats: they are expressed using strings, which goes against code evolvability.
+
 > `FieldMask` are also used to express a [partial update operation](method_update_partial.md).
 
 Additionally, the [Resource View](https://cloud.google.com/apis/design/design_patterns#resource_view) pattern to select a specific view of a resource. For example, we might have two views, _basic_ and _full_, for a resource. Then the request object will specify which particular view it will use:
