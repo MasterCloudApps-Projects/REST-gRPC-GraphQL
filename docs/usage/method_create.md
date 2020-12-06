@@ -14,7 +14,7 @@ The entity body of the HTTP request will contain the resource to be added. This 
 The response, if successful, would be a `201 Created`. Typically, two things are included:
 
 * A redirection to the new resource. This redirection is expressed through the `Location` header.
-* A representation of the new resource. The _news_ will be added to the entity body; the `Content-Location` HEADER will identify the URI of the returned resource; and the `Content-Type` will specify the Media Type used for the resource.
+* A representation of the new resource. The resource will be added to the entity body; the `Content-Location` header will identify the URI of the returned resource; and the `Content-Type` will specify the Media Type used for the resource.
 
 Example request:
 
