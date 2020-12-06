@@ -66,7 +66,7 @@ WWW-Authenticate: Digest nonce="7ypf/xlj9XXwfDPEoM4URrv/xwf94BcCAzFZH4GiTo0v", q
 * `qop` - or _quality of protection_, can be either `auth` (onlt the credentials are used to calculate the digest) or `auth-int` (both credentials and body are used to calculate the digest, thus providing integrity).
 * `algorithm` - to specify the algorithm that must be used to calculate the digest. IANA maitains a list of [approved algorithms][Hypertext Transfer Protocol (HTTP) Digest Algorithm Values].
 
-With those values, the client identifier, and the client secret, a `response` value will be calculated and sent in the `Authorization` header of the request (See section 3.4.1 Response of the [RFC 7616][HTTP Digest Access Authentication (RFC 7616)] for details).
+With those values, together with the client identifier, and the client secret, a `response` value will be calculated and sent in the `Authorization` header of the request (See section 3.4.1 Response of the [RFC 7616][HTTP Digest Access Authentication (RFC 7616)] for details).
 
 ### `Bearer` scheme
 Originally created for OAuth 2.0, the [Bearer Token][The OAuth 2.0 Authorization Framework: Bearer Token Usage (RFC 6750)], also known as _Token Authorization_, is a scheme that specifies that:
