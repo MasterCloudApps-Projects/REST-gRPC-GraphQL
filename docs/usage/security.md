@@ -116,7 +116,9 @@ When browser in a site, `foo.com`, wants to access a resource on another site, `
 This _preflight request_ is done automatically by the browser when using `XMLHttpRequest` or the `Fetch API` and the request is not _simple_ (for example, when using `application/json` as the `Content-Type`, or when sending a credential through cookies or the `Authorization` header).
 
 ## gRPC Authentication
-Nativelly, gRPC nativelly supports three authentication methods:
+Since gRPC runs on top of HTTP/2, and it _de facto_ works through TLS (specifically using the [ALPN](https://tools.ietf.org/html/rfc7301) extension), the confidentiality and integrity is then provided by the transport layer.
+
+With regard to authentication, nativelly gRPC nativelly supports three methods:
 
 * **TLS** - TLS certificates can be used to provide authentication, integrity and confidetiality.
 * **ALTS** - Similar to TLS, [ALTS](https://cloud.google.com/security/encryption-in-transit/application-layer-transport-security) is a Protocol Buffer based authentication mechanism conceived for the Google Cloud Platform.
