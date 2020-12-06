@@ -197,6 +197,8 @@ The [GraphQL Schema Language][] let us specify each of these operations in their
 }
 ```
 
+> Internally, server implemenations will map each _field_ to a [_resolver_][GraphQL: resolvers]. These resolvers are functions, provided by the API developer, that returns the value for a field.
+
 Note: we have defined three types, each mapping to its _operation type_. We can have used whatever name, but its a convention to name `Query`, `Mutation` and `Subscription` each of these types. Also note that our `Query` type is just a regular _Object Type_, with a number of typed fields that can optionally define arguments, as any other _Object Type_.
 
 ### Arguments and return values
@@ -280,5 +282,6 @@ There is also the [`rejoiner` project](https://github.com/google/rejoiner), whic
 [Hypermedia in API design]: https://smartbear.com/learn/api-design/what-is-hypermedia/
 [GraphQL Schema Language]: https://graphql.org/learn/schema/
 [GraphQL: Operations arguments]: https://graphql.org/learn/queries/#arguments
+[GraphQL: resolvers]: https://graphql.org/learn/execution/#root-fields-resolvers
 [grpc-gateway]: https://github.com/grpc-ecosystem/grpc-gateway
 [Why HATEOAS is useless and what that means for REST]: https://medium.com/@andreasreiser94/why-hateoas-is-useless-and-what-that-means-for-rest-a65194471bc8
