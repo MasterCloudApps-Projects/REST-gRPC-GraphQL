@@ -91,7 +91,7 @@ enum OrderStatus {
 
 Then the `FieldMask` will may be used to update only the `status` field.
 
-Additionally, for common status, an custom rpc might be created. For example, a `Cancel` method can be created to cancel an order:
+Additionally, for common status, a custom rpc might be created. For example, a `Cancel` method can be created to cancel an order:
 
 ```proto
 rpc cancelOrder(CancelOrderRequest) returns (Order);
