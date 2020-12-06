@@ -106,7 +106,16 @@ REST leverages this featore to allow client applications negotiate the specific 
 To negotiate the representation of a resource, the client may suggest its preference to the server using the `Accept` header, as in `Accept: application/json, text/plain, */*;q=0.8`.
 
 ### GraphQL
-GraphQL does not have support to negotiate the representation of a resource. Instead, JSON is always used.
+GraphQL does not have support to negotiate the representation of a resource. Instead, JSON is always used. However, it does support arguments to fields. This can be used to specify details about how to represent an object, like for example currency unit, distance unit or language.
+
+```graphql
+query GetProduct {
+    product(id: "12") {
+        name(language: SPANISH)
+        price(currency: EURO)
+    }
+}
+```
 
 ### gRPC
 Even though gRPC runs on top of HTTP/2, and [can be used with any data representation (Protobuf, XML, JSON or Thrift)](https://grpc.io/faq/#can-i-use-grpc-with-my-favorite-data-format-json-protobuf-thrift-xml-), it does not support Content Negotiation out of the box.
