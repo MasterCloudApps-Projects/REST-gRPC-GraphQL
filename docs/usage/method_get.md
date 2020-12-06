@@ -156,7 +156,7 @@ These techniques has a wide adoption:
 
 * [Google Tasks API][Partial response in Google Tasks API] recommends using _partial responses_ to improve the performance.
 * JSON:API specification has a section about [Sparse Fieldsets][JSON:API Sparse Fieldsets].
-* [OData][OData: Querying] takes this concept to the next level and has spec really close to a query language.
+* [OData][OData: Querying] takes this concept to the next level and has a specification really close to a query language.
 
 ### GraphQL
 GraphQL is basically a query language which allows third-parties to accurately select the shape of the data they are interested in. Let's supose a movie catalog which allows us to fetch specific movies. Each movie contains scalar fields, like `title`, `plot` or `year`, and typed fields, like `director` or `actors`, which is an array of actors.
