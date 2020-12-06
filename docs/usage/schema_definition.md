@@ -264,8 +264,8 @@ There are several things to note:
 import "google/protobuf/any.proto";
 
 message Operation {
-    int32 id = 1
-    Status status = 2
+    int32 id = 1;
+    Status status = 2;
     google.protobuf.Any response = 3;
 }
 ```
@@ -284,8 +284,8 @@ Which might result in something like this:
 import "google/protobuf/any.proto";
 
 message Operation {
-    int32 id = 1
-    Status status = 2
+    int32 id = 1;
+    Status status = 2;
     oneof result {
         google.protobuf.Any response = 3;
         Error error = 4;
