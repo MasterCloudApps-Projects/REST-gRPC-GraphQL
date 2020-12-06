@@ -131,6 +131,21 @@ type Mutation {
 }
 ```
 
+In addition, GraphQL allows for batch operations, either `queries` or `mutations`, as in:
+
+```graphql
+mutation UpdateTwoProducts($product1:ProductInput!, ($product2:ProductInput!) {
+    update1: updateProduct(product: $product1) {
+        id
+        price
+    }
+    update2: updateProduct(product: $product2) {
+        id
+        price
+    }
+}
+```
+
 ### gRPC
 Any other operation can be express without restrictions in an `rpc` message type. Google Cloud API Design Guide suggest that developers follow a standard naming policy for these regular operations, as in:
 
