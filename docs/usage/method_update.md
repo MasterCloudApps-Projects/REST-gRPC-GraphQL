@@ -19,6 +19,8 @@ Content-Type: application/json
 }
 ```
 
+If a read-only field conflicts with the expected value, it may be ignored, or a `409 - Conflict` status code can be returned.
+
 ### GraphQL
 For this, a _mutation_ is used. In this case, as in a `PUT` operation in REST, a full replacement will be done. So, the _mutation_ will receive as an argument the new state of the resource, as in the following definition:
 
