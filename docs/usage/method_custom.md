@@ -41,9 +41,15 @@ message DistanceResponse {
 Resources have both _state_ and _state transitions_. For example, an _order_ might be _pending_, _paid_, _shipped_ or _delivered_. We can think of a resource as a _state machine_ with allowed transitions.
 
 ### REST
-For simple cases, we can map a state to a field: a field called `status` for a music player, which accepts a number of possible options, or a field called `activated` of type boolean.
-
 On a truly _RESTFul Web Service_ that follows the HATEOAS constraint, a _custom action_ can be expressed just as a possible state transition to a resource.
+
+For simple cases, we can also map a state to a field: a field called `status` for a music player, which accepts a number of possible options, or a field called `activated` of type boolean.
+
+In addition, a new resource can be created as well. These resources will map actions into them. For example, we can use this technique to send a recovery password email to a user. The new embedded resource will belong to `user` and might contain the `sent_date` and the `hash_code` used in the recovery URL.
+
+Looking at real world REST APIs, we find that GitHub defined an [embedded resource in gists][GitHub embedded resources to star gists] (a form of shareable snippets of code) to _star_ or _unstar_ them, as in `PUT|DELETE /gists/:gist_id/start`.
+
+[Paypal as well allows to authorize a payment][Paypal embedded resources to authorize payments] creating a resource of type `authorize` into an order: `PUT /v2/checkout/orders/5O190127TN364715T/authorize`.
 
 ### GraphQL
 A _mutation_ will be used to express a change state. This can be done either in a _resource-oriented_ or in a _action-oriented_ approach. If our API is _resource-oriented_, we can define a custom field which contains the state, as in a field called `status`. To update it, a generic update mutation can be used, or a specific mutation:
@@ -105,14 +111,6 @@ message CancelOrderRequest {
 Even though almost any operation can be expressed in terms of just state transitions, sometimes this approach does not naturally fit our action. There are several ways to workaround this for each API style.
 
 ### REST
-#### Embedded resources
-In REST we can also create new resources. These resources will map actions into them. For example, we can use this technique to send a recovery password email to a user. The new embedded resource will belong to `user` and might cointain the `sent_date` and the `hash_code` used in the recovery URL.
-
-Looking at real world REST APIs, we find that GitHub defined an [embedded resource in gists][GitHub embedded resources to star gists] (a form of shareable snippets of code) to _star_ or _unstar_ them, as in `PUT|DELETE /gists/:gist_id/start`.
-
-[Paypal as well allows to authorize a payment][Paypal embedded resources to authorize payments] creating a resource of type `authorize` into an order: `PUT /v2/checkout/orders/5O190127TN364715T/authorize`.
-
-#### Controller resources
 Another option available to REST APIs is creating a resource of type _controller_. This can be used for a number of cases:
 
 * To merge two resources.
