@@ -19,7 +19,7 @@ The two main strategies can be used:
 
 The returned resultset can also contain `Web Links` headers to help traversing the rest of the collection.
 
-To sort the results, we can use query parameters as well: `GET/univerisities?limit=10&offset=20&sort-by=establishment-date`.
+To sort the results, we can use query parameters as well: `GET /univerisities?limit=10&offset=20&sort-by=establishment-date`.
 
 ### Filtering
 To filter the resultset, query parameters can be used as well. This technique includes basic filtering, like this:
