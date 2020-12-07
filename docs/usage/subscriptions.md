@@ -20,8 +20,8 @@ This call to the webhook could be:
 
 The overall design of the WebHook will depend of how the applications of the Web Service will consume that information. Give the nature of this technology, it is used to create an event-based API for servers.
 
-### HTTP Streaming and Long polling
-Long polling is a technique that consists in letting an open TCP connection between the HTTP client and the server, so that the server can decide when to respond to the client. When the server responds, a new TCP connection is oppened by the client.
+### Long polling and HTTP Streaming
+Long polling is a technique that consists in keeping an open TCP connection between the HTTP client and the server, so that the server can decide when to respond to the client. When the server responds, a new TCP connection is oppened by the client.
 
 HTTP Streaming is quite similar: the client opens an HTTP connection to the server using a special header, `Transfer-Encoding: chunked` ([the response will come in a series of chunks][Transfer Encoding in MDN]).
 
