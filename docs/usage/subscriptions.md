@@ -30,7 +30,7 @@ HTTP Streaming is quite similar: the client opens an HTTP connection to the serv
 These techniques, in contrast to WebHooks, can be used to let HTTP clients be notified of events. For example, HTTP streaming is used by [Twitter][Twitter API: Filtered Stream] in their API to Filtered Streams.
 
 ## GraphQL
-GraphQL natively supports a custom operation called [_subscription_][Subscriptions in GraphQL and Relay] that let a client application subscribe to a certain event. This will open a WebSocket between the server and the client app.
+GraphQL natively supports a custom operation called [_subscription_][Subscriptions in GraphQL and Relay] that let a client application subscribe to a certain event. This will open a session, using the [WebSocket Protocol (RFC 6455)][], between the server and the client app.
 
 Subscriptions, like the rest of GraphQL root types, accepts parameters. These can be used to let app clients specify not just the topic they are interested in, but also to filter specific events of that topic.
 
@@ -137,3 +137,4 @@ TODO
 [Twitter API: Filtered Stream]: https://developer.twitter.com/en/docs/twitter-api/tweets/filtered-stream/introduction
 [Subscriptions in GraphQL and Relay]: https://graphql.org/blog/subscriptions-in-graphql-and-relay/
 [Apollo Server: Subscriptions]: https://www.apollographql.com/docs/apollo-server/data/subscriptions/
+[WebSocket Protocol (RFC 6455)]: https://tools.ietf.org/html/rfc6455
