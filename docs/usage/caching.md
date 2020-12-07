@@ -14,6 +14,12 @@ In HTTP, caches are controlled using the [`Cache-Control` header][HTTP Caching, 
 * `public` - the response can be stored anywhere.
 * `max-age` - sets the maximum amount of time in seconds, relative to the request time, to consider a resource fresh.
 
+Example:
+
+```
+Cache-Control: public, max-age=604800
+```
+
 Note that a `Expires` header can be used to specify an absolute time to expire a cache. Although it will be ignored when `Cache-Control` is defined.
 
 Cached resources are periodically removed or replaced (this process is known as _cache eviction_). Before its expiration time, a resouce is considered _fresh_. After its expiration time, it's called _stale_. In addition, if a response included either an `ETag` or an `Last-Modified` headers, then the cache would be able to be revalidated.
