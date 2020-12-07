@@ -14,7 +14,7 @@ WebHooks can also be:
 * **topic-based**: the webhook URL will be called only under certain events. For example, notify only events of the topic `orders/create`. Used by [Shopify][Shopify Webhooks].
 * **parameterized**: the developer is able to set parameters to select only certain notification events of the topic they are interested in. For example, to receive calendar notifications of a specific users. Used by [Microsoft Graph API][Microsoft Graph API Webhooks].
 
-The call to the webhook could be:
+This call to the webhook could be:
 * just an event, so that the application would need to make further requests in case it wants more information.
 * A resource, containing for example the current snapshot of the resource where the event happened.
 
