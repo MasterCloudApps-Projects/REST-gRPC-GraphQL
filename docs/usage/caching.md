@@ -29,7 +29,7 @@ Most apps will limit their cache only to `GET` requests.
 It's important to note that highly customizable RESTful APIs won't benefit as much from the HTTP cache. If clients are able to request embedded resources or sparse fieldsets the odds to reuse a stored fresh result are reduced.
 
 ## GraphQL
-GraphQL servers expose a single entry point for the whole entity graph, so most of the time it can take advantage of the HTTP caching support.
+GraphQL servers expose a single entry point for the whole entity graph, so most of the time it cannot take advantage of the HTTP caching support.
 
 * _Application cache_ can be used in the server side.
 * When tunnelling GraphQL through `GET`, HTTP cache can be used as well. We need to prevent _mutations_ and _subscriptions_ from being cached, though. For example, making it mandatory to run them over `POST`.
