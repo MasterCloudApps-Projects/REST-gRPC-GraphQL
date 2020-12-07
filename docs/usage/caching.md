@@ -22,7 +22,7 @@ Cache-Control: public, max-age=604800
 
 Note that a `Expires` header can be used to specify an absolute time to expire a cache. Although it will be ignored when `Cache-Control` is defined.
 
-Cached resources are periodically removed or replaced (this process is known as _cache eviction_). Before its expiration time, a resouce is considered _fresh_. After its expiration time, it's called _stale_. In addition, if a response included either an `ETag` or an `Last-Modified` headers, then the cache would be able to be revalidated.
+Cached resources are periodically removed or replaced (this process is known as _cache eviction_). Before its expiration time, a resouce is considered _fresh_. After its expiration time, it's called _stale_. In addition, if a response included either an [`ETag`][Etag (RFC 7232)] or an `Last-Modified` headers, then the cache would be able to be revalidated.
 
 Most apps will limit their cache only to `GET` requests.
 
@@ -54,3 +54,4 @@ TODO: https://cloud.google.com/apis/design/design_patterns#etags
 [Prevent unnecessary network requests with the HTTP Cache]: https://web.dev/http-cache/
 [GraphQL & Caching: The Elephant in the Room]: https://www.apollographql.com/blog/graphql-caching-the-elephant-in-the-room-11a3df0c23ad/
 [GraphQL: Caching]: https://graphql.org/learn/caching/
+[ETag (RFC 7232)]: https://tools.ietf.org/html/rfc7232#section-2.3
