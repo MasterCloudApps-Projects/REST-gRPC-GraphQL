@@ -1,5 +1,5 @@
 # Contract
-Sticking to the [Google Coud API Design Guide][], we can distinguise between _standard methods_ and [_custom methods_](method_custom.md). _Standard methods_ are:
+Sticking to the [Google Cloud API Design Guide][], we can distinguish between _standard methods_ and [_custom methods_](method_custom.md). _Standard methods_ are:
 
 * [`List`](method_list.md) - Fetches a list of resources from a collection.
 * [`Get`](method_get.md) - Fetches a single resource.
@@ -35,7 +35,7 @@ REST specification does not mention much about which HTTP methods should be used
   * To add a new item into a _collection_. This is like calling to a factory method. A `Slug` (a suggested identifier) can optionally be set, but the identifier will be defined by the server.
   * To exercise a _controller_.
   * To run _safe_ and _idempotent_ operations that exceed the maximum length for an identifier. For example, when running a complex query whose URI-representation is invalid.
-  * And to run any other _unsafe_ and _nonidempotent_ operation. For example, an **asynchronous task**.
+  * And to run any other _unsafe_ and _non-idempotent_ operation. For example, an **asynchronous task**.
 * `PUT`:
   * Update a mutable resource. [Conditional Requests (RFC 7232)][] are recommended in order to prevent concurrency problems.
   * Add a new item into a _store_, this is, when the client can decide the identifier of the resource.
@@ -82,9 +82,9 @@ The mapping between this operations types and our _standard methods_ is straight
 ## gRPC
 RPC services in general, and gRPC in particular, are very flexible interfaces that allow both _resource-oriented_ and _action-oriented_ API styles. Google, as the creators of Protocol Buffers, encourages developers to follow a resource oriented approach.
 
-Since Protocol Buffers wraps every remot procedure into an `rpc` type definition, we just need to create an `rpc` named after the method it follows, as in `GetArticle` or `ListArticles`.
+Since Protocol Buffers wraps every remote procedure into an `rpc` type definition, we just need to create an `rpc` named after the method it follows, as in `GetArticle` or `ListArticles`.
 
-[Google Coud API Design Guide]: https://cloud.google.com/apis/design/standard_methods
+[Google Cloud API Design Guide]: https://cloud.google.com/apis/design/standard_methods
 [HTTP/1.1 Request Methods (RFC 7231)]: https://tools.ietf.org/html/rfc7231#section-4.1
 [PATCH Method for HTTP (RFC 5789)]: https://tools.ietf.org/html/rfc5789
 [Conditional Requests (RFC 7232)]: https://tools.ietf.org/html/rfc7232

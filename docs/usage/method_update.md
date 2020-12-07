@@ -78,7 +78,7 @@ Here our backend will be protected against race conditions.
 ### REST
 Since REST promotes visibility, a _RESTful Web Services_ takes advantage of the HTTP built-in caching and of the [Conditional Requests (RFC 7232)][]. Every response might contain:
 
-* `ETag` - or `entity tag`. Part of the HTTP specification, this is a header to represent a specific version of a resource from. Tipically, hash functions are used for this. Clients may save a copy of the resource so that, once they are expired (which is controlled by the `Expires` and/or `Cache-Control` headers), they can make a new request sending its `ETag` in the `If-None-Match` header field. If the server detects the `ETag` has not change, then it will return a `304 - Not Modified` response.
+* `ETag` - or `entity tag`. Part of the HTTP specification, this is a header to represent a specific version of a resource from. Typically, hash functions are used for this. Clients may save a copy of the resource so that, once they are expired (which is controlled by the `Expires` and/or `Cache-Control` headers), they can make a new request sending its `ETag` in the `If-None-Match` header field. If the server detects the `ETag` has not change, then it will return a `304 - Not Modified` response.
 * `Last-Modified` - This works like `ETag` but, unlike this, it is timestamp-based. This timestamp is set into `If-Modified-Since` header when sending a new request.
 
 When running a _safe_ request, as in `GET`, this is useful to save resources. For _unsafe_ requests, like `POST`, `PUT`, `PATCH` or `DELETE`, these values can be used to provide concurrency control.
@@ -113,7 +113,7 @@ If-Match: W/"2f-1enSYy6fyIcEanN2CM5rqcZISwc"
 ```
 
 #### One-time URIs
-We can also use _one-time URIs_ to implement conditional `POST` requests. These are URIs tailored for a specific operation and for a given resource version. Let's suppose we have a `comment` resource which includes a link to remove it. This link would be conditional, i.e. it works as long as the given resource has not been modifie). To go about this, we generate a one-time URI: this is, a URI which somehow identifies current request, as in:
+We can also use _one-time URIs_ to implement conditional `POST` requests. These are URIs tailored for a specific operation and for a given resource version. Let's suppose we have a `comment` resource which includes a link to remove it. This link would be conditional, i.e. it works as long as the given resource has not been modified). To go about this, we generate a one-time URI: this is, a URI which somehow identifies current request, as in:
 
 ```
 Link: <http://www.example.com/comments/gtlrx8et2l>;rel="remove"
@@ -150,7 +150,7 @@ curl -v --header "Content-Type: application/json" \
 http://localhost:4000/articles/5fa96503bd00b971bafa81d3
 ```
 
-Finally, if the preconditions are met, the resource is succesfully updated:
+Finally, if the preconditions are met, the resource is successfully updated:
 
 ```
 curl -v --header "Content-Type: application/json" \

@@ -2,7 +2,7 @@
 This chapter covers how the different API styles let API developers define their operations: which is the recommended approach, what alternatives there are, which Interface Definition Languages can be used, and so on. This chapter does not cover how to define schemas to shape our models (see [schema definition](schema_definition.md) for this), nor how to express each operation (see [methods](methods.md)).
 
 ## REST
-For a Web API to be called RESTful, it is mandatory that it is **hypermedia-based** (HATEOAS). This means all their resources can be traversed with no prior knowledge of their URI, but as a succesion of links. This mechanism, that inspired Roy Fielding when creating REST, has been proven succesful in the World Wide Web: people browse the Web as a series of links. However, most _REST APIs_ are not HATEOAS compliant. So, instead of taking advantage of hypermedia, very often APIs rely on _contracts_ and _uri templates_ on how identifiers are built; links are not _opaque_ anymore, but _predictable_. These APIs, which are like _resource-based_ RPC, are often called _REST-Like Web Services_. Many people think that, despite being a good idea, [true RESTful market is far from being mature][Why HATEOAS is useless and what that means for REST].
+For a Web API to be called RESTful, it is mandatory that it is **hypermedia-based** (HATEOAS). This means all their resources can be traversed with no prior knowledge of their URI, but as a succession of links. This mechanism, that inspired Roy Fielding when creating REST, has been proven successful in the World Wide Web: people browse the Web as a series of links. However, most _REST APIs_ are not HATEOAS compliant. So, instead of taking advantage of hypermedia, very often APIs rely on _contracts_ and _uri templates_ on how identifiers are built; links are not _opaque_ anymore, but _predictable_. These APIs, which are like _resource-based_ RPC, are often called _REST-Like Web Services_. Many people think that, despite being a good idea, [true RESTful market is far from being mature][Why HATEOAS is useless and what that means for REST].
 
 Let's see each one of these _REST styles_.
 
@@ -17,7 +17,7 @@ Characteristics of a HATEOAS API:
 * ✘ Lack of adoption and tooling.
 * ✘ Cost. Developing a RESTful Service is expensive.
 
-What this means is that each resouce is somehow connected to other resources, thus creating a graph. If a client application uses that graph as its engine, then that means that the graph is a [_state machine_][Designing a true REST state machine], where each resource/node is a state, and each link/connection is a state transition. Let's think of a microwave oven. When we first get the microwave, its representation might contain an `action` to turn it on:
+What this means is that each resource is somehow connected to other resources, thus creating a graph. If a client application uses that graph as its engine, then that means that the graph is a [_state machine_][Designing a true REST state machine], where each resource/node is a state, and each link/connection is a state transition. Let's think of a microwave oven. When we first get the microwave, its representation might contain an `action` to turn it on:
 
 ```json
 // GET /microwaves/12
@@ -51,8 +51,8 @@ So, technically, all these URI might be completely RESTful:
 
 There is no unique medium to express them:
 
-* HTTP: [Web Links (RFC 8288)][] - Send links through the HTTP headers. Apropriate when the representation does not allow links (i.e. an image or a plain text) or when it's required to read links without parsing the body.
-* JSON: [JSON API][] (it can descrive links as well), [JSON-LD][], [JSON Hyper-Schema][] (the hypermedia solution of JSON Schema), [HAL (Hypertext Application Language)][] or [Hydra][] (based on JSON-LD).
+* HTTP: [Web Links (RFC 8288)][] - Send links through the HTTP headers. Appropriate when the representation does not allow links (i.e. an image or a plain text) or when it's required to read links without parsing the body.
+* JSON: [JSON API][] (it can describe links as well), [JSON-LD][], [JSON Hyper-Schema][] (the hypermedia solution of JSON Schema), [HAL (Hypertext Application Language)][] or [Hydra][] (based on JSON-LD).
 * XML: [Atom (RFC 5023)][].
 
 Typically, the type of relation in a link is specified in a `rel` field. IANA maintains a [list of standard link relations][IANA list of link relations].
@@ -85,7 +85,7 @@ Criticisms of HATEOAS often argue that there are no real-world examples of it, w
 ```
 
 #### Note on Versioning
-When it comes to versioning, according to [Roy Fielding keynote on Evolve'13][], the best practice for versioning a REST API is not to version it. REST is already defined as a state machine (HATEOAS) where each state can be dynamic and each transition can be redirected (linked). So instead of agreeing on an interface, to change the state, client software should only need to _follow_ the apropriate links (as we humans do when we use a web). But still, [an API might need updates which break backwards compatibility][API Change Strategy] (like fixing a typo in a schema).
+When it comes to versioning, according to [Roy Fielding keynote on Evolve'13][], the best practice for versioning a REST API is not to version it. REST is already defined as a state machine (HATEOAS) where each state can be dynamic and each transition can be redirected (linked). So instead of agreeing on an interface, to change the state, client software should only need to _follow_ the appropriate links (as we humans do when we use a web). But still, [an API might need updates which break backwards compatibility][API Change Strategy] (like fixing a typo in a schema).
 
 ### REST-Like
 Although Hypermedia is a very powerful tool, most developers choose a different approach when the consumer of the API is another application that wants to provide its own experience to the final user. Here, URIs are no longer opaque, but constructed by the client. This is often known as _REST-Like_, _so-called REST_ or simply _OpenAPI_, and basically it is a _resource-oriented_ RPC Web API, just like gRPC, but unlike gRPC, in _REST-Like_ the underlying transport protocol, HTTP, is exposed to the client.
@@ -93,7 +93,7 @@ Although Hypermedia is a very powerful tool, most developers choose a different 
 The fact that this is not pure REST is not necessarily bad. Actually, this type of API design is so popular that it is the one followed by well-known frameworks like [OpenAPI][], [API Blueprint][] or [RAML][]. And, in spite of the evolvability benefits from an hypermedia-based API, [some people is skeptical about whether we are ready for them][Criticism to HATEOAS].
 
 #### URI Templates and URI design
-Even thoguh according to the REST contraints neither the client nor the documentation should rely on a specific URI convention, that does not mean that we cannot follow a convention to (1) make the URIs human-readable, (2) to save design time or (3) to distribute the processing based on our URIs path. It is completely right to use, for example, [URI Templates (RFC 6570)][].
+Even though according to the REST constraints neither the client nor the documentation should rely on a specific URI convention, that does not mean that we cannot follow a convention to (1) make the URIs human-readable, (2) to save design time or (3) to distribute the processing based on our URIs path. It is completely right to use, for example, [URI Templates (RFC 6570)][].
 
 Many of the rules on how to design URIs are opinionated. Still, some have major approval in the community, like the ones presented in [REST API Design Rulebook, by Mark Masse][]:
 
@@ -111,13 +111,13 @@ There is almost a consensus about whether to use plural or singular names:
 #### OpenAPI
 OpenAPI is a specification to describe what an HTTP API can do. This is done writing an OpenAPI spec using either Yaml or Json.
 
-* It's standard. So it is well suited for humans, to understand an API, but also for machines: they can render it as an interacive documentation (see [Swagger UI][]) or autogenerate code for us (see [Swagger CodeGen][]).
+* It's standard. So it is well suited for humans, to understand an API, but also for machines: they can render it as an interactive documentation (see [Swagger UI][]) or autogenerate code for us (see [Swagger CodeGen][]).
 * Describes the [_paths_][OpenAPI Paths] (endpoints), with the supported _operations_, parameters and resources.
 * Can specify [_data models_ using JSON Schema][OpenAPI Data Models].
 * Since OpenAPI 3.0, [_links_][OpenAPI Links] are supported, which allows for using the value returned by an _operation_ as the input of another _operation_. Although this is not technically HATEOAS, it's an alternative to [hypermedia][Hypermedia in API design] used in REST.
 
 Example:
-This example, taken from the Swagger website, outlines how to add the metainformation of a server, and its path `/users/{userId}`, reachable throuh `GET`:
+This example, taken from the Swagger website, outlines how to add the metainformation of a server, and its path `/users/{userId}`, reachable through `GET`:
 
 ```yaml
 openapi: 3.0.0
@@ -182,7 +182,7 @@ The [GraphQL Schema Language][] let us specify each of these operations in their
 
     type Mutation {
         myFirstMutation(param: FirstMutationInput!): ReturnType
-        mySeconMutation(param: SecondMutationInput): OtherReturnType
+        mySecondMutation(param: SecondMutationInput): OtherReturnType
     }
 
     type Subscription {
@@ -197,7 +197,7 @@ The [GraphQL Schema Language][] let us specify each of these operations in their
 }
 ```
 
-> Internally, server implemenations will map each _field_ to a [_resolver_][GraphQL: resolvers]. These resolvers are functions, provided by the API developer, that returns the value for a field.
+> Internally, server implementations will map each _field_ to a [_resolver_][GraphQL: resolvers]. These resolvers are functions, provided by the API developer, that returns the value for a field.
 
 Note: we have defined three types, each mapping to its _operation type_. We can have used whatever name, but its a convention to name `Query`, `Mutation` and `Subscription` each of these types. Also note that our `Query` type is just a regular _Object Type_, with a number of typed fields that can optionally define arguments, as any other _Object Type_.
 
@@ -230,7 +230,7 @@ Here, we define a named service, `myService`, that exposes a single entry point,
 It is also possible to implement a REST Web Service using gRPC. For this, we will annotate the `.proto` definition with `google.api.http` to map an RPC with an HTTP request:
 
 ```proto
-rpc CreatArticle(CreateArticleRequest) returns (Article) {
+rpc CreateArticle(CreateArticleRequest) returns (Article) {
   option (google.api.http) = {
     post: "/articles"
     body: "article"

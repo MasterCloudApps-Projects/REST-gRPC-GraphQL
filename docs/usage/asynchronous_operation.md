@@ -1,5 +1,5 @@
 # Asynchronous operations
-Sometimes an API call might take a long time to be completed, so that a synchronous answer is not possible at all. This is a challenging operation that should be effectively taclked.
+Sometimes an API call might take a long time to be completed, so that a synchronous answer is not possible at all. This is a challenging operation that should be effectively tackled.
 
 ## REST
 Let's first analyze the creation of a resource that takes too long. In this case, we will define a brand new resource, called `task`, that will represent the task to create our slow-resource, for example, a `video`. So, whenever an application wants to create a new `video`, it will actually create a new resource of type `task`. This will contain a `status` field to let us know when it has finished.
@@ -22,7 +22,7 @@ Optionally, if our task has created several resources, it might return a body wi
 ]
 ```
 
-When it comes to delete instead of create, same steps apply: when a `DELETE` takes too long to carry it out synchronosly, we will create a new task resource to be able to query its completion status.
+When it comes to delete instead of create, same steps apply: when a `DELETE` takes too long to carry it out synchronously, we will create a new task resource to be able to query its completion status.
 
 ## GraphQL
 TODO
@@ -37,7 +37,7 @@ Recommendation: use the `Operation` interface: https://cloud.google.com/apis/des
 ## Source code
 
 ### REST
-Example source code contains a `video` model. Processing a new video is an slow opperation. To publish a new resource of type `video`, a `videoTask` needs to be created:
+Example source code contains a `video` model. Processing a new video is an slow operation. To publish a new resource of type `video`, a `videoTask` needs to be created:
 
 ```
 curl -v --header "Content-Type: application/json" \

@@ -1,22 +1,22 @@
 # Introduction to APIs
-Putting it simply, an API, or _Application Progamming Interface_, is a _language_ which allows two systems to talk to each other through the network. We use them constantly, when browsing the Internet or when using a mobile application. For example, they let the Twitter application interact with the Twitter server to read and publish tweets. [Some people](https://www.youtube.com/watch?v=_nAfNxhzJy0) even say that for a service to be considered an API, it also needs to be _reusable_.
+Putting it simply, an API, or _Application Programming Interface_, is a _language_ which allows two systems to talk to each other through the network. We use them constantly, when browsing the Internet or when using a mobile application. For example, they let the Twitter application interact with the Twitter server to read and publish tweets. [Some people](https://www.youtube.com/watch?v=_nAfNxhzJy0) even say that for a service to be considered an API, it also needs to be _reusable_.
 
-APIs are so important that many business, like [Twilio](https://www.twilio.com/), are completely based on their API. This leads to very trendy topic: [API Managament](https://www.redhat.com/en/topics/api/what-is-api-management), the process to improve the adoption and engagement of an API.
+APIs are so important that many business, like [Twilio](https://www.twilio.com/), are completely based on their API. This leads to very trendy topic: [API Management](https://www.redhat.com/en/topics/api/what-is-api-management), the process to improve the adoption and engagement of an API.
 
 ## Paradigms
 In addition to providing a good value, API needs to be designed to effectively solve the requirements of their users or customers. This issue is addressed by picking the right API style. In order to classify each API style, let's first introduce some paradigms.
 
 ### Consumers
-Not every API is intentended for the same audience:
+Not every API is intended for the same audience:
 
 * **Public APIs**: these are publicly available to third-parties. Sometimes, they will require a registration.
 * **Private APIs**: in contrast, private APIs are only available to services within a company.
 
 ### Request-response APIs
 * **RPC API**: this is the simplest form, where the API is designed around arbitrary procedures and typically described using an IDL (Interface Definition Language). There are several existing specifications, like SOAP, JSON-RPC or XML-RPC. Currently, [Apache Thrift](https://thrift.apache.org/) and [gRPC](grpc.md) specifications are very popular, both of them containing official implementations.
-* **Web API**: Or [REST](rest.md). It is an architectural style where the system behaviour is based on transitions of data (or _resources_, as called in HTTP). There is no official implementation.
-    * REST-like. A key characteristic of REST is that their clients just _follow_ (or _bookmark_) opaque URIs. When we use a so-called REST API where clients construct URIs, then it is not _pure REST_, but RPC over HTTP. This is often refered as _REST-Like_.
-* **Query API**: in addition to the styles above, we also have query APIs, like [GraphQL](graphql.md). It is esentialy an RPC API, exposing a single service, that allow clients to run _queries_, using a SQL-like syntax, and make changes through _mutations_. Its state is represented in form of graph.
+* **Web API**: Or [REST](rest.md). It is an architectural style where the system behavior is based on transitions of data (or _resources_, as called in HTTP). There is no official implementation.
+    * REST-like. A key characteristic of REST is that their clients just _follow_ (or _bookmark_) opaque URIs. When we use a so-called REST API where clients construct URIs, then it is not _pure REST_, but RPC over HTTP. This is often referred as _REST-Like_.
+* **Query API**: in addition to the styles above, we also have query APIs, like [GraphQL](graphql.md). It is essentially an RPC API, exposing a single service, that allow clients to run _queries_, using a SQL-like syntax, and make changes through _mutations_. Its state is represented in form of graph.
 
 ### Event-Driven APIs
 Constantly sending requests to a remote API to find out when something happens might be resource-expensive. According to [some studies][Zapier RESTHooks.org], 1.5% of those API calls returns new data. To prevent this, Event-Driven APIs might be used:

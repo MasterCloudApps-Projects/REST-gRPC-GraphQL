@@ -1,5 +1,5 @@
 # Schema Definition
-Protobuf en gRPC, types en GraphQL y libre en REST (JSON Schema es una opción)
+API designers often will need a mechanism to describe how the data on their API is defined. This helps both computers (to automatically generate client models, validators or documentation) and humans (to easily understand how to interact with an API). Let's see how each API style deals with schema definition.
 
 ## REST
 _self-descriptive messages_ constraint states that we need each message to be self-descriptive; this comprehends the payload as well as the metadata.
@@ -12,7 +12,7 @@ In _RESTful Web Services_, we rely on HTTP to specify the metadata:
 * [`Content-Length`][]: size in bytes of the body.
 * [`Content-Language`][]: describes the language intended for the audience.
 
-To choose the apropriate representation of the payload, the `Content-Type` entity header will be used. See the [IANA document on Media-Types][] to check a comprehensive list of Media Types approved by the IANA. For example, `text/plain` or `image/png`. An extensible format, like `application/xml` or `application/json` can be used as well. Even a binary representation as [Protobuf can be used in REST][Protobuf and REST].
+To choose the appropriate representation of the payload, the `Content-Type` entity header will be used. See the [IANA document on Media-Types][] to check a comprehensive list of Media Types approved by the IANA. For example, `text/plain` or `image/png`. An extensible format, like `application/xml` or `application/json` can be used as well. Even a binary representation as [Protobuf can be used in REST][Protobuf and REST].
 
 To describe JSON resources, several specifications can be used:
 * [JSON Schema][], using `application/schema+json`.
@@ -74,12 +74,12 @@ Defining an schema using a graph is with no doubt GraphQL trademark. As the [off
 
 > With GraphQL, you model your business domain as a graph
 
-This resembles the mindmap most object-oriented developers follow, in which a business is modeled as a set of objects of their domain.
+This resembles the mind-map most object-oriented developers follow, in which a business is modeled as a set of objects of their domain.
 
 Then, GraphQL let API designers express their schema using a reduced yet powerful number of primitives in the [GraphQL Schema Language]:
 
 ### Scalar types
-Are used to define field types of `Object types` and opreation arguments. This type comprehends:
+Are used to define field types of `Object types` and operation arguments. This type comprehends:
 * `Int`
 * `Float`
 * `String`
@@ -132,7 +132,7 @@ Each field in a type can optionally accept arguments. They can be used to for ex
 }
 ```
 
-Here we are leting the client application specify how it want the date to be represented (let's assume `DateFormats` is an existing Enumeration Type), with a default format `ISO8601`. They can also paginate the returned `comments`.
+Here we are letting the client application specify how it want the date to be represented (let's assume `DateFormats` is an existing Enumeration Type), with a default format `ISO8601`. They can also paginate the returned `comments`.
 
 ### Union type
 Union types indicates a list of various possible types. When a union type is used as a field, any of its concrete types may be used:
@@ -151,11 +151,11 @@ If a query returns an array `SearchResult`, we can specify fields for each type,
         __typename
         ... on Professor {
             name
-            lastname
+            last_name
         }
         ... on Student {
             name
-            lastname
+            last_name
         }
         ... on Subject {
             name
@@ -184,7 +184,7 @@ If a query returns an array `SearchResult`, we can specify fields for each type,
 }
 ```
 
-Every field in the interface needs to be redefined. Interfaces are useful when an operation can return different types all of them implementing the same interface. In addition to intefaces, an operation can also be based on `union types`:
+Every field in the interface needs to be redefined. Interfaces are useful when an operation can return different types all of them implementing the same interface. In addition to interfaces, an operation can also be based on `union types`:
 
 ```graphql
 {
@@ -193,7 +193,7 @@ Every field in the interface needs to be redefined. Interfaces are useful when a
 ```
 
 ### Input type
-Finally, GraphQL allows to define object types expected to be used as the input of an operation. These are used, for example, to provide an _input object_ to create it in the system. To define an `input type`, we will follow the same syntaxt we used for regular `object types`:
+Finally, GraphQL allows to define object types expected to be used as the input of an operation. These are used, for example, to provide an _input object_ to create it in the system. To define an `input type`, we will follow the same syntax we used for regular `object types`:
 
 ```graphql
 {
@@ -206,7 +206,7 @@ Finally, GraphQL allows to define object types expected to be used as the input 
 ```
 
 ## gRPC
-Although gRPC can be used with any extensible language, such as JSON, most of the time it uses [Protocol Buffers](https://developers.google.com/protocol-buffers/docs/overview) to define the schema of its entites. It consists in a platform-agnostic language for serializing data, toghether with a [compiler](https://developers.google.com/protocol-buffers/docs/proto3#generating) to generate language-specific code out from the schema definition. To define a schema, a `.proto` file will be used.
+Although gRPC can be used with any extensible language, such as JSON, most of the time it uses [Protocol Buffers](https://developers.google.com/protocol-buffers/docs/overview) to define the schema of its entities. It consists in a platform-agnostic language for serializing data, together with a [compiler](https://developers.google.com/protocol-buffers/docs/proto3#generating) to generate language-specific code out from the schema definition. To define a schema, a `.proto` file will be used.
 
 There are several versions of Protocol Buffers. Here, we will cover [proto3](https://developers.google.com/protocol-buffers/docs/proto3) version, specifying it in the first line of the `.proto` file, as in:
 
@@ -258,7 +258,7 @@ There are several things to note:
 * **Field numbers**: each field is _identified_ with a unique number. If a message is updated and a field is remover, its field number should be marked as forbidden using the [`reserved` statement](https://developers.google.com/protocol-buffers/docs/proto3#reserved).
 
 ### Any message type
-[`Any`](https://developers.google.com/protocol-buffers/docs/proto3#any) adds support to embed a field of an unknown type. For example, our API might have an _abstract_ `Operation` message type as a response to any requested operation. The `Operation` message might have a concret `status` field, plus a `response` field of type `Any`:
+[`Any`](https://developers.google.com/protocol-buffers/docs/proto3#any) adds support to embed a field of an unknown type. For example, our API might have an _abstract_ `Operation` message type as a response to any requested operation. The `Operation` message might have a concrete `status` field, plus a `response` field of type `Any`:
 
 ```proto
 import "google/protobuf/any.proto";

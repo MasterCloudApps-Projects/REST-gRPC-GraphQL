@@ -1,12 +1,12 @@
 # Standard method: list
-In addition to fetching a single document, we need to be able to fetch a list of documents: a _collection_. In simplest clases, a colection will never contain many elements: for example, professors for a given department. However, when collections can become arbitrarily large, for example with mail messages in a mailbox, we need to be able to specify which elements we are interested in. In this case, we will use pagination, sorting and optionally filtering.
+In addition to fetching a single document, we need to be able to fetch a list of documents: a _collection_. In simplest classes, a collection will never contain many elements: for example, professors for a given department. However, when collections can become arbitrarily large, for example with mail messages in a mailbox, we need to be able to specify which elements we are interested in. In this case, we will use pagination, sorting and optionally filtering.
 
 To provide pagination, two main approaches are followed:
 
 * **Offset-based pagination** - A fixed position, or _offset_, is given to the query of the collection.
 * **Cursor-based pagination** - An identifier for the first item, or _cursor_, is given to the query of the collection. This strategy is more popular nowadays, because the cursor is opaque and promotes evolution of the API.
 
-When using pagination, a _sorting mechanism_ should be used. Typically, our data will be backed in a datasore, like a database, with indices and keys. A public id can be used to paginate, but other options can be provided. For example, we can let our users sort our collection by a date field.
+When using pagination, a _sorting mechanism_ should be used. Typically, our data will be backed in a datastore, like a database, with indices and keys. A public id can be used to paginate, but other options can be provided. For example, we can let our users sort our collection by a date field.
 
 ## REST
 As it happened with simple resources, or _documents_, to fetch a _collection resource_ `GET` can be used.
@@ -19,7 +19,7 @@ The two main strategies can be used:
 
 The returned resultset can also contain `Web Links` headers to help traversing the rest of the collection.
 
-To sort the results, we can use query parameters as well: `GET /univerisities?limit=10&offset=20&sort-by=establishment-date`.
+To sort the results, we can use query parameters as well: `GET /universities?limit=10&offset=20&sort-by=establishment-date`.
 
 ### Filtering
 To filter the resultset, query parameters can be used as well. This technique includes basic filtering, like this:
@@ -67,12 +67,12 @@ With regard to pagination, both approaches, offset-based and cursor-based, can b
 }
 ```
 
-And the collection query would accept several arguments. In case of foward-pagination:
+And the collection query would accept several arguments. In case of forward-pagination:
 
 * `first`: non-negative number
 * `after`: cursor
 
-And in case of backard-pagination:
+And in case of backward-pagination:
 * `last`: non-negative number
 * `before`: cursor
 
@@ -283,7 +283,7 @@ message ListArticlesResponse {
 }
 ```
 
-To exercute it, run the gprc client, `npm run grpcc`, and then:
+To execute it, run the gprc client, `npm run grpcc`, and then:
 
 ```js
 client.ListArticles({}, pr)

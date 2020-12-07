@@ -2,10 +2,10 @@
 Sometimes, we want to add a new item to a collection. For example, to create a new article in a blog. Let's see how we would tackle this in each API style.
 
 ## REST
-Many authors distinguise two types of repositories in REST: _collections_ and _stores_. Let's see each one of them.
+Many authors distinguish two types of repositories in REST: _collections_ and _stores_. Let's see each one of them.
 
 ### Collection
-Adding an item to a collection is a _unsafe_ and _non-idempotent_ operation. It's not _idempotent_ because the identifier for the new resource is chosen by the server, so runing the same operation twice will generate two resources. For this, we have the `POST` method.
+Adding an item to a collection is a _unsafe_ and _non-idempotent_ operation. It's not _idempotent_ because the identifier for the new resource is chosen by the server, so running the same operation twice will generate two resources. For this, we have the `POST` method.
 
 Typically, to create a document resource in a collection, the resource we operate into is the collection itself, so that the combination `POST` plus _collection_ works as a factory method. For the sake of simplicity, let's consider that `/articles` is the URI of the collection.
 

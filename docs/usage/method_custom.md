@@ -69,7 +69,7 @@ type Mutation {
 }
 ```
 
-There is no such think as HATEOAS for GraphQL. This means client applications will need more knowlodege, but also they will do a better use of the network traffic.
+There is no such think as HATEOAS for GraphQL. This means client applications will need more knowledge, but also they will do a better use of the network traffic.
 
 ### gRPC
 To express a state transition, a `status` field of type enum can be used, as in:

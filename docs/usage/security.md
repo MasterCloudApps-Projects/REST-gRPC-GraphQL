@@ -1,13 +1,13 @@
 # Security
 An API needs to ensure several things, for example: only allowed users can access resources; the integrity and confidentiality of the information is ensured. Since both REST and GraphQL typically are used over the same transport protocol, same HTTP security practices usually apply.
 
-## Integritiy and confidentiality of the data
+## Integrity and confidentiality of the data
 We need to make sure that:
 
-* **Integrity**: the representation of the data is consistent and accurante during its life cycle.
-* **Confidentiality**: the information is protected from third-partys accesses.
+* **Integrity**: the representation of the data is consistent and accurate during its life cycle.
+* **Confidentiality**: the information is protected from third-parties accesses.
 
-HTTP is an non-secure protocol, which means the data on an HTTP request does not ensure neither integrity nor confidentiality. To overcome this, _Transport Layer Securty_, also known as [TLS (RFC 8446)][], is used:
+HTTP is an non-secure protocol, which means the data on an HTTP request does not ensure neither integrity nor confidentiality. To overcome this, _Transport Layer Security_, also known as [TLS (RFC 8446)][], is used:
 
 > TLS allows client/server applications to communicate over the Internet in a way that is designed to prevent eavesdropping, tampering, and message forgery.
 
@@ -21,7 +21,7 @@ First, lets recap what authentication and authorization are:
 
 This means you might be authentication in a system, but not authorized to access a certain resource.
 
-Even though cookies can be used to provide authentication, and it's usage is not necessarely discouraged (as long as they are not used to provide _state_, and prevents CSRF attacks), they are not very commonly used in APIs. Instead, typically [HTTP Authorization][] is used for this.
+Even though cookies can be used to provide authentication, and it's usage is not necessarily discouraged (as long as they are not used to provide _state_, and prevents CSRF attacks), they are not very commonly used in APIs. Instead, typically [HTTP Authorization][] is used for this.
 
 [HTTP: Authentication (RFC 7235)][], by Roy Fielding (creator of REST), tells that:
 
@@ -63,8 +63,8 @@ WWW-Authenticate: Digest nonce="7ypf/xlj9XXwfDPEoM4URrv/xwf94BcCAzFZH4GiTo0v", q
 ```
 
 * `nonce` - opaque string that will be used by clients to generate the digest.
-* `qop` - or _quality of protection_, can be either `auth` (onlt the credentials are used to calculate the digest) or `auth-int` (both credentials and body are used to calculate the digest, thus providing integrity).
-* `algorithm` - to specify the algorithm that must be used to calculate the digest. IANA maitains a list of [approved algorithms][Hypertext Transfer Protocol (HTTP) Digest Algorithm Values].
+* `qop` - or _quality of protection_, can be either `auth` (only the credentials are used to calculate the digest) or `auth-int` (both credentials and body are used to calculate the digest, thus providing integrity).
+* `algorithm` - to specify the algorithm that must be used to calculate the digest. IANA maintains a list of [approved algorithms][Hypertext Transfer Protocol (HTTP) Digest Algorithm Values].
 
 With those values, together with the client identifier, and the client secret, a `response` value will be calculated and sent in the `Authorization` header of the request (See section 3.4.1 Response of the [RFC 7616][HTTP Digest Access Authentication (RFC 7616)] for details).
 
@@ -90,7 +90,7 @@ An access token can be get using:
 * [Authorization code](https://www.oauth.com/oauth2-servers/access-tokens/authorization-code-request/) - Used when a user is requested to gran permissions to the application. The user sends the application the _auth code_. Currently, it's the recommended mechanism for either server and client applications.
 * [Refresh token](https://oauth.net/2/grant-types/refresh-token/) - When an access token has expired, a new one can be got using the _refresh token_.
 * Legacy: [Password grant](https://www.oauth.com/oauth2-servers/access-tokens/password-grant/) - When a user shares its password with the application. Its usage is discouraged because it clearly goes against the spirit of OAuth.
-* Legacy: [Implicit grant](https://oauth.net/2/grant-types/implicit/) - For standalone applications where an user authorizes in a consent screen and then they get back to the orignal page, but instead of bearing an auth code, an access token is immediately returned. This was proposed as a workaround, because browsers prevented javascript to access to domains different to the current one. CORS bypass this limitation.
+* Legacy: [Implicit grant](https://oauth.net/2/grant-types/implicit/) - For standalone applications where an user authorizes in a consent screen and then they get back to the original page, but instead of bearing an auth code, an access token is immediately returned. This was proposed as a workaround, because browsers prevented javascript to access to domains different to the current one. CORS bypass this limitation.
 
 #### JWT
 Access tokens sent to an API using the `Bearer` scheme need to be opaque; they can just be a random string stored in the server which allows for identifying the user making the API call. [JWT (RFC 7519)][] can also be [used to encode an _Bearer Token_][JWT for Bearer Tokens]. They specify a uniform, self-contained token description that, since are self-contained and thus stateless, allow servers to escalate. Because of this, they industry is widely adopting this technology.
@@ -98,7 +98,7 @@ Access tokens sent to an API using the `Bearer` scheme need to be opaque; they c
 ### API Keys
 Like the [`Basic` scheme](#basic-scheme), API Keys are a very popular and simple mechanism to control the access to an API, present since the inception of HTTP APIs. Typically used when a _project_ needs access to an API (i.e. they don't need to access the API on behalf of a user), they are often used to prevent third-parties from abusing of a service (because they make too many requests or they violated the user agreement), and are sent in a number of places:
 
-* As a query parameter: `GET /product?api_key=DkvTp96fGV2Bw7qc`. Note, this is completely discouraged. In browsers, they can be tracked in the history. In webservers, they might be stored in access logs.
+* As a query parameter: `GET /product?api_key=DkvTp96fGV2Bw7qc`. Note, this is completely discouraged. In browsers, they can be tracked in the history. In web servers, they might be stored in access logs.
 * As an `X-API-Key` header: `X-API-Key: DkvTp96fGV2Bw7qc`.
 * In a cookie: `Cookie: X-API-Key=DkvTp96fGV2Bw7qc`.
 * In a `Bearer` scheme: `Authorization: Bearer DkvTp96fGV2Bw7qc`.
@@ -118,13 +118,13 @@ This _preflight request_ is done automatically by the browser when using `XMLHtt
 ## gRPC Authentication
 Since gRPC runs on top of HTTP/2, and it _de facto_ works through TLS (specifically using the [ALPN](https://tools.ietf.org/html/rfc7301) extension), the confidentiality and integrity is then provided by the transport layer.
 
-With regard to authentication, nativelly gRPC nativelly supports three methods:
+With regard to authentication, gRPC natively supports three methods:
 
-* **TLS** - TLS certificates can be used to provide authentication, integrity and confidetiality.
+* **TLS** - TLS certificates can be used to provide authentication, integrity and confidentiality.
 * **ALTS** - Similar to TLS, [ALTS](https://cloud.google.com/security/encryption-in-transit/application-layer-transport-security) is a Protocol Buffer based authentication mechanism conceived for the Google Cloud Platform.
 * **Token-based for Google** - When connection to Google Services, this third mechanism can be used.
 
-Since gRPC hijacks the HTTP communication protocol, it's not that easy to take advantage of the native HTTP authentication mechanisms. Most solutions leverage the use of middlewares to add a custom authentication layer on top of gRPC ([Example in nodejs](https://medium.com/compli-engineering/grpc-nodejs-using-jwt-authentication-b048fef6ecb2), [Example in Go](https://medium.com/@tillknuesting/grpc-http-basic-auth-oauth2-bearer-tokens-f088b5a2314)).
+Since gRPC hijacks the HTTP communication protocol, it's not that easy to take advantage of the native HTTP authentication mechanisms. Most solutions use a middleware to add a custom authentication layer on top of gRPC ([Example in nodejs](https://medium.com/compli-engineering/grpc-nodejs-using-jwt-authentication-b048fef6ecb2), [Example in Go](https://medium.com/@tillknuesting/grpc-http-basic-auth-oauth2-bearer-tokens-f088b5a2314)).
 
 ## Source code
 Our sample application contains some API calls protected. Let's see how we can access them:
@@ -134,7 +134,7 @@ The provided example code shows how we can use `Bearer` scheme using `JWT`. To l
 
 ```
 curl -v -H "Content-Type: application/json" \
-    -X POST -d '{"username": "pepe", "password":"secret"}' \
+    -X POST -d '{"username": "john", "password":"secret"}' \
     http://localhost:4000/login
 ```
 
@@ -178,7 +178,7 @@ We will get this error message: `Access restricted. Please, provide a valid acce
 
 ```
 curl -v -H "Content-Type: application/json" \
-    -X POST -d '{"username": "pepe", "password":"secret"}'
+    -X POST -d '{"username": "john", "password":"secret"}'
     http://localhost:4000/login
 ```
 
@@ -221,7 +221,7 @@ An error will be returned: `UNAUTHENTICATED: jwt must be provided`. A jwt access
 
 ```
 curl -v -H "Content-Type: application/json" \
-    -X POST -d '{"username": "pepe", "password":"secret"}'
+    -X POST -d '{"username": "john", "password":"secret"}'
     http://localhost:4000/login
 ```
 

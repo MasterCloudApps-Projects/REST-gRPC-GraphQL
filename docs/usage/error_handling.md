@@ -9,7 +9,7 @@ Meaningful `response status codes` should be used. A complete list of response s
 For example, when requesting a nonexisting resource, return a `404`. However, sometimes this can be confusing:
 
 * Consider this identifier: `/departments/:deptID/employees?id=Smith`. If for the given department there is no employee whose identifier is `smith`, a `404` looks fine. What if there is no department for `:deptID`? What should we return?
-* If we get a `404`, can we assume a resource does not exist? Can we safely delete our local copy? What if we are getting that just because of a missconfiguration on NGINX? HTTP server errors might be conflated with application logic errors.
+* If we get a `404`, can we assume a resource does not exist? Can we safely delete our local copy? What if we are getting that just because of a misconfiguration on NGINX? HTTP server errors might be conflated with application logic errors.
 
 HTTP responses are limited, as we have just seen. Sometimes, we need room to add more details. We can express error descriptions in the body. For this, several solutions have been proposed: [JSend][], [Problem Details For HTTP APIs (RFC 7807)][]. For example, in the RFC 7807 we can express an _out of credit_ error like this:
 
@@ -62,7 +62,7 @@ Most implementations will fill the `errors` array automatically, providing clien
 }
 ```
 
-[Apollo Server][] is bundled with a number of common errors, ready to be used, that will provide a readable error code in their `exensions.code` field. This can be done [without using any specific framework logic][Custom errors and error reporting in GraphQL] as well.
+[Apollo Server][] is bundled with a number of common errors, ready to be used, that will provide a readable error code in their `extensions.code` field. This can be done [without using any specific framework logic][Custom errors and error reporting in GraphQL] as well.
 
 In addition, most GraphQL server implementations provide a mechanism to let API designers to format a custom error message, as in the [`CustomFormatErrorFn` option of the `express-graphql` project][express-graphql].
 
@@ -108,12 +108,12 @@ this is what we get:
 ```
 
 ## gRPC
-When a call runs succesfully, it will return an `OK` status code to the client application. When it fails, though, gRPC defines a list of [error status codes](https://grpc.io/docs/guides/error/#error-status-codes) that will be sent back to the client. This error model is independent of the data format used (i.e. it's independent of Protocol Buffers). For example:
+When a call runs successfully, it will return an `OK` status code to the client application. When it fails, though, gRPC defines a list of [error status codes](https://grpc.io/docs/guides/error/#error-status-codes) that will be sent back to the client. This error model is independent of the data format used (i.e. it's independent of Protocol Buffers). For example:
 
 * `GRPC_STATUS_CANCELLED` - The client application cancelled the request.
 * `GRPC_STATUS_DEADLINE_EXCEEDED` - Exceeded the deadline/timeout specified by the client.
 * `GRPC_STATUS_UNIMPLEMENTED` - Method undefined in the server.
-* `GRPC_STATUS_INTERNAL` - Covers several errors, like parsing errors in either the request or the response or compression algorithsm errors.
+* `GRPC_STATUS_INTERNAL` - Covers several errors, like parsing errors in either the request or the response or compression algorithms errors.
 * `GRPC_STATUS_UNKNOWN` - The server threw an unhandled exception.
 
 ### Google Error model

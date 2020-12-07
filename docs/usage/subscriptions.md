@@ -2,7 +2,7 @@
 Request-Response APIs are convenient to let clients request data. However, this might be very resource-intensive. When we face these scaling problems, event-driven mechanisms can be used.
 
 ## REST
-RESTful Web Services by definition cannot maintain an open, stateful conection to a client. However, a number of side solutions have been built around REST-Like Web Services to provide an event-based Web API.
+RESTful Web Services by definition cannot maintain an open, stateful connection to a client. However, a number of side solutions have been built around REST-Like Web Services to provide an event-based Web API.
 
 ### WebHook
 The most popular approach is using WebHooks. This is simply a mechanism to let client subscribe to events by registering a callback URI. Whenever a certain event happens, the callback URI will be invoked. For example, a blog might let their API users subscribe to events, so that whenever _something_ happens (a new article has been published or a comment has been written), the server will call each of the registered HTTP callbacks.
@@ -21,7 +21,7 @@ This call to the webhook could be:
 The overall design of the WebHook will depend of how the applications of the Web Service will consume that information. Give the nature of this technology, it is used to create an event-based API for servers.
 
 ### Long polling and HTTP Streaming
-Long polling is a technique that consists in keeping an open TCP connection between the HTTP client and the server, so that the server can decide when to respond to the client. When the server responds, a new TCP connection is oppened by the client.
+Long polling is a technique that consists in keeping an open TCP connection between the HTTP client and the server, so that the server can decide when to respond to the client. When the server responds, a new TCP connection is opened by the client.
 
 HTTP Streaming is quite similar: the client opens an HTTP connection to the server using a special header, `Transfer-Encoding: chunked` ([the response will come in a series of chunks][Transfer Encoding in MDN]).
 
@@ -68,10 +68,10 @@ Protocol Buffers implements a very powerful service definition, which allows for
     rpc LotsOfGreetings(stream HelloRequest) returns (HelloResponse);
     ```
 
-* **Bidirectional streaming** - both ends will receive a _stram_ from each other.
+* **Bidirectional streaming** - both ends will receive a _stream_ from each other.
 
     ```proto
-    rpc BidiHello(stream HelloRequest) returns (stream HelloResponse);
+    rpc BidirectionalHello(stream HelloRequest) returns (stream HelloResponse);
     ```
 
 An rpc with an `stream` response will allow to create a _subscription_ to a topic. This mimics the [HTTP/2 stream connections][HTTP/2 (RFC 7540)].
@@ -82,9 +82,9 @@ An rpc with an `stream` response will allow to create a _subscription_ to a topi
 TODO
 
 ### GraphQL
-Apollo Server, one of the most popular GraphQL implementations, [support subscriptions out of the box][Apollo Server: Subscriptions]. A `publish-subscribe` service should be used within the server to let mutators notify the subscribers.
+Apollo Server, one of the most popular GraphQL implementations, [support subscriptions out of the box][Apollo Server: Subscriptions]. A `publish-subscribe` service should be used within the server to let mutations notify the subscribers.
 
-The sample project has been implemented using the Apollo Server middleware for Express and supports subscriptions. To run this test, we will need a client application able to use websockets. Let's open the Graphiql interface in http://localhost:4000/graphql.
+The sample project has been implemented using the Apollo Server middleware for Express and supports subscriptions. To run this test, we will need a client application able to use webSockets. Let's open the GraphiQL interface in http://localhost:4000/graphql.
 
 To create a subscription, run:
 
@@ -96,7 +96,7 @@ subscription {
 }
 ```
 
-Now, to create an article open the Graphiql interface in another tab and create a new article:
+Now, to create an article open the GraphiQL interface in another tab and create a new article:
 
 ```graphql
 mutation {
@@ -106,7 +106,7 @@ mutation {
 }
 ```
 
-The first Graphiql, which is subscribed to `newArticle` events, would have receive the message, as in:
+The first GraphiQL, which is subscribed to `newArticle` events, would have receive the message, as in:
 
 ```json
 {
@@ -123,7 +123,7 @@ TODO
 
 ## Resources
 * [Transfer Encoding in MDN][]
-* [Stackoverflow question about different push technologies in the Web](https://stackoverflow.com/questions/12555043/my-understanding-of-http-polling-long-polling-http-streaming-and-websockets)
+* [StackOverflow question about different push technologies in the Web](https://stackoverflow.com/questions/12555043/my-understanding-of-http-polling-long-polling-http-streaming-and-websockets)
 * [Shopify Webhooks][]
 * [Microsoft Graph API Webhooks][]
 * [Twitter API: Filtered Stream][]

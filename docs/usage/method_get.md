@@ -8,7 +8,7 @@ Given an identifier, an API needs to allow their consumers to fetch the resource
 ### REST
 To fetch a single document resource in a _RESTful Web Service_, we first need to consider two things:
 
-* Which HTTP method is the more apropriate.
+* Which HTTP method is the more appropriate.
 * How we identify the resource.
 
 A fetching does not have side effects, so it is both a _safe_ and an _idempotent_ operation. Besides, the underneath semantic matches that of `GET`. So for this we will use `GET`.
@@ -81,7 +81,7 @@ message GetArticleRequest {
 A resource might be represented in a variety of forms. For example, a product can be represented as a JSON, as an XML object, as a text description readable for humans, or even as a PDF as it happens with the data sheets of electronic components. Let's see how each API style deals with this.
 
 ### REST
-HTTP provides native support for _Content Negotiation_. This is the process to selected the apropriate representation for a resource. It can be [Server-Driven Negotiation][] or [Agent-Driven Negotiation][]
+HTTP provides native support for _Content Negotiation_. This is the process to selected the appropriate representation for a resource. It can be [Server-Driven Negotiation][] or [Agent-Driven Negotiation][]
 
 #### Server-Driven Negotiation
 Clients can use HTTP to tell the server about their preferences. Then the server uses their choices to select a representation. Please note, there is no standard algorithm for this.
@@ -96,10 +96,10 @@ Servers will return the selected values, as well as a [`Vary`][] header to tell 
 #### Agent-Driven Negotiation
 Sometimes, it is useful to let the user agent (manually or through a script) selected the desired representation. And even though HTTP includes some important selection features (type, charset, language, encoding...), it still lacks of many other useful representations, for example, currency unit or distance unit.
 
-For all of the above, the _Agent-Driven Negociation_ was defined. In this case, the server will return a `300 - Multiple Choices` with a list of URIs for each representation. Note there is no standarized way to return the list of possible choices. Sometimes, subdomains, query parameters or URI extensions are used as a workaround.
+For all of the above, the _Agent-Driven Negotiation_ was defined. In this case, the server will return a `300 - Multiple Choices` with a list of URIs for each representation. Note there is no standardized way to return the list of possible choices. Sometimes, subdomains, query parameters or URI extensions are used as a workaround.
 
-#### Conteng-Negotiation in REST
-REST leverages this featore to allow client applications negotiate the specific representation they are interested in. The requested Media Type will be returned as long as the server supports it.
+#### Content-Negotiation in REST
+REST leverages this feature to allow client applications negotiate the specific representation they are interested in. The requested Media Type will be returned as long as the server supports it.
 
 > Most of the time, the resources will be represented using a meta-language, either in XML, JSON or YAML. Some people argue that this feature of REST is not that useful, since most modern programming languages can easily handle all those formats.
 
@@ -130,7 +130,7 @@ Sometimes, the _shape_ of the returned representation does not match the require
 In REST, a naive way to address this would be defining a couple of _schemas_ for a resource representation. One could for example represent the _basic fields_, whereas other might represent the _extra fields_. Then, a client application could rely on content negotiation.
 
 #### Sparse Fieldsets
-When content negotiation is not enough, sparse fieldsets can be use. This technique aims to reduce the load on the backend and in the network by selecting the specific fields of the representation of a resource. By default, the _full representation_ will be returned. Clients are also able to specify which fields they are insterested in:
+When content negotiation is not enough, sparse fieldsets can be use. This technique aims to reduce the load on the backend and in the network by selecting the specific fields of the representation of a resource. By default, the _full representation_ will be returned. Clients are also able to specify which fields they are interested in:
 
 ```
 GET /resources?fields[]=field1&fields[]=field2
@@ -145,7 +145,7 @@ For example, the following request might return the blog post #12 along with its
 GET /posts/12?embed[]=comments&embed[]=author
 ```
 
-Note that this technique can be use together with Sparse Fieldsets, so that a client app is allowed to specify not just the embedded resources but also the fields of those resouces. For example, the command above can be updated to select only the `name` field from the author:
+Note that this technique can be use together with Sparse Fieldsets, so that a client app is allowed to specify not just the embedded resources but also the fields of those resources. For example, the command above can be updated to select only the `name` field from the author:
 
 ```
 GET /posts/12?embed[]=comments&embed[]=author.name
@@ -159,7 +159,7 @@ These techniques has a wide adoption:
 * [OData][OData: Querying] takes this concept to the next level and has a specification really close to a query language.
 
 ### GraphQL
-GraphQL is basically a query language which allows third-parties to accurately select the shape of the data they are interested in. Let's supose a movie catalog which allows us to fetch specific movies. Each movie contains scalar fields, like `title`, `plot` or `year`, and typed fields, like `director` or `actors`, which is an array of actors.
+GraphQL is basically a query language which allows third-parties to accurately select the shape of the data they are interested in. Let's suppose a movie catalog which allows us to fetch specific movies. Each movie contains scalar fields, like `title`, `plot` or `year`, and typed fields, like `director` or `actors`, which is an array of actors.
 
 ```graphql
 type Person {

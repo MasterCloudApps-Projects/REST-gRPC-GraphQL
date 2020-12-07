@@ -87,7 +87,7 @@ message UpdateArticleRequest {
 ## Source code
 
 ### REST
-The example source code cointains a prepopulated collection of articles. Fetch any of them. Run:
+The example source code contains a pre-populated collection of articles. Fetch any of them. Run:
 
 ```
 curl -v http://localhost:4000/articles
