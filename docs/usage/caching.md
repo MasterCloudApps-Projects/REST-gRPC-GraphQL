@@ -36,12 +36,14 @@ GraphQL servers expose a single entry point for the whole entity graph, so most 
 * [Global object identification](https://graphql.org/learn/global-object-identification/) can be used to unequivocally identify an entity in GraphQL. This tool let client developers easily maintain their [local GraphQL cache](https://graphql.org/learn/caching/).
 
 ## gRPC
-gRPC, like GraphQL, hijacks the HTTP protocol, so it cannot befeit from the native HTTP cache. Instead, we can use:
+gRPC, like GraphQL, hijacks the HTTP protocol, so it cannot easily befeit from the native HTTP cache. However, default implementations of gRPC let API designers leverage [ETag-based HTTP caching][gRPC: ETag] through the definition of a string-typed field named `etag`, that will contain the [ETag][ETag (RFC 7232)] identifier in it.
+
+In addition, gRPC can also use:
 
 * _Application cache_ in the server side.
 * _Local cache_ in the client side as long as we implement a robust identifiers model, as the Goblat Object Identification proposal of GraphQL.
 
-TODO: https://cloud.google.com/apis/design/design_patterns#etags
+
 
 ## Resources
 * [Caching Tutorial](https://www.mnot.net/cache_docs/)
@@ -55,3 +57,4 @@ TODO: https://cloud.google.com/apis/design/design_patterns#etags
 [GraphQL & Caching: The Elephant in the Room]: https://www.apollographql.com/blog/graphql-caching-the-elephant-in-the-room-11a3df0c23ad/
 [GraphQL: Caching]: https://graphql.org/learn/caching/
 [ETag (RFC 7232)]: https://tools.ietf.org/html/rfc7232#section-2.3
+[gRPC: ETag]: https://cloud.google.com/apis/design/design_patterns#etags
