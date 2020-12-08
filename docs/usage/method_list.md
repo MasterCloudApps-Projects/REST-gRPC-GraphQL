@@ -144,7 +144,7 @@ query {
 ## gRPC
 
 ### Pagination and sorting
-Google Cloud API Design Guide recommends that every [List operation]() contains [cursor-based pagination](https://cloud.google.com/apis/design/design_patterns#list_pagination) and [result ordering](https://cloud.google.com/apis/design/design_patterns#sorting_order) from the beginning-
+Google Cloud API Design Guide recommends that every List operation contains [cursor-based pagination](https://cloud.google.com/apis/design/design_patterns#list_pagination) and [sorting order](https://cloud.google.com/apis/design/design_patterns#sorting_order) from the beginning-
 
 ```proto
 service Blog {
