@@ -74,7 +74,7 @@ Protocol Buffers implements a very powerful service definition, which allows for
     rpc BidirectionalHello(stream HelloRequest) returns (stream HelloResponse);
     ```
 
-An rpc with an `stream` response will allow to create a _subscription_ to a topic. This mimics the [HTTP/2 stream connections][HTTP/2 (RFC 7540)].
+An rpc with a `stream` response will allow to create a _subscription_ to a topic. This mimics the [HTTP/2 stream connections][HTTP/2 (RFC 7540)].
 
 ## Source code
 
