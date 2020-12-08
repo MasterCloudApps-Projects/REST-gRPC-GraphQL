@@ -25,7 +25,7 @@ HTTP responses are limited, as we have just seen. Sometimes, we need room to add
 ```
 
 ## GraphQL
-In GraphQL, an application should lead with several error mechanisms:
+In GraphQL, an application should deal with several error mechanisms:
 
 * **HTTP errors**: On the one hand, it needs to manage HTTP errors as in any other Web API. This can be for example when there is a network problem and the server is not reachable.
 * **GraphQL server errors**: On the other, the GraphQL server should be able to report errors to the client. If the user provides an invalid input, this will be reported as a GraphQL error.
