@@ -230,11 +230,13 @@ Here, we define a named service, `myService`, that exposes a single entry point,
 It is also possible to implement a REST Web Service using gRPC. For this, we will annotate the `.proto` definition with `google.api.http` to map an RPC with an HTTP request:
 
 ```proto
-rpc CreateArticle(CreateArticleRequest) returns (Article) {
-  option (google.api.http) = {
-    post: "/articles"
-    body: "article"
-  };
+service myService {
+  rpc CreateArticle(CreateArticleRequest) returns (Article) {
+    option (google.api.http) = {
+      post: "/articles"
+      body: "article"
+    };
+  }
 }
 
 message CreateArticleRequest {
