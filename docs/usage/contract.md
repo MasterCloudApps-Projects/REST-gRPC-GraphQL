@@ -229,7 +229,9 @@ It is also possible to implement a REST Web Service using gRPC. For this, we wil
 
 ```proto
 service myService {
-  rpc CreateArticle(CreateArticleRequest) returns (Article) {
+  rpc CreateArticle(CreateArticleRequest)
+    returns (Article)
+  {
     option (google.api.http) = {
       post: "/articles"
       body: "article"
