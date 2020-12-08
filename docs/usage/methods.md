@@ -1,4 +1,4 @@
-# Contract
+# Standard methods
 Sticking to the [Google Cloud API Design Guide][], we can distinguish between _standard methods_ and [_custom methods_](method_custom.md). _Standard methods_ are:
 
 * [`List`](method_list.md) - Fetches a list of resources from a collection.
