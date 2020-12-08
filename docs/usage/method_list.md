@@ -111,6 +111,12 @@ GraphQL _queries_ accept arguments. These can be used also to filter arguments. 
 query {
     products(type: FURNITURE) {
         totalCount
+        edges {
+            node {
+                name
+                price(currency: EURO)
+            }
+        }
     }
 }
 ```
