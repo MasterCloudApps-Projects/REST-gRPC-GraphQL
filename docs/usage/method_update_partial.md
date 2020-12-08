@@ -76,7 +76,10 @@ Whatever of these approaches we use, they are not as powerful as [JSON-PATCH][JS
 Partial updates are the recommended way to run an update operation in gRPC. They are carried out using a [`FieldMask`](https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#fieldmask), as in a [Get method](method_get.md). In this case, in addition to the resource, the response will also contain a `FieldMask` field specifying which fields will be updated.
 
 ```proto
-rpc UpdateArticle(UpdateArticleRequest) returns (Article);
+service Blog {
+    rpc UpdateArticle(UpdateArticleRequest)
+        returns (Article);
+}
 
 message UpdateArticleRequest {
   Article article = 1;

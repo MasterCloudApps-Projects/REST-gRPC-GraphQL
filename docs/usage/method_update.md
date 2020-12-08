@@ -61,10 +61,13 @@ Also note that since our _mutation_ `updateProduct` returns a `Product`, we can 
 A full update can be carried out using a regular RPC, as in:
 
 ```proto
-rpc UpdateArticle(UpdateArticleRequest) returns (Article);
+service Blog {
+    rpc UpdateArticle(UpdateArticleRequest)
+        returns (Article);
+}
 
 message UpdateArticleRequest {
-  Article article = 1;
+    Article article = 1;
 }
 ```
 
@@ -165,10 +168,10 @@ To update an article in our example, we can run this operation:
 
 ```graphql
 mutation UpdateArticle($id:ID!, $article:ArticleInput!) {
-  updateArticle(id:$id,article:$article) {
-    title
-    description
-  }
+    updateArticle(id:$id,article:$article) {
+        title
+        description
+    }
 }
 ```
 
@@ -176,11 +179,11 @@ With these variables:
 
 ```json
 {
-  "id": "5faeed572bbb8d6e218829c7",
-  "article": {
-    "title": "New title",
-    "description": "New description"
-  }
+    "id": "5faeed572bbb8d6e218829c7",
+    "article": {
+        "title": "New title",
+        "description": "New description"
+    }
 }
 ```
 

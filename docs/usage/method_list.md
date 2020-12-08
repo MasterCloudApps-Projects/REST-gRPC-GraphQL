@@ -141,7 +141,10 @@ query {
 Google Cloud API Design Guide recommends that every [List operation]() contains [cursor-based pagination](https://cloud.google.com/apis/design/design_patterns#list_pagination) and [result ordering](https://cloud.google.com/apis/design/design_patterns#sorting_order) from the beginning-
 
 ```proto
-rpc ListArticle(ListArticlesRequest) returns (ListArticlesResponse);
+service Blog {
+    rpc ListArticle(ListArticlesRequest)
+        returns (ListArticlesResponse);
+}
 
 message ListArticlesRequest {
   int32 page_size = 1;
@@ -265,7 +268,10 @@ query {
 A new `rpc` has been created. It accepts a request object to configure the pagination, and returns a response object that contains the next cursor, as well as a list of articles:
 
 ```proto
-rpc ListArticles(ListArticlesRequest) returns (ListArticlesResponse);
+service Main {
+    rpc ListArticles(ListArticlesRequest)
+        returns (ListArticlesResponse);
+}
 
 message ListArticlesRequest {
     int32 page_size = 1;

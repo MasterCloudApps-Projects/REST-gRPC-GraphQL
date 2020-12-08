@@ -25,15 +25,18 @@ type Query {
 A regular `rpc` operation can be used to express a pure function:
 
 ```proto
-rpc GetDistance(DistanceRequest) returns (DistanceResponse);
+service MyService {
+    rpc GetDistance(DistanceRequest)
+        returns (DistanceResponse);
+}
 
 message DistanceRequest {
-  string from = 1;
-  string to = 2;
+    string from = 1;
+    string to = 2;
 }
 
 message DistanceResponse {
-  int32 distance = 1;
+    int32 distance = 1;
 }
 ```
 
@@ -75,23 +78,26 @@ There is no such think as HATEOAS for GraphQL. This means client applications wi
 To express a state transition, a `status` field of type enum can be used, as in:
 
 ```proto
-rpc updateOrder(UpdateOrderRequest) returns (Order);
+service Shop {
+    rpc updateOrder(UpdateOrderRequest)
+        returns (Order);
+}
 
 message UpdateOrderRequest {
-  Order order = 1;
-  FieldMask update_mask = 2;
+    Order order = 1;
+    FieldMask update_mask = 2;
 }
 
 message Order {
-  string id = 1;
-  OrderStatus status = 2;
+    string id = 1;
+    OrderStatus status = 2;
 }
 
 enum OrderStatus {
-  PENDING = 1;
-  PAID = 2;
-  SHIPPED = 3;
-  DELIVERED = 4;
+    PENDING = 1;
+    PAID = 2;
+    SHIPPED = 3;
+    DELIVERED = 4;
 }
 ```
 
@@ -100,10 +106,13 @@ Then the `FieldMask` will may be used to update only the `status` field.
 Additionally, for common status, a custom rpc might be created. For example, a `Cancel` method can be created to cancel an order:
 
 ```proto
-rpc cancelOrder(CancelOrderRequest) returns (Order);
+service Shop {
+    rpc cancelOrder(CancelOrderRequest)
+        returns (Order);
+}
 
 message CancelOrderRequest {
-  string name = 1;
+    string name = 1;
 }
 ```
 
@@ -169,11 +178,11 @@ To get the distance between `Madrid` and `Barcelona`, run this query:
 
 ```
 {
-  distance(from:"Madrid",to:"Barcelona") {
-    from
-    to
-    km
-  }
+    distance(from:"Madrid",to:"Barcelona") {
+        from
+        to
+        km
+    }
 }
 ```
 
@@ -181,7 +190,10 @@ To get the distance between `Madrid` and `Barcelona`, run this query:
 The gRPC project contains an `rpc` to calculate a distance:
 
 ```proto
-rpc distance(DistanceRequest) returns (DistanceReply);
+service MyService {
+    rpc distance(DistanceRequest)
+        returns (DistanceReply);
+}
 
 message DistanceRequest {
     string from = 1;

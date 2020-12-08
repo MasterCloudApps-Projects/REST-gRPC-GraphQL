@@ -79,7 +79,10 @@ There are some usage cases where _idempotency_ is a convenient mechanism to enha
 Following the _resource-oriented_ design, a [`Create` method](https://cloud.google.com/apis/design/standard_methods#create) will be defined for each resource that can be created.
 
 ```proto
-rpc CreateArticle(CreateArticleRequest) returns (Article);
+service Blog {
+    rpc CreateArticle(CreateArticleRequest)
+        returns (Article);
+}
 ```
 
 Optionally, the request resource may contain a client-assigned id, similarly to [REST stores](#stores). If the resource exists:
@@ -134,7 +137,10 @@ query {
 The `rpc` to create a new article is as follows:
 
 ```proto
-rpc CreateArticle(CreateArticleRequest) returns (Article);
+service Blog {
+    rpc CreateArticle(CreateArticleRequest)
+        returns (Article);
+}
 
 message CreateArticleRequest {
     Article article = 1;

@@ -70,7 +70,10 @@ Here, the client code is defining an operation of type `query`, using `GetProduc
 In gRPC, a single [`Get` method](https://cloud.google.com/apis/design/standard_methods#get) will be defined. This will accept an request object to specify which resource to fetch:
 
 ```proto
-rpc GetArticle(GetArticleRequest) returns (Article);
+service Blog {
+    rpc GetArticle(GetArticleRequest)
+        returns (Article);
+}
 
 message GetArticleRequest {
     string id = 1;
@@ -505,7 +508,10 @@ Here, we execute two queries of the type `article()`, each one returning a diffe
 An `rpc` has been defined to fetch a single article in the gRPC service:
 
 ```proto
-rpc GetArticle(GetArticleRequest) returns (Article);
+service Blog {
+    rpc GetArticle(GetArticleRequest)
+        returns (Article);
+}
 ```
 
 To exercise it, first identify which articles are available. Run the gprc client, `npm run grpcc`, and then:

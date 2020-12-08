@@ -18,7 +18,10 @@ A custom _mutation_ will be created. This will somehow receive an identifier of 
 To delete a resource, a new RPC method will be created:
 
 ```proto
-rpc DeleteArticle(DeleteArticleRequest) returns (google.protobuf.Empty);
+service Blog {
+    rpc DeleteArticle(DeleteArticleRequest)
+        returns (google.protobuf.Empty);
+}
 
 message DeleteArticleRequest {
   string id = 1;
@@ -89,7 +92,10 @@ mutation {
 An `rpc` has been defined to delete an article in the gRPC service:
 
 ```proto
-    rpc DeleteArticle(DeleteArticleRequest) returns (google.protobuf.Empty);
+service Main {
+    rpc DeleteArticle(DeleteArticleRequest)
+        returns (Empty);
+}
 ```
 
 To exercise it, first identify which articles are available. Run the gprc client, `npm run grpcc`, and then:
