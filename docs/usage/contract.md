@@ -176,17 +176,15 @@ The [GraphQL Schema Language][] let us specify each of these operations in their
 ```graphql
 {
     type Query {
-        myFirstQuery(param: Int): ReturnType
-        mySecondQuery(param: Int): OtherReturnType
+        user(param: Int): User
     }
 
     type Mutation {
-        myFirstMutation(param: FirstMutationInput!): ReturnType
-        mySecondMutation(param: SecondMutationInput): OtherReturnType
+        updateUser(param: UpdateUserInput!): User
     }
 
     type Subscription {
-        someTopic: ReturnType
+        newUser: User
     }
 
     schema {
