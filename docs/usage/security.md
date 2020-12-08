@@ -124,7 +124,7 @@ With regard to authentication, gRPC natively supports three methods:
 * **ALTS** - Similar to TLS, [ALTS](https://cloud.google.com/security/encryption-in-transit/application-layer-transport-security) is a Protocol Buffer based authentication mechanism conceived for the Google Cloud Platform.
 * **Token-based for Google** - When connection to Google Services, this third mechanism can be used.
 
-Since gRPC hijacks the HTTP communication protocol, it's not that easy to take advantage of the native HTTP authentication mechanisms. Most solutions use a middleware to add a custom authentication layer on top of gRPC ([Example in nodejs](https://medium.com/compli-engineering/grpc-nodejs-using-jwt-authentication-b048fef6ecb2), [Example in Go](https://medium.com/@tillknuesting/grpc-http-basic-auth-oauth2-bearer-tokens-f088b5a2314)).
+Since gRPC hijacks the HTTP communication protocol, it's not that easy to take advantage of the native HTTP authentication mechanisms. Most solutions use a middleware to add a custom authentication layer on top of gRPC _metadata_ ([Example in nodejs](https://medium.com/compli-engineering/grpc-nodejs-using-jwt-authentication-b048fef6ecb2), [Example in Go](https://medium.com/@tillknuesting/grpc-http-basic-auth-oauth2-bearer-tokens-f088b5a2314)). Basically, the metadata is a list of key-value entries that are part of a gRPC connection).
 
 ## Source code
 Our sample application contains some API calls protected. Let's see how we can access them:
