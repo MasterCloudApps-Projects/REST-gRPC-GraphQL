@@ -216,7 +216,7 @@ query {
 ```
 
 ## gRPC
-gRPC uses gRPC uses [Protocol Buffers] as the Interface Definition Language for describing its _contract_ and to define its [schema](schema_definition.md). To define a [service interface in Protocol Buffers](https://developers.google.com/protocol-buffers/docs/proto3#services), the Service type will be used:
+gRPC uses gRPC uses [Protocol Buffers][] as the Interface Definition Language for describing its _contract_ and to define its [schema](schema_definition.md). To define a [service interface in Protocol Buffers](https://developers.google.com/protocol-buffers/docs/proto3#services), the Service type will be used:
 
 ```proto
 service myService {
@@ -285,3 +285,4 @@ There is also the [`rejoiner` project](https://github.com/google/rejoiner), whic
 [GraphQL: resolvers]: https://graphql.org/learn/execution/#root-fields-resolvers
 [grpc-gateway]: https://github.com/grpc-ecosystem/grpc-gateway
 [Why HATEOAS is useless and what that means for REST]: https://medium.com/@andreasreiser94/why-hateoas-is-useless-and-what-that-means-for-rest-a65194471bc8
+[Protocol Buffers]: https://developers.google.com/protocol-buffers
