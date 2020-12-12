@@ -188,6 +188,25 @@ With these variables:
 ```
 
 ### gRPC
-TODO
+The `rpc` to create a new article is as follows:
+
+```proto
+service Blog {
+    rpc UpdateArticle(UpdateArticleRequest)
+        returns (Article);
+}
+
+message UpdateArticleRequest {
+    Article article = 1;
+}
+```
+
+We can update an existing article using the client application, `npm run grpcc`, and then:
+
+```js
+client.updateArticle({article:{id: "5fc3ffe378b3dd2565ed83f3", title: "Updated title", description:"Updated description"}}, pr)
+```
+
+The updated article will be returned.
 
 [Conditional Requests (RFC 7232)]: https://tools.ietf.org/html/rfc7232

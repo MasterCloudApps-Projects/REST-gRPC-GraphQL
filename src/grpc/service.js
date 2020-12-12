@@ -80,7 +80,8 @@ async function listArticles(call, callback) {
 
 async function getArticle(call, callback) {
     const id = call.request.id;
-    const article = await Article.findById(id);
+    const article = await Article.findById("5fc3ffe378b3dd2565ed83f3");
+    console.log(article);
     let response = null;
     let error = null;
     const comments = await Comment.find({ article: id })
@@ -128,6 +129,14 @@ async function deleteArticle(call, callback) {
     callback();
 }
 
+async function updateArticle(call, callback) {
+    const id = call.request.article.id;
+    const previous = await Article.findById(id);
+    const updatedArticle = Object.assign(previous, call.request.article);
+    await Article.replaceOne({ _id: id}, updatedArticle);
+    callback(null, updatedArticle);
+}
+
 module.exports = () => {
     var server = new grpc.Server();
     server.addService(
@@ -139,6 +148,7 @@ module.exports = () => {
             CreateArticle: createArticle,
             DeleteArticle: deleteArticle,
             GetClient: getClient,
+            UpdateArticle: updateArticle,
         }
     );
     const PORT = 50051;
