@@ -1,5 +1,9 @@
 # GraphQL
-Back in 2012, Facebook mobile developers only had a RESTful API to access resources, and able to create advanced queries using FQL (An SQL-Like language developed by Facebook to let API clients run their own queries). This technology didn't suit well their needs; they wanted an API technology that let them access the whole Facebook model, in a really simple way, and not thinking in terms of resources nor representations (only JSON is supported). Then GraphQL was born. Most commonly known as a query language, GraphQL is much more than that:
+Back in 2012, Facebook mobile developers only had a RESTful API to access resources, and able to create advanced queries using FQL (An SQL-Like language developed by Facebook to let API clients run their own queries). This technology didn't suit well their needs; they wanted an API technology that let them access the whole Facebook model, in a really simple way, and not thinking in terms of resources nor representations (only JSON is supported). Then GraphQL was born.
+
+![](media/graphql.png)
+
+Most commonly known as a query language, GraphQL is much more than that:
 
 * **Query language** - Let client-side application run their own queries. It supports filtering, pagination, fields-selection, etc. Queries are just a string sent from the client to the server. Given the nature of the schema, graphql reduces the required number of requests.
 * **Schema definition language** - There is no need to appeal to third-party technologies to define the domain model. The GraphQL Schema Language is also **strongly typed**.
