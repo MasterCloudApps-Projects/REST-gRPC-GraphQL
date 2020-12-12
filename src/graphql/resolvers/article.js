@@ -1,10 +1,7 @@
 const { PubSub } = require('apollo-server-express');
 const Article = require("../../models/article")
 const Comment = require("../../models/comment")
-
-const NEW_ARTICLE = 'NEW_ARTICLE';
-
-const pubsub = new PubSub();
+const pubsub = require("../../pubsub");
 
 class GArticle {
     constructor(row) {
@@ -64,7 +61,7 @@ module.exports = {
         createArticle: async (_, args) => {
             const article = new Article(args.article);
             const newArticle = await article.save();
-            pubsub.publish(NEW_ARTICLE, {newArticle});
+            pubsub.publishNewArticle(newArticle);
             return new GArticle(newArticle);
         },
 
@@ -100,7 +97,7 @@ module.exports = {
 
     Subscription: {
         newArticle: {
-            subscribe: () => pubsub.asyncIterator([NEW_ARTICLE])
+            subscribe: () => pubsub.getNewArticleAsyncIterator()
         },
     },
 };

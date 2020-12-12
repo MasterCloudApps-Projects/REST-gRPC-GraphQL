@@ -77,6 +77,9 @@ Protocol Buffers implements a very powerful service definition, which allows for
 An rpc with a `stream` response will allow to create a _subscription_ to a topic. This mimics the [HTTP/2 stream connections][HTTP/2 (RFC 7540)].
 
 ## Source code
+For this, any publish-subscribe solutions can be used, like [Kafka](https://kafka.apache.org/), [RabbitMQ](https://www.rabbitmq.com/) or [Redis Pub/Sub](https://redis.io/topics/pubsub). Here, we will be using a basic in-memory publish-subscribe implementation provided by Apollo Server, the GraphQL framework.
+
+A simple subscription for _new articles_ has been created. Every API is able to react to _new articles_ regardless of where they were originated.
 
 ### REST
 TODO
@@ -119,7 +122,30 @@ The first GraphiQL, which is subscribed to `newArticle` events, would have recei
 ```
 
 ### gRPC
-TODO
+Since gRPC natively supports streams, we can leverage them to provide subscriptions.
+
+The sample project contains an endpoint to provide streaming for new articles. To create a subscription, start up the project (`npm start`) and the gRPC client (`npm run grpcc`) and then run:
+
+```js
+client.listNewArticles({}).on('data', sr).on('status', sr);
+```
+
+This will create a new request to the `listNewArticles` rpc (that accepts an empty object). Then, it creates two handlers:
+
+* `data`, that is called whenever a new data is received. The builtin `sr` (shorthand of `streamReply`) function will be called, which will output the received data.
+* `status`, that is invoked whenever the status of the requests changes, for example because it has finished. Again, the builtin `sr` function will be called.
+
+Now, to check how it works, we just need to create a new article. Note that it can be created from GraphQL as well. The new object will be displayed in the client gRPC application:
+
+```
+Main@127.0.0.1:50051>
+{
+  "id": "5fd4d9230c6f4323c5321e98",
+  "title": "This is the title",
+  "description": "This is the description",
+  "comments": []
+}
+```
 
 ## Resources
 * [Transfer Encoding in MDN][]

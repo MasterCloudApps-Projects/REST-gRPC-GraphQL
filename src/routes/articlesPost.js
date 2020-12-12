@@ -1,11 +1,13 @@
 var mongoose = require('mongoose');
 const Article = require('../models/article');
 var { ValidationError } = mongoose.Error;
+const pubsub = require("../pubsub");
 
 module.exports = async (req, res) => {
     let article = new Article(req.body);
     try {
         const newArticle = await article.save();
+        pubsub.publishNewArticle(newArticle);
         const identifier = '/articles/' + newArticle._id;
         res.location(identifier);
         res.status(201);

@@ -10,6 +10,7 @@ service Main {
     rpc CreateArticle(CreateArticleRequest) returns (Article);
     rpc DeleteArticle(DeleteArticleRequest) returns (Empty);
     rpc GetClient(GetClientRequest) returns (Client);
+    rpc ListNewArticles(Empty) returns (stream Article);
 }
 
 message DistanceRequest {

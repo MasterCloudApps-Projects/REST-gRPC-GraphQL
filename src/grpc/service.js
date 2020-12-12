@@ -1,6 +1,7 @@
 
 var PROTO_PATH = __dirname + '/proto/schema.proto';
 
+const pubsub = require("../pubsub");
 const Article = require("../models/article");
 const Comment = require("../models/comment");
 const Client = require('../models/client');
@@ -81,7 +82,6 @@ async function listArticles(call, callback) {
 async function getArticle(call, callback) {
     const id = call.request.id;
     const article = await Article.findById("5fc3ffe378b3dd2565ed83f3");
-    console.log(article);
     let response = null;
     let error = null;
     const comments = await Comment.find({ article: id })
@@ -108,6 +108,7 @@ async function getArticle(call, callback) {
 async function createArticle(call, callback) {
     const article = new Article(call.request.article);
     const newArticle = await article.save();
+    pubsub.publishNewArticle(newArticle);
     callback(null, {
         id: newArticle.id,
         title: newArticle.title,
@@ -137,6 +138,12 @@ async function updateArticle(call, callback) {
     callback(null, updatedArticle);
 }
 
+async function listNewArticles(call) {
+    for await (const article of pubsub.getNewArticleAsyncIterator()) {
+        call.write(article.newArticle);
+    }
+}
+
 module.exports = () => {
     var server = new grpc.Server();
     server.addService(
@@ -149,6 +156,7 @@ module.exports = () => {
             DeleteArticle: deleteArticle,
             GetClient: getClient,
             UpdateArticle: updateArticle,
+            ListNewArticles: listNewArticles,
         }
     );
     const PORT = 50051;
