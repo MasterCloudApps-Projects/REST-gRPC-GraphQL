@@ -82,7 +82,11 @@ For this, any publish-subscribe solutions can be used, like [Kafka](https://kafk
 A simple subscription for _new articles_ has been created. Every API is able to react to _new articles_ regardless of where they were originated.
 
 ### REST
-TODO
+A simple WebHook has been added as a subscription mechanism for REST. Note that this solution is commonly seen as a companion to REST APIs, but it has nothing to do with it, so other API styles can use it as well.
+
+Typically, registered clients or users will have a dashboard to configure their endpoint. Here, we have just added a configuration, `WEBHOOK_URL`, in `nodemon.son`. So, whenever a new article is created, a post request identifying the operation (`newArticle`) as well as the payload (the article itself) will be send to the expected endpoint. By default `https://httpbin.org/anything` is configured: as a response to any request, it will return whatever it received, which is a convenient way to test and troubleshoot.
+
+To see how it works, just create a new article from whatever API you choose. The console of the main app will echo the payload received as a response to the remote webhook.
 
 ### GraphQL
 Apollo Server, one of the most popular GraphQL implementations, [support subscriptions out of the box][Apollo Server: Subscriptions]. A `publish-subscribe` service should be used within the server to let mutations notify the subscribers.
