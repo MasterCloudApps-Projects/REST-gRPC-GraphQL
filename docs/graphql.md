@@ -97,8 +97,7 @@ When using `POST`, an JSON object like this will be sent to the server:
     "query": "...",
     "operationName": "...",
     "variables": {
-        "myVariable": "someValue",
-        ...
+        "myVariable": "someValue"
     }
 }
 ```
@@ -109,8 +108,8 @@ Where `operationName` and `variables` are optional fields.
 GraphQL only supports a single representation for their entities: `JSON`. Specifically, the response will be wrapped in a JSON object with two fields, `data` and `errors`:
 
 ```json
-    "data": { ... },
-    "errors": [ ... ]
+    "data": { },
+    "errors": [ ]
 }
 ```
 
