@@ -87,6 +87,13 @@ Criticisms of HATEOAS often argue that there are no real-world examples of it, w
 #### Note on Versioning
 When it comes to versioning, according to [Roy Fielding keynote on Evolve'13][], the best practice for versioning a REST API is not to version it. REST is already defined as a state machine (HATEOAS) where each state can be dynamic and each transition can be redirected (linked). So instead of agreeing on an interface, to change the state, client software should only need to _follow_ the appropriate links (as we humans do when we use a web). But still, [an API might need updates which break backwards compatibility][API Change Strategy] (like fixing a typo in a schema).
 
+#### Tooling
+As with the Web, a HATEOAS based API needs somewhere to start from. For this, we typically use the root page. Then, from there we can traverse the whole system.
+
+This way of interaction is convenient for humans. With unattended applications we will need prior knowledge about what links there are, so that we can programmatically get to them. This _knowledge_ can be provided by the API itself ([REST APIs are highly discoverable](./discoverability.md)). We can use tools like [HAL Browser](https://github.com/mikekelly/hal-browser) to navigate the API.
+
+With regard to unattended applications, there are libraries to simplify the traversal of standard hypermedia links in REST APIs, like [Traverson](https://github.com/traverson/traverson) (which comes with builtin support for JSON API links).
+
 ### REST-Like
 Although Hypermedia is a very powerful tool, most developers choose a different approach when the consumer of the API is another application that wants to provide its own experience to the final user. Here, URIs are no longer opaque, but constructed by the client. This is often known as _REST-Like_, _so-called REST_ or simply _OpenAPI_, and basically it is a _resource-oriented_ RPC Web API, just like gRPC, but unlike gRPC, in _REST-Like_ the underlying transport protocol, HTTP, is exposed to the client.
 
@@ -111,7 +118,7 @@ There is almost a consensus about whether to use plural or singular names:
 #### OpenAPI
 OpenAPI is a specification to describe what an HTTP API can do. This is done writing an OpenAPI spec using either Yaml or Json.
 
-* It's standard. So it is well suited for humans, to understand an API, but also for machines: they can render it as an interactive documentation (see [Swagger UI][]) or autogenerate code for us (see [Swagger CodeGen][]).
+* It's standard. So it is well suited for humans, to understand an API, but also for machines: they can render it as an interactive documentation (see [Swagger UI][] or [ReDoc](https://github.com/Redocly/redoc)) or autogenerate code for us (see [Swagger CodeGen][]).
 * Describes the [_paths_][OpenAPI Paths] (endpoints), with the supported _operations_, parameters and resources.
 * Can specify [_data models_ using JSON Schema][OpenAPI Data Models].
 * Since OpenAPI 3.0, [_links_][OpenAPI Links] are supported, which allows for using the value returned by an _operation_ as the input of another _operation_. Although this is not technically HATEOAS, it's an alternative to [hypermedia][Hypermedia in API design] used in REST.
@@ -250,6 +257,7 @@ There is also the [`rejoiner` project](https://github.com/google/rejoiner), whic
 
 ## Resources
 * [HATEOAS 101: Opinionated Introduction to a REST API Style](https://www.youtube.com/watch?v=6UXc71O7htc)
+* [Pragmatic RESTful HAL APIs](https://www.innoq.com/en/articles/2020/12/rest-apis-with-hal/)
 * [REST APIs must be hypertext-driven][]
 * [Designing a true REST state machine][]
 * [OpenAPI specification][OpenAPI]
