@@ -52,7 +52,7 @@ This project was born as a Master's Dissertation. You can check:
 [Partial update]: docs/usage/method_update_partial.md
 [Delete]: docs/usage/method_delete.md
 [Custom methods]: docs/usage/method_custom.md
-[Long-requests]: docs/usage/asynchronous_operation.md
+[Long-requests]: docs/usage/long_running_operation.md
 [Error handling]: docs/usage/error_handling.md
 [Security]: docs/usage/security.md
 [Subscriptions]: docs/usage/subscriptions.md

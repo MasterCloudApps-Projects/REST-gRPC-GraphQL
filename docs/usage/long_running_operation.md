@@ -1,4 +1,4 @@
-# Asynchronous operations
+# Long-running operations
 Sometimes an API call might take a long time to be completed, so that a synchronous answer is not possible at all. This is a challenging operation that should be effectively tackled.
 
 ## REST
@@ -25,11 +25,18 @@ Optionally, if our task has created several resources, it might return a body wi
 When it comes to delete instead of create, same steps apply: when a `DELETE` takes too long to carry it out synchronously, we will create a new task resource to be able to query its completion status.
 
 ## GraphQL
-TODO
+There is no much information online about how to implement a long-running operation in GraphQL.
+
+Nevertheless, it is just straightforward to apply some patterns:
+
+* If we can measure the progress of a certain ongoing operation, then it might be interesting wrapping a mutation inside a _subscription_ request to let clients know about the progress of the petition.
+* If there is no measurable progress, _subscriptions_ can still being used.
+* An _Operation_ entity can be also used, as we suggested in REST APIs. To get the best of both worlds, this technique can be also combined with subscriptions: for long-running requests an _Operation_ object is created and returned. Then, clients may use a _subscription_ to track the progress and/or status of the operation, thus getting rid of other techniques like polling.
 
 ## gRPC
-TODO
-Recommendation: use the `Operation` interface: https://cloud.google.com/apis/design/design_patterns#long_running_operations
+Unlike REST, gRPC need not stick to the semantics of HTTP, so it can immediately return a success return message to an incomplete creation.
+
+However, it is recommended that we follow an [Operation pattern][Google Cloud pattern for Long Running Operations] similar to the one we have defined for REST. This can also be combined with a server stream connection to track the progress and/or status of the operation.
 
 ## External Resources
 * [Google Cloud pattern for Long Running Operations](https://cloud.google.com/apis/design/design_patterns#long_running_operations)
@@ -60,6 +67,3 @@ Now the video can be retrieved:
 ```
 curl -v -X GET http://localhost:4000/videos/5fa981689e12c15ccc8f427a
 ```
-
-## GraphQL
-TODO
