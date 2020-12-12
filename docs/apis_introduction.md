@@ -58,6 +58,8 @@ They have been chosen because of their maturity, adoption and popularity. The [S
 * 🔗 [REST vs. GraphQL: A Critical Review, by Zdenek "Z" Nemec](https://goodapi.co/blog/rest-vs-graphql)
 * 🔗 [API design: Understanding gRPC, OpenAPI and REST and when to use them](https://cloud.google.com/blog/products/api-management/understanding-grpc-openapi-and-rest-and-when-to-use-them)
 * 🔗 [REST vs. gRPC: Battle of the APIs](https://code.tutsplus.com/tutorials/rest-vs-grpc-battle-of-the-apis--cms-30711)
+* 🔗 [When to Use What: REST, GraphQL, Webhooks, & gRPC](https://nordicapis.com/when-to-use-what-rest-graphql-webhooks-grpc/)
+* 🔗 [Comparing API Architectural Styles: SOAP vs REST vs GraphQL vs RPC](https://www.altexsoft.com/blog/soap-vs-rest-vs-graphql-vs-rpc/)
 
 [OpenAPI]: https://swagger.io/specification/
 [Google API design Guide: Resource Oriented Design]: https://cloud.google.com/apis/design/resources
