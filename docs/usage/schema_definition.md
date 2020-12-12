@@ -298,9 +298,6 @@ There is much more with regard to Protocol Buffers:
 * **Importing definitions**: a `.proto` file can reference another `.proto` file to import its definitions. This is not supported in Java.
 * **Maps**: we can create hash tables, to map a `key_type` to a `value_type`.
 
-## Source Code
-TODO
-
 [`Content-Type`]: https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Type
 [`Last-Modified`]: https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Last-Modified
 [`Content-Encoding`]: https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Encoding
