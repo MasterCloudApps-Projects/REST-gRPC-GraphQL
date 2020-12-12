@@ -10,7 +10,6 @@ See [implementation project](src/)
 2. [REST](docs/rest.md)
 3. [GraphQL](docs/graphql.md)
 4. [gRPC](docs/grpc.md)
-5. [Comparison](docs/../docs/comparison.md)
 
 ### Comparison table
 
